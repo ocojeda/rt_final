@@ -5,7 +5,8 @@ SRCDIR		=	srcs/
 SRC			=	main.c \
 				hooks.c \
 				mlx_begin.c \
-				raytrace.c
+				raytrace.c \
+				color.c
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a
 LIBVEC		=	libs/libvec/libvec.a

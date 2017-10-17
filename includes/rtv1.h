@@ -185,4 +185,8 @@ void			init_rt(t_rt *e);
 int				keypress(int keycode, void *param);
 void			frame(t_rt *e);
 
+unsigned int	ret_colors(t_color colo);
+t_color			c_color(float r, float g, float b);
+
+
 #endif
