@@ -8,7 +8,9 @@ SRC			=	main.c \
 				raytrace.c \
 				color.c \
 				ray.c \
-				frame.c
+				frame.c \
+				sphere.c \
+				plane.c
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a
 LIBVEC		=	libs/libvec/libvec.a

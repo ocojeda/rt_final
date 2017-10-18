@@ -79,6 +79,9 @@
 # define MAXOBJ 50
 # define MAXLIGHT 21
 # define NB_THREADS 8
+# define DIST_MAX 20000
+# define DIST_MIN -80000
+# define EPSILON 1e-7
 
 typedef struct		s_ray
 {
@@ -216,6 +219,20 @@ typedef struct		s_reflect
 	int				a;
 }					t_reflect;
 
+typedef struct		s_calc
+{
+	float			a;
+	float			b;
+	float			c;
+	float			d;
+	float			t0;
+	float			t1;
+	float			disc;
+	float			eq;
+	t_vec3			len;
+	float			sqrtdisc;
+}					t_calc;
+
 void			ft_start_rt(t_rt *e);
 void			init_rt(t_rt *e);
 int				keypress(int keycode, void *param);
@@ -228,4 +245,8 @@ t_color			raytrace(int x, int y, t_rt *e);
 t_ray			ray_init(t_rt *e, int x, int y);
 
 void			pixel_to_image(int x, int y, t_rt *e, int color);
+
+float			intersect_sphere(t_ray ray, t_obj *sphere);
+float			intersect_plane(t_ray ray, t_obj *plane);
+t_vec3			plane_norm(t_obj plane);
 #endif

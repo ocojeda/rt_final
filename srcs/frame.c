@@ -47,11 +47,26 @@ t_scene				copy_scene(t_scene scene)
 	scene.obj[0].type = SPHERE;
     copy.obj[0].type = SPHERE;
     copy.obj[0].color = c_color(0, 0, 200);
-    copy.obj[0].pos = vec_new3(500, 300, 500);
-    copy.obj[0].r = 50;
-	copy.obj[1].type = END;
-	copy.cam.pos.x = 0;
-	copy.cam.pos.y = 0;
+    copy.obj[0].pos = vec_new3(400, 400, 500);
+    copy.obj[0].r = 200;
+
+    copy.obj[1].type = PLANE;
+    copy.obj[1].color = c_color(200, 200, 0);
+    copy.obj[1].pos = vec_new3(400, 0, 800);
+    copy.obj[1].normal = vec_norme3(vec_new3(-1, 0, 0));
+    copy.obj[1].vector = vec_new3(0, 1, 0);
+
+    copy.obj[2].type = PLANE;
+    copy.obj[2].color = c_color(0, 200, 0);
+    copy.obj[2].pos = vec_new3(0, 0, 800);
+    copy.obj[2].normal = vec_norme3(vec_new3(0, 1, 0));
+    copy.obj[2].vector = vec_new3(1, 0, 0);
+    
+    copy.nbr_obj = 3;
+
+	copy.obj[3].type = END;
+	copy.cam.pos.x = 400;
+	copy.cam.pos.y = 400;
 	copy.cam.pos.z = -1000;
 //	if (!(copy.lights = (t_light *)malloc(scene.nbr_light *
 //	sizeof(t_light))))
@@ -178,6 +193,7 @@ void			frame(t_rt *e)
 	}
 //	filters(e);
 	free(th_e);
-	mlx_put_image_to_window(INIT, WIN, IMG, 0, 0);
+    mlx_put_image_to_window(INIT, WIN, IMG, 0, 0);
+    //ft_putstr("exit succesful\n");
 	//disp_cam(e, 0x00FFFFFF);
 }
