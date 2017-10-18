@@ -161,7 +161,7 @@ t_rt			**launch_thread(t_rt *e)
 		THREAD.y = ((THREAD.h) / NB_THREADS) * i;
 		THREAD.max_y = THREAD.y + ((THREAD.h) / NB_THREADS);
 		//if (e->file.aliasing == 1)
-			pthread_create(&th[i], NULL, drawline, (void *)th_e[i]);
+		pthread_create(&th[i], NULL, drawline, (void *)th_e[i]);
 		//else
 		//	pthread_create(&th[i], NULL, drawlinex2, (void *)th_e[i]);
 	}
