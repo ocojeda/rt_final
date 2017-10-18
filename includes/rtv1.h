@@ -3,12 +3,18 @@
 
 # include "libft.h"
 # include "../libs/minilibx/mlx.h"
-# include "libvec.h"
+# include "../libs/libvec/includes/libvec.h"
 # include <math.h>
 # include <stdio.h>
 # include <pthread.h>
 # include <fcntl.h>
 # include <unistd.h>
+
+# define END 0
+# define CONE 1
+# define PLANE 2
+# define SPHERE 3
+# define CYLINDER 4
 
 # define KEY_A 0
 # define KEY_S 1
@@ -58,6 +64,7 @@
 # define KEY_UP 126
 # define KEY_ESC 53
 
+# define ALIASING e->file.aliasing
 # define INIT e->mlx.init
 # define WIN e->mlx.window
 # define IMG e->mlx.image
@@ -96,6 +103,21 @@ typedef struct		s_mthread
 	t_color			*colors;
 }					t_mthread;
 
+typedef struct		s_camera
+{
+	int				fov;
+	t_vec3			pos;
+	t_vec3			rot;
+	t_mtrx4			ctw;
+	float			reso;
+	float			aspect;
+	float			ratio_x;
+	float			ratio_y;
+	char			is_circular;
+	t_vec3			tmp_pos;
+	t_vec3			tmp_rot;
+}					t_camera;
+
 typedef struct		s_obj
 {
 	char			is_init;
@@ -130,21 +152,21 @@ typedef struct		s_light
 
 typedef struct		s_scene
 {
-//	t_camera		cam;
-	t_light			*lights;
-	t_obj			*obj;
+	t_camera		cam;
+	t_light			lights[MAXLIGHT];
+	t_obj			obj[MAXOBJ];
 //	t_texture		skybox;
-/*	int				last;
-	float			ambient;
+//	int				last;
+//	float			ambient;
 	int				nbr_light;
 	int				nbr_obj;
-	int				nbr_complex;
-	char			nbr_tot;
+//	int				nbr_complex;
+//	char			nbr_tot;
 	int				id;
-	int				supersampling;
-	int				filters;
-	int				selected;
-	int				max_iter;*/
+//	int				supersampling;
+//	int				filters;
+//	int				selected;
+//	int				max_iter;
 }					t_scene;
 
 typedef struct		s_file
@@ -180,6 +202,20 @@ typedef struct		s_rt
 	int				frame;
 }					t_rt;
 
+typedef struct		s_reflect
+{
+	t_ray			ray;
+	t_ray			new_ray;
+	t_vec3			poi;
+	t_color			color;
+	float			total_distance;
+	int				counter;
+	float			min_dist;
+	int				tmp_id;
+	float			dist_rate;
+	int				a;
+}					t_reflect;
+
 void			ft_start_rt(t_rt *e);
 void			init_rt(t_rt *e);
 int				keypress(int keycode, void *param);
@@ -188,5 +224,8 @@ void			frame(t_rt *e);
 unsigned int	ret_colors(t_color colo);
 t_color			c_color(float r, float g, float b);
 
+t_color			raytrace(int x, int y, t_rt *e);
+t_ray			ray_init(t_rt *e, int x, int y);
 
+void			pixel_to_image(int x, int y, t_rt *e, int color);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libvec.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agfernan <agfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ocojeda- <ocojeda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/17 13:11:14 by mhalit            #+#    #+#             */
-/*   Updated: 2017/09/28 05:03:50 by agfernan         ###   ########.fr       */
+/*   Updated: 2017/10/18 13:28:55 by ocojeda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_vec3			vec_norme3(t_vec3 u);
 
 t_vec3d			vec_scale3d(t_vec3d u, double r);
 t_vec3d			vec_new3d(double x, double y, double z);
+t_vec3      	vec_cpy3(t_vec3 origin);
 t_vec3d			vec_mul3d(t_vec3d u, t_vec3d v);
 t_vec3d			vec_div3d(t_vec3d u, t_vec3d v);
 t_vec3d			vec_add3d(t_vec3d u, t_vec3d v);

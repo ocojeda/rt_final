@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mtrx4_prod.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agfernan <agfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ocojeda- <ocojeda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 04:26:18 by agfernan          #+#    #+#             */
-/*   Updated: 2017/09/28 15:04:56 by agfernan         ###   ########.fr       */
+/*   Updated: 2017/10/18 13:28:32 by ocojeda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,12 @@ t_mtrx4		prod_matrx4(t_mtrx4 a, t_mtrx4 b)
 		+ a.mtrx[10] * b.mtrx[9] + a.mtrx[11] * b.mtrx[13];
 	prod_matrx4_p2(&matrix, a, b);
 	return (matrix);
+}
+
+t_vec3      vec_cpy3(t_vec3 origin)
+{
+    t_vec3  new;
+    
+    new = vec_new3(origin.x, origin.y, origin.z);
+    return (new);
 }
