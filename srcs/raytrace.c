@@ -6,7 +6,6 @@ float			intersect_obj(t_ray ray, t_obj *obj)
 		return (intersect_cylinder(ray, obj));
 	if (obj->type == SPHERE)
 		return (intersect_sphere(ray, obj));
-	//return (intersect_sphere(ray, obj));
 	else if (obj->type == PLANE)
 		return (intersect_plane(ray, obj));
 //	else if (obj->type == CONE)
@@ -42,11 +41,8 @@ static t_color	get_pxl_color(t_rt *e, t_ray ray)
 	t_reflect	ref;
 
 	e->scene.id = -1;
-//	if ((ref.min_dist = get_min_dist(e, ray)) == -1)
-//		return (skybox(e, ray));
 	if ((ref.min_dist = get_min_dist(e, ray)) == -1)
 		return (c_color(0,0,0));
-
 //	ref.tmp_id = e->scene.id;
 //	ref.poi = vec_add3(ray.pos, vec_scale3(ray.dir, ref.min_dist));
 //	ref.counter = NR_ITER;
@@ -83,8 +79,5 @@ t_color			raytrace(int x, int y, t_rt *e)
 
 	ray = ray_init(e, x * RES / ALIASING, y * RES / ALIASING);
 	color = get_pxl_color(e, ray);
-	(void)x;
-	(void)e;
-//    color = c_color(x,y,y); 
 	return (color);
 }

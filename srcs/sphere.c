@@ -32,8 +32,4 @@ float			intersect_sphere(t_ray ray, t_obj *sphere)
 	op.c = vec_dot3(x, x) - (sphere->r * sphere->r);
 	op.eq = get_res_of_quadratic(&op, sphere);
 	return (op.eq);
-	//if (op.eq == op.t0)
-	//	return (limit_dist(*sphere, ray, op.eq, op.t1));
-	//else
-	//	return (limit_dist(*sphere, ray, op.eq, op.t0));
 }

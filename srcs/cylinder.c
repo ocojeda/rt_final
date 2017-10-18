@@ -11,12 +11,6 @@ t_vec3		cylinder_norm(t_obj cyl, t_vec3 poi)
 	dot = vec_dot3(tmp, cyl.vector);
 	project = vec_scale3(cyl.vector, dot);
 	normal = vec_sub3(tmp, project);
-	//if (cyl.mat.sin == 1)
-	//{
-	//	normal.x = normal.x;
-	//	normal.y = sin(normal.y) * 20;
-	//	normal.z = normal.z;
-	//}
 	return (vec_norme3(normal));
 }
 
@@ -40,8 +34,4 @@ float		intersect_cylinder(t_ray ray, t_obj *cyl)
 	op.c = vec_dot3(x, x) - p(dotxv) - p(cyl->r);
     op.eq = get_res_of_quadratic(&op, cyl);
     return (op.eq);
-//	if (op.eq == op.t0)
-//		return (limit_dist(*cyl, ray, op.eq, op.t1));
-//	else
-//		return (limit_dist(*cyl, ray, op.eq, op.t0));
 }
