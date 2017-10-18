@@ -10,7 +10,8 @@ SRC			=	main.c \
 				ray.c \
 				frame.c \
 				sphere.c \
-				plane.c
+				plane.c \
+				cylinder.c
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a
 LIBVEC		=	libs/libvec/libvec.a

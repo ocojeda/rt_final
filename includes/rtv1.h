@@ -248,5 +248,7 @@ void			pixel_to_image(int x, int y, t_rt *e, int color);
 
 float			intersect_sphere(t_ray ray, t_obj *sphere);
 float			intersect_plane(t_ray ray, t_obj *plane);
+float			intersect_cylinder(t_ray ray, t_obj *cyl);
 t_vec3			plane_norm(t_obj plane);
+float			get_res_of_quadratic(t_calc *op, t_obj *obj);
 #endif
