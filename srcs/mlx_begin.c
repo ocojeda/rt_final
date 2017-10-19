@@ -44,6 +44,9 @@ void			init_rt(t_rt *e)
     e->file.aliasing = 1;
     e->file.reso = calcul_res(e, 400000);
 	e->file.reso_buff = e->file.reso;
+
+
+	
     //if (!(e->scene.obj = (t_obj *)malloc(sizeof(t_obj) * MAXOBJ)))
     //   exit(42);
     //if (!(e->scene.lights = (t_light *)malloc(sizeof(t_light) * MAXLIGHT)))

@@ -46,7 +46,7 @@ t_scene				copy_scene(t_scene scene)
     /*
     * No Parseur yet, parse here
     */
-	scene.obj[0].type = SPHERE;
+	//scene.obj[0].type = SPHERE;
     copy.obj[0].type = SPHERE;
     copy.obj[0].color = c_color(0, 0, 200);
     copy.obj[0].pos = vec_new3(400, 400, 500);
@@ -101,7 +101,10 @@ t_scene				copy_scene(t_scene scene)
 	copy.supersampling = scene.supersampling;
 	copy.cam = scene.cam;
 	copy.filters = scene.filters;
-*/	return (copy);
+	
+*/	scene = copy;
+	return(scene);
+	return (copy);
 }
 
 void			*drawline(void *arg)

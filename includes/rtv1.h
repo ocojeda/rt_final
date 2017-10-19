@@ -258,6 +258,8 @@ t_color			c_color(float r, float g, float b);
 t_color			raytrace(int x, int y, t_rt *e);
 t_ray			ray_init(t_rt *e, int x, int y);
 
+t_ray			c_ray(t_vec3 i, t_vec3 j);
+
 /*
 *mlx relative fonctions
 */
