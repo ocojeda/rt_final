@@ -16,7 +16,7 @@ t_vec3		cylinder_norm(t_obj cyl, t_vec3 poi)
 
 float		p(float x)
 {
-	return (pow(x, 2));
+	return (x * x);
 }
 
 float		intersect_cylinder(t_ray ray, t_obj *cyl)

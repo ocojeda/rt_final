@@ -63,13 +63,20 @@ t_scene				copy_scene(t_scene scene)
     copy.obj[2].vector = vec_new3(1, 0, 0);
 
     copy.obj[3].type = CYLINDER;
-    copy.obj[3].r = 10;
-    copy.obj[3].color = c_color(15, 200, 200);
+    copy.obj[3].r = 4;
+    copy.obj[3].color = c_color(15, 50, 150);
     copy.obj[3].pos = vec_new3(300, 400, 0);
-    copy.obj[3].vector = vec_new3(0, 1, 0);
+	copy.obj[3].vector = vec_new3(0, 1, 0);
+	
+	copy.obj[4].type = CONE;
+	//k is for angle
+    copy.obj[4].k = 0.1;
+	copy.obj[4].color = c_color(100, 15, 200);
+	copy.obj[4].pos = vec_new3(600, 400, 0);
+    copy.obj[4].vector = vec_new3(0, 1, 0);
     
-    copy.nbr_obj = 4;
-    copy.obj[4].type = END;
+    copy.nbr_obj = 5;
+    copy.obj[5].type = END;
     
 	copy.cam.pos.x = 400;
 	copy.cam.pos.y = 400;

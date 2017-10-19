@@ -233,22 +233,47 @@ typedef struct		s_calc
 	float			sqrtdisc;
 }					t_calc;
 
+/*
+* parsing fonctions
+*/
 void			ft_start_rt(t_rt *e);
 void			init_rt(t_rt *e);
-int				keypress(int keycode, void *param);
+
+/*
+* multhread fonctions
+*/
 void			frame(t_rt *e);
 
+/*
+* color managing fonctions
+*/
 unsigned int	ret_colors(t_color colo);
 t_color			c_color(float r, float g, float b);
 
+/*
+*raytracing basic fonctions
+*/
 t_color			raytrace(int x, int y, t_rt *e);
 t_ray			ray_init(t_rt *e, int x, int y);
 
+/*
+*mlx relative fonctions
+*/
 void			pixel_to_image(int x, int y, t_rt *e, int color);
+int				keypress(int keycode, void *param);
 
+/*
+* intersect fonctions
+*/
 float			intersect_sphere(t_ray ray, t_obj *sphere);
 float			intersect_plane(t_ray ray, t_obj *plane);
 float			intersect_cylinder(t_ray ray, t_obj *cyl);
+float			intersect_cone(t_ray ray, t_obj *cone);
 t_vec3			plane_norm(t_obj plane);
 float			get_res_of_quadratic(t_calc *op, t_obj *obj);
+
+/*
+* math aux fonctions
+*/
+float			p(float x);
 #endif

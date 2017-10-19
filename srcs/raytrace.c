@@ -8,8 +8,8 @@ float			intersect_obj(t_ray ray, t_obj *obj)
 		return (intersect_sphere(ray, obj));
 	else if (obj->type == PLANE)
 		return (intersect_plane(ray, obj));
-//	else if (obj->type == CONE)
-//		return (intersect_cone(ray, obj));
+	else if (obj->type == CONE)
+		return (intersect_cone(ray, obj));
 	return (DIST_MAX);
 }
 

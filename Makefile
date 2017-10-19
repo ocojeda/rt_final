@@ -11,7 +11,8 @@ SRC			=	main.c \
 				frame.c \
 				sphere.c \
 				plane.c \
-				cylinder.c
+				cylinder.c \
+				cone.c
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a
 LIBVEC		=	libs/libvec/libvec.a
