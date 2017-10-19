@@ -44,6 +44,42 @@ void			init_rt(t_rt *e)
     e->file.aliasing = 1;
     e->file.reso = calcul_res(e, 400000);
 	e->file.reso_buff = e->file.reso;
+	
+	e->scene.obj[0].type = SPHERE;
+    e->scene.obj[0].color = c_color(0, 0, 200);
+    e->scene.obj[0].pos = vec_new3(400, 400, 500);
+    e->scene.obj[0].r = 200;
+
+    e->scene.obj[1].type = PLANE;
+    e->scene.obj[1].color = c_color(200, 200, 0);
+    e->scene.obj[1].pos = vec_new3(400, 0, 800);
+    e->scene.obj[1].vector = vec_new3(0, 1, 0);
+
+    e->scene.obj[2].type = PLANE;
+    e->scene.obj[2].color = c_color(0, 200, 0);
+    e->scene.obj[2].pos = vec_new3(300, 0, 800);
+    e->scene.obj[2].vector = vec_new3(1, 0, 0);
+
+    e->scene.obj[3].type = CYLINDER;
+    e->scene.obj[3].r = 4;
+    e->scene.obj[3].color = c_color(15, 50, 150);
+    e->scene.obj[3].pos = vec_new3(300, 400, 0);
+	e->scene.obj[3].vector = vec_new3(0, 1, 0);
+	
+	e->scene.obj[4].type = CONE;
+	//k is for angle
+    e->scene.obj[4].k = 0.1;
+	e->scene.obj[4].color = c_color(100, 15, 200);
+	e->scene.obj[4].pos = vec_new3(600, 400, 0);
+    e->scene.obj[4].vector = vec_new3(1, 0.1, 0);
+    
+    e->scene.nbr_obj = 5;
+    e->scene.obj[5].type = END;
+    
+	e->scene.cam.pos.x = 400;
+	e->scene.cam.pos.y = 400;
+	e->scene.cam.pos.z = -1000;
+	e->scene.cam.fov = 45;
 
 
 	

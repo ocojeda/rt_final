@@ -19,6 +19,26 @@ int				keypress(int keycode, void *param)
 			RES = 1;
 		frame(e);
 	}
+	if (keycode == KEY_UP)
+	{
+		e->scene.cam.pos.y += 100;
+		frame(e);
+	}
+	if (keycode == KEY_DOWN)
+	{
+		e->scene.cam.pos.y -= 100;
+		frame(e);
+	}
+	if (keycode == KEY_RIGHT)
+	{
+		e->scene.cam.pos.x += 100;
+		frame(e);
+	}
+	if (keycode == KEY_LEFT)
+	{
+		e->scene.cam.pos.x -= 100;
+		frame(e);
+	}
 	/*e->keys.key_w = (keycode == KEY_W) ? 1 : e->keys.key_w;
 	e->keys.key_a = (keycode == KEY_A) ? 1 : e->keys.key_a;
 	e->keys.key_s = (keycode == KEY_S) ? 1 : e->keys.key_s;
