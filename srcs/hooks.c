@@ -7,6 +7,18 @@ int				keypress(int keycode, void *param)
 	e = (t_rt *)param;
 	if (keycode == KEY_ESC)
 		exit(42);
+	if (keycode == PAGE_UP)
+	{
+		RES++;
+		frame(e);
+	}
+	if (keycode == PAGE_DOWN)
+	{
+		RES--;
+		if(RES == 0)
+			RES = 1;
+		frame(e);
+	}
 	/*e->keys.key_w = (keycode == KEY_W) ? 1 : e->keys.key_w;
 	e->keys.key_a = (keycode == KEY_A) ? 1 : e->keys.key_a;
 	e->keys.key_s = (keycode == KEY_S) ? 1 : e->keys.key_s;

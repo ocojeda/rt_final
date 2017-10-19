@@ -27,7 +27,6 @@ float			intersect_cone(t_ray ray, t_obj *cone)
 	float		dotdv;
 	float		dotxv;
 
-        ft_putchar('@');
 	x = vec_sub3(ray.pos, cone->pos);
 	dotdv = vec_dot3(ray.dir, cone->vector);
 	dotxv = vec_dot3(x, cone->vector);

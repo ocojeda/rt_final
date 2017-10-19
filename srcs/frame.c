@@ -73,7 +73,7 @@ t_scene				copy_scene(t_scene scene)
     copy.obj[4].k = 0.1;
 	copy.obj[4].color = c_color(100, 15, 200);
 	copy.obj[4].pos = vec_new3(600, 400, 0);
-    copy.obj[4].vector = vec_new3(0, 1, 0);
+    copy.obj[4].vector = vec_new3(1, 0.1, 0);
     
     copy.nbr_obj = 5;
     copy.obj[5].type = END;
@@ -164,6 +164,7 @@ t_rt			**launch_thread(t_rt *e)
 		THREAD.w = LARGEUR * e->file.aliasing;
 		THREAD.h /= RES;
 		THREAD.w /= RES;
+		ft_putnbr(RES);
 		THREAD.y = ((THREAD.h) / NB_THREADS) * i;
 		THREAD.max_y = THREAD.y + ((THREAD.h) / NB_THREADS);
 		//if (e->file.aliasing == 1)
