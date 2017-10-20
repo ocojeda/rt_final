@@ -44,47 +44,61 @@ void			init_rt(t_rt *e)
     e->file.aliasing = 1;
     e->file.reso = calcul_res(e, 400000);
 	e->file.reso_buff = e->file.reso;
-	
-	e->scene.obj[0].type = SPHERE;
+    
+    e->scene.obj[0].type = SPHERE;
     e->scene.obj[0].color = c_color(0, 0, 200);
     e->scene.obj[0].pos = vec_new3(400, 400, 500);
-    e->scene.obj[0].r = 200;
+	e->scene.obj[0].r = 200;
+	e->scene.obj[0].mat.diff = 0.5;
 
     e->scene.obj[1].type = PLANE;
     e->scene.obj[1].color = c_color(200, 200, 0);
     e->scene.obj[1].pos = vec_new3(400, 0, 800);
-    e->scene.obj[1].vector = vec_new3(0, 1, 0);
+	e->scene.obj[1].vector = vec_new3(0, 1, 0);
+	e->scene.obj[1].mat.diff = 0.5;
 
     e->scene.obj[2].type = PLANE;
     e->scene.obj[2].color = c_color(0, 200, 0);
     e->scene.obj[2].pos = vec_new3(300, 0, 800);
     e->scene.obj[2].vector = vec_new3(1, 0, 0);
+	e->scene.obj[2].mat.diff = 0.5;
 
     e->scene.obj[3].type = CYLINDER;
-    e->scene.obj[3].r = 4;
-    e->scene.obj[3].color = c_color(15, 50, 150);
-    e->scene.obj[3].pos = vec_new3(300, 400, 0);
+    e->scene.obj[3].r = 72;
+    e->scene.obj[3].color = c_color(5, 20, 100);
+    e->scene.obj[3].pos = vec_new3(500, 400, 0);
 	e->scene.obj[3].vector = vec_new3(0, 1, 0);
-	
+	e->scene.obj[3].mat.diff = 0.5;
+
 	e->scene.obj[4].type = CONE;
 	//k is for angle
     e->scene.obj[4].k = 0.1;
-	e->scene.obj[4].color = c_color(100, 15, 200);
+	e->scene.obj[4].color = c_color(100, 15, 100);
 	e->scene.obj[4].pos = vec_new3(600, 400, 0);
     e->scene.obj[4].vector = vec_new3(1, 0.1, 0);
-    
+	e->scene.obj[4].mat.diff = 0.5;
+
     e->scene.nbr_obj = 5;
     e->scene.obj[5].type = END;
-    
+	
+	e->scene.lights[0].ray = c_ray(vec_new3(800, 400, -800), vec_new3(0, 0, 0));
+	e->scene.lights[0].color = c_color(255, 000, 000);
+	e->scene.lights[0].intensity = 0.4;
+	e->scene.lights[0].is_init = 0;
+
+	e->scene.lights[1].ray = c_ray(vec_new3(400, 400, -300), vec_new3(0, 0, 0));
+	e->scene.lights[1].color = c_color(255, 000, 000);
+	e->scene.lights[1].intensity = 0.4;
+	e->scene.lights[1].is_init = 0;
+
+	e->scene.ambient = 0.2;
+	e->scene.nbr_light = 2;
+	//e->scene.lights[1] = END;
+
 	e->scene.cam.pos.x = 400;
 	e->scene.cam.pos.y = 400;
     e->scene.cam.pos.z = -1000;
-    e->scene.cam.focus_point = vec_new3(e->scene.cam.pos.x, e->scene.cam.pos.y, 0);
-	e->scene.cam.fov = 45;
-
-
-	
-    //if (!(e->scene.obj = (t_obj *)malloc(sizeof(t_obj) * MAXOBJ)))
+	//if (!(e->scene.obj = (t_obj *)malloc(sizeof(t_obj) * MAXOBJ)))
     //   exit(42);
     //if (!(e->scene.lights = (t_light *)malloc(sizeof(t_light) * MAXLIGHT)))
     //    exit(5);
