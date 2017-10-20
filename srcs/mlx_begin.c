@@ -47,26 +47,26 @@ void			init_rt(t_rt *e)
     
     e->scene.obj[0].type = SPHERE;
     e->scene.obj[0].color = c_color(0, 0, 200);
-    e->scene.obj[0].pos = vec_new3(400, 400, 500);
+    e->scene.obj[0].pos = vec_new3(400, 400, 1000);
 	e->scene.obj[0].r = 200;
 	e->scene.obj[0].mat.diff = 0.5;
 
     e->scene.obj[1].type = PLANE;
     e->scene.obj[1].color = c_color(200, 200, 0);
-    e->scene.obj[1].pos = vec_new3(400, 0, 800);
-	e->scene.obj[1].vector = vec_new3(0, 1, 0);
-	e->scene.obj[1].mat.diff = 0.5;
+    e->scene.obj[1].pos = vec_new3(400, 400, 900);
+	e->scene.obj[1].vector = vec_norme3(vec_new3(0, 0, 1));
+	e->scene.obj[1].mat.diff = 1;
 
     e->scene.obj[2].type = PLANE;
     e->scene.obj[2].color = c_color(0, 200, 0);
-    e->scene.obj[2].pos = vec_new3(300, 0, 800);
-    e->scene.obj[2].vector = vec_new3(1, 0, 0);
+    e->scene.obj[2].pos = vec_new3(900, -100, 800);
+    e->scene.obj[2].vector = vec_norme3(vec_new3(0, 0.9, 0));
 	e->scene.obj[2].mat.diff = 0.5;
 
     e->scene.obj[3].type = CYLINDER;
     e->scene.obj[3].r = 30;
     e->scene.obj[3].color = c_color(5, 20, 100);
-    e->scene.obj[3].pos = vec_new3(500, 400, 0);
+    e->scene.obj[3].pos = vec_new3(500, 400, 300);
 	e->scene.obj[3].vector = vec_norme3(vec_new3(0.5, 1, 0));
 	e->scene.obj[3].mat.diff = 0.5;
 
@@ -74,7 +74,7 @@ void			init_rt(t_rt *e)
 	//k is for angle
     e->scene.obj[4].k = 0.1;
 	e->scene.obj[4].color = c_color(100, 15, 100);
-	e->scene.obj[4].pos = vec_new3(600, 400, 0);
+	e->scene.obj[4].pos = vec_new3(600, 400, 300);
     e->scene.obj[4].vector = vec_norme3(vec_new3(1, 0.5, 0));
 	e->scene.obj[4].mat.diff = 0.5;
 
@@ -96,11 +96,11 @@ void			init_rt(t_rt *e)
 	//e->scene.lights[1] = END;
 
 	e->scene.cam.pos.x = 400;
-	e->scene.cam.pos.y = 400;
-    e->scene.cam.pos.z = -1000;
+	e->scene.cam.pos.y = 800;
+    e->scene.cam.pos.z = -2000;
 
-    e->scene.cam.focus_point.x = 400;
-	e->scene.cam.focus_point.y = 400;
+    e->scene.cam.focus_point.x = 399;
+	e->scene.cam.focus_point.y = 799;
     e->scene.cam.focus_point.z = 0;
     
 	//if (!(e->scene.obj = (t_obj *)malloc(sizeof(t_obj) * MAXOBJ)))

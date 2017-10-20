@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vec_ssp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mhalit <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ocojeda- <ocojeda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/17 15:22:24 by mhalit            #+#    #+#             */
-/*   Updated: 2017/08/14 22:15:47 by rlecart          ###   ########.fr       */
+/*   Updated: 2017/10/20 19:20:45 by ocojeda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ t_vec3		vec_tsub3(t_vec3 u, t_vec3 v)
 	return (pts);
 }
 
-double		vec_dot3(t_vec3 u, t_vec3 v)
+float		vec_dot3(t_vec3 u, t_vec3 v)
 {
 	float	dot;
 
 	dot = u.x * v.x + u.y * v.y + u.z * v.z;
-	return ((double)dot);
+	return (dot);
 }
 
 t_vec3		vec_inv3(t_vec3 u)

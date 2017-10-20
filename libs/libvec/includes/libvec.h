@@ -6,7 +6,7 @@
 /*   By: ocojeda- <ocojeda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/17 13:11:14 by mhalit            #+#    #+#             */
-/*   Updated: 2017/10/18 13:28:55 by ocojeda-         ###   ########.fr       */
+/*   Updated: 2017/10/20 19:19:12 by ocojeda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct	s_vec3d
 	double		m;
 }				t_vec3d;
 
-double			vec_dot3(t_vec3 u, t_vec3 v);
+float			vec_dot3(t_vec3 u, t_vec3 v);
 t_vec3			vec_scale3(t_vec3 u, float r);
 t_vec3			vec_new3(float x, float y, float z);
 t_vec3			vec_mul3(t_vec3 u, t_vec3 v);

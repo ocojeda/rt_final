@@ -29,10 +29,12 @@ t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi)
 	{
 		intensity += intensity_obj(e, poi, obj, e->CLIGHT) ;//* e->CLIGHT.intensity;
 	}
-	if (intensity > 1)
-		intensity = 1;
 	if (intensity != 0)
+	{
+		if(intensity == 1)
+			ft_putchar('@');
 		return (color_mult(obj.color, intensity, 1));
+	}
 	return ((t_color){0, 0, 0, 0});
 }
 
