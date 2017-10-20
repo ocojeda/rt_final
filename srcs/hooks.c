@@ -10,6 +10,8 @@ int				keypress(int keycode, void *param)
 	if (keycode == PAGE_UP)
 	{
 		RES++;
+		if(RES > 20)
+			RES = 20;
 		frame(e);
 	}
 	if (keycode == PAGE_DOWN)
@@ -21,22 +23,50 @@ int				keypress(int keycode, void *param)
 	}
 	if (keycode == KEY_UP)
 	{
-		e->scene.cam.pos.y += 100;
+		e->scene.cam.focus_point.y += 10;
 		frame(e);
 	}
 	if (keycode == KEY_DOWN)
 	{
-		e->scene.cam.pos.y -= 100;
+		e->scene.cam.focus_point.y -= 10;
 		frame(e);
 	}
 	if (keycode == KEY_RIGHT)
 	{
-		e->scene.cam.pos.x += 100;
+		e->scene.cam.focus_point.x += 10;
 		frame(e);
 	}
 	if (keycode == KEY_LEFT)
 	{
-		e->scene.cam.pos.x -= 100;
+		e->scene.cam.focus_point.x -= 10;
+		frame(e);
+	}
+	if (keycode == KEY_PLUS)
+	{
+		e->scene.cam.focus_point.z += 10;
+		frame(e);
+	}
+	if (keycode == KEY_MINUS)
+	{
+		e->scene.cam.focus_point.z -= 10;
+		frame(e);
+	}
+	
+	if (keycode == KEY_W)
+	{
+		e->scene.cam.pos.z += 10;
+		frame(e);
+	}if (keycode == KEY_S)
+	{
+		e->scene.cam.pos.z -= 10;
+		frame(e);
+	}if (keycode == KEY_A)
+	{
+		e->scene.cam.pos.x += 10;
+		frame(e);
+	}if (keycode == KEY_D)
+	{
+		e->scene.cam.pos.x -= 10;
 		frame(e);
 	}
 	/*e->keys.key_w = (keycode == KEY_W) ? 1 : e->keys.key_w;

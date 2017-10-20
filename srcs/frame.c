@@ -147,6 +147,13 @@ void			frame(t_rt *e)
 		}
 //		dname(e, th_e, i);
 	}
+	i = 0;
+	while (i < NB_THREADS)
+	{
+		free(th_e[i]->thread.colors);
+		free(th_e[i]);
+		i++;
+	}
 //	filters(e);
 	free(th_e);
     mlx_put_image_to_window(INIT, WIN, IMG, 0, 0);

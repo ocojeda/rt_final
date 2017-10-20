@@ -112,6 +112,7 @@ typedef struct		s_camera
 {
 	int				fov;
 	t_vec3			pos;
+	t_vec3			focus_point;
 	t_vec3			rot;
 	t_mtrx4			ctw;
 	float			reso;

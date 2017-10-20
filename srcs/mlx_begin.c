@@ -78,7 +78,8 @@ void			init_rt(t_rt *e)
     
 	e->scene.cam.pos.x = 400;
 	e->scene.cam.pos.y = 400;
-	e->scene.cam.pos.z = -1000;
+    e->scene.cam.pos.z = -1000;
+    e->scene.cam.focus_point = vec_new3(e->scene.cam.pos.x, e->scene.cam.pos.y, 0);
 	e->scene.cam.fov = 45;
 
 
