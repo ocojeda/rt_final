@@ -13,6 +13,29 @@ float			intersect_obj(t_ray ray, t_obj *obj)
 	return (DIST_MAX);
 }
 
+float			get_length(t_vec3 v)
+{
+	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
+}
+
+t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi)
+{
+	float		intensity;
+	int			i;
+
+	i = -1;
+	intensity = (!e->scene.nbr_light) ? AMBIENT_LIGHT : 0;
+	while (++i < e->scene.nbr_light)
+	{
+		intensity += intensity_obj(e, poi, obj, e->CLIGHT) ;//* e->CLIGHT.intensity;
+	}
+	if (intensity > 1)
+		intensity = 1;
+	if (intensity != 0)
+		return (color_mult(obj.color, intensity, 1));
+	return ((t_color){0, 0, 0, 0});
+}
+
 float			get_min_dist(t_rt *e, t_ray ray)
 {
 	float		min_dist;
@@ -67,7 +90,8 @@ static t_color	get_pxl_color(t_rt *e, t_ray ray)
 	printf("%f ",ray.dir.z);
 	ft_putchar('\n');*/
 	//ft_putnbr((int)e->scene.obj[1].color.r);
-	ref.color = c_color(e->scene.obj[e->scene.id].color.r, e->scene.obj[e->scene.id].color.g, e->scene.obj[e->scene.id].color.b);
+	//ref.color = c_color(e->scene.obj[e->scene.id].color.r, e->scene.obj[e->scene.id].color.g, e->scene.obj[e->scene.id].color.b);
+	ref.color = get_color(e, e->scene.obj[e->scene.id], ref.poi);
 	return (ref.color);
 }
 

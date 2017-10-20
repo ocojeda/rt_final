@@ -66,6 +66,8 @@
 # define KEY_UP 126
 # define KEY_ESC 53
 
+# define CLIGHT scene.lights[i]
+# define AMBIENT_LIGHT e->scene.ambient
 # define ALIASING e->file.aliasing
 # define INIT e->mlx.init
 # define WIN e->mlx.window
@@ -124,6 +126,24 @@ typedef struct		s_camera
 	t_vec3			tmp_rot;
 }					t_camera;
 
+typedef struct		s_matiere
+{
+	//t_checker		checker;
+	float			diff;
+	float			spec;
+	float			reflect;
+	float			refract;
+	float			reflex;
+	//t_texture		tex;
+	float			transparency;
+	float			absorbtion;
+	char			*coeff;
+	char			opacite;
+	int				sin;
+	int				perlin;
+	//t_texture		texture;
+}					t_matiere;
+
 typedef struct		s_obj
 {
 	char			is_init;
@@ -139,7 +159,7 @@ typedef struct		s_obj
 	float			t;
 	int				nbr_t;
 	t_vec3			normal;
-//	t_matiere		mat;
+	t_matiere		mat;
 	int				plimit_active;
 	int				plimit_type;
 	int				plimit_valid;
@@ -163,7 +183,7 @@ typedef struct		s_scene
 	t_obj			obj[MAXOBJ];
 //	t_texture		skybox;
 //	int				last;
-//	float			ambient;
+	float			ambient;
 	int				nbr_light;
 	int				nbr_obj;
 //	int				nbr_complex;
@@ -252,6 +272,7 @@ void			frame(t_rt *e);
 */
 unsigned int	ret_colors(t_color colo);
 t_color			c_color(float r, float g, float b);
+t_color			color_mult(t_color color, float taux, float limit);
 
 /*
 *raytracing basic fonctions
@@ -270,6 +291,8 @@ int				keypress(int keycode, void *param);
 /*
 * intersect fonctions
 */
+
+float			intersect_obj(t_ray ray, t_obj *obj);
 float			intersect_sphere(t_ray ray, t_obj *sphere);
 float			intersect_plane(t_ray ray, t_obj *plane);
 float			intersect_cylinder(t_ray ray, t_obj *cyl);
@@ -281,4 +304,23 @@ float			get_res_of_quadratic(t_calc *op, t_obj *obj);
 * math aux fonctions
 */
 float			p(float x);
+float			get_length(t_vec3 v);
+
+/*
+* fonction pour les normales
+*/
+t_vec3				color_norm(t_obj obj, t_vec3 poi, t_vec3 light);
+t_vec3				object_norm(t_obj obj, t_vec3 poi);
+t_vec3				cone_norm(t_obj obj, t_vec3 poi);
+t_vec3				plane_norm(t_obj obj);
+t_vec3				sphere_norm(t_obj obj, t_vec3 poi);
+t_vec3				cylinder_norm(t_obj obj, t_vec3 poi);
+
+/*
+*	que le lumiere soit
+*/
+
+float		intensity_obj(t_rt *e, t_vec3 poi, t_obj obj, t_light light);
+float		diff_intensity(t_obj obj, float dot);
+
 #endif
