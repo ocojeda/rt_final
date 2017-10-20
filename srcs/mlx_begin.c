@@ -64,10 +64,10 @@ void			init_rt(t_rt *e)
 	e->scene.obj[2].mat.diff = 0.5;
 
     e->scene.obj[3].type = CYLINDER;
-    e->scene.obj[3].r = 72;
+    e->scene.obj[3].r = 30;
     e->scene.obj[3].color = c_color(5, 20, 100);
     e->scene.obj[3].pos = vec_new3(500, 400, 0);
-	e->scene.obj[3].vector = vec_new3(0, 1, 0);
+	e->scene.obj[3].vector = vec_norme3(vec_new3(0.5, 1, 0));
 	e->scene.obj[3].mat.diff = 0.5;
 
 	e->scene.obj[4].type = CONE;
@@ -75,7 +75,7 @@ void			init_rt(t_rt *e)
     e->scene.obj[4].k = 0.1;
 	e->scene.obj[4].color = c_color(100, 15, 100);
 	e->scene.obj[4].pos = vec_new3(600, 400, 0);
-    e->scene.obj[4].vector = vec_new3(1, 0.1, 0);
+    e->scene.obj[4].vector = vec_norme3(vec_new3(1, 0.5, 0));
 	e->scene.obj[4].mat.diff = 0.5;
 
     e->scene.nbr_obj = 5;
