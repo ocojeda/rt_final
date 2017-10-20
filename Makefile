@@ -12,7 +12,9 @@ SRC			=	main.c \
 				sphere.c \
 				plane.c \
 				cylinder.c \
-				cone.c
+				cone.c \
+				normal.c \
+				intensity.c 
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a
 LIBVEC		=	libs/libvec/libvec.a

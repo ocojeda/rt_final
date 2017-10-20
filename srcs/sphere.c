@@ -20,6 +20,14 @@ float			get_res_of_quadratic(t_calc *op, t_obj *obj)
 	return (DIST_MAX);
 }
 
+t_vec3			sphere_norm(t_obj obj, t_vec3 poi)
+{
+	t_vec3	norme;
+
+	norme = vec_norme3(vec_sub3(poi, obj.pos));
+	return (norme);
+}
+
 float			intersect_sphere(t_ray ray, t_obj *sphere)
 {
 	t_vec3		x;
