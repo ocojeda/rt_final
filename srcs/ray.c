@@ -16,6 +16,22 @@ t_ray		ray_init(t_rt *e, int x, int y)
     //float	fov;
     ray.pos = e->scene.cam.pos;
     ray.dir = vec_norme3(vec_sub3(vec_new3(x, y, 0), e->scene.cam.pos));
+	
+	ray.pos = e->scene.cam.pos;
+	/*px = vec_norme3(vec_sub3(e->scene.cam.focus_point, e->scene.cam.pos));
+	px.x += x;
+	px.y += y;
+	px.z += ray.pos.z + 1;
+	ray.dir = px;
+	*/
+	if(e->scene.cam.focus_point.z < 0)
+		ray.dir = 
+	vec_norme3(vec_sub3(vec_sub3(e->scene.cam.focus_point, 
+	vec_new3(x , y , e->scene.cam.focus_point.z + 1)), e->scene.cam.pos));
+	else
+		ray.dir = 
+	vec_norme3(vec_sub3(vec_sub3(e->scene.cam.focus_point, 
+	vec_new3(x , y , e->scene.cam.focus_point.z - 1)), e->scene.cam.pos));
 
     /*<camera fov="45">
     <pos x="0" y="100" z="-1000"/>

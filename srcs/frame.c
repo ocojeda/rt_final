@@ -43,10 +43,6 @@ t_scene				copy_scene(t_scene scene)
 	int				i;
 
     i = -1;
-    /*
-    * No Parseur yet, parse here
-    */
-	//scene.obj[0].type = SPHERE;
     copy.obj[0].type = SPHERE;
     copy.obj[0].color = c_color(0, 0, 200);
     copy.obj[0].pos = vec_new3(400, 400, 500);
@@ -121,9 +117,9 @@ t_scene				copy_scene(t_scene scene)
 	copy.cam = scene.cam;
 	copy.filters = scene.filters;
 	
-*/	scene = copy;
+*/
+  scene = copy;
 	return(scene);
-	return (copy);
 }
 
 void			*drawline(void *arg)
@@ -186,7 +182,6 @@ t_rt			**launch_thread(t_rt *e)
 		THREAD.w = LARGEUR * e->file.aliasing;
 		THREAD.h /= RES;
 		THREAD.w /= RES;
-		//ft_putnbr(RES);
 		THREAD.y = ((THREAD.h) / NB_THREADS) * i;
 		THREAD.max_y = THREAD.y + ((THREAD.h) / NB_THREADS);
 		//if (e->file.aliasing == 1)
@@ -225,6 +220,13 @@ void			frame(t_rt *e)
                     ret_colors(th_e[i]->thread.colors[++i2]));
 		}
 //		dname(e, th_e, i);
+	}
+	i = 0;
+	while (i < NB_THREADS)
+	{
+		free(th_e[i]->thread.colors);
+		free(th_e[i]);
+		i++;
 	}
 //	filters(e);
 	free(th_e);
