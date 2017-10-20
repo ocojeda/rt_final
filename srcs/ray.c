@@ -14,8 +14,8 @@ t_ray		ray_init(t_rt *e, int x, int y)
 	t_ray	ray;
 	//t_vec3	px;
     //float	fov;
-    ray.pos = e->scene.cam.pos;
-    ray.dir = vec_norme3(vec_sub3(vec_new3(x, y, 0), e->scene.cam.pos));
+   // ray.pos = e->scene.cam.pos;
+   // ray.dir = vec_norme3(vec_sub3(vec_new3(x, y, 0), e->scene.cam.pos));
 	
 	ray.pos = e->scene.cam.pos;
 	/*px = vec_norme3(vec_sub3(e->scene.cam.focus_point, e->scene.cam.pos));
