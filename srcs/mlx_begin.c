@@ -46,18 +46,18 @@ void			init_rt(t_rt *e)
 	e->file.reso_buff = e->file.reso;
     
     e->scene.obj[0].type = SPHERE;
-    e->scene.obj[0].color = c_color(180, 190, 200);
-    e->scene.obj[0].pos = vec_new3(400, 600, 2000);
-	e->scene.obj[0].r = 200;
-	e->scene.obj[0].mat.reflex = 0;
-	e->scene.obj[0].mat.diff = 0.1;
+    e->scene.obj[0].color = c_color(100, 100, 255);
+    e->scene.obj[0].pos = vec_new3(300, 600, -300);
+	e->scene.obj[0].r = 100;
+	e->scene.obj[0].mat.reflex = 1;
+	e->scene.obj[0].mat.diff = 1;
 
 	e->scene.obj[1].type = PLANE;
     e->scene.obj[1].color = c_color(200, 200, 100);
     e->scene.obj[1].pos = vec_new3(400, 400, 900);
 	e->scene.obj[1].vector = vec_norme3(vec_new3(0, 0, -1));
 	e->scene.obj[1].mat.diff = 0.4;
-	e->scene.obj[1].mat.reflex = 1;
+	e->scene.obj[1].mat.reflex = 0;
 
 	e->scene.obj[2].type = PLANE;
 	e->scene.obj[2].mat.reflex = 0;
@@ -72,7 +72,7 @@ void			init_rt(t_rt *e)
     e->scene.obj[3].pos = vec_new3(500, 400, 300);
 	e->scene.obj[3].vector = vec_norme3(vec_new3(0.5, 1, 0));
 	e->scene.obj[3].mat.diff = 0.2;
-	e->scene.obj[3].mat.reflex = 0;
+	e->scene.obj[3].mat.reflex = 0.9;
 
 	e->scene.obj[4].type = CONE;
     e->scene.obj[4].k = 0.1;

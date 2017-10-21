@@ -14,7 +14,8 @@ SRC			=	main.c \
 				cylinder.c \
 				cone.c \
 				normal.c \
-				intensity.c 
+				intensity.c \
+				reflex.c
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a
 LIBVEC		=	libs/libvec/libvec.a

@@ -281,6 +281,7 @@ t_color			raytrace(int x, int y, t_rt *e);
 t_ray			ray_init(t_rt *e, int x, int y);
 
 t_ray			c_ray(t_vec3 i, t_vec3 j);
+t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi);
 
 /*
 *mlx relative fonctions
@@ -322,7 +323,13 @@ t_vec3				cylinder_norm(t_obj obj, t_vec3 poi);
 
 float		intensity_obj(t_rt *e, t_vec3 poi, t_obj obj, t_light light);
 float		diff_intensity(t_obj obj, float dot);
-t_color			get_reflected_color(t_rt *e, t_vec3 poi,
-	t_color base_color, t_reflect ref);
+
+/*
+*	reflexion fonctions
+*/
+t_color		get_reflected_color(t_rt *e, t_vec3 poi,
+t_color base_color, t_reflect ref);
+t_color		ret_reflected_pixel(t_rt *e, t_reflect ref, t_ray ray,
+		float min_dist);
 
 #endif
