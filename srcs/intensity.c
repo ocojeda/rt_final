@@ -25,7 +25,7 @@ float			obj_isnt_in_shadow(t_rt *e, t_vec3 poi, t_light *light)
 
 float		intensity_obj(t_rt *e, t_vec3 poi, t_obj obj, t_light light)
 {
-/*	float	intensity;
+	float	intensity;
 	t_vec3	norm;
 	float	transp;
 	float	dot;
@@ -43,10 +43,10 @@ float		intensity_obj(t_rt *e, t_vec3 poi, t_obj obj, t_light light)
 		intensity = vec_dot3(vec_scale3(light.ray.dir, -1), refl);
 		if(intensity < 0)
 			intensity = 0;
-		intensity = pow(intensity, 50) * 0.9;
+		intensity = pow(intensity, 10);
 	}
 	return (intensity * transp + AMBIENT_LIGHT);
-*/
+/*
 float	intensity;
 t_vec3	norm;
 float	transp;
@@ -63,7 +63,7 @@ if ((dot = vec_dot3(light.ray.dir, norm)) > 0
 	dist_to_light = get_length(light.ray.dir);
 	intensity += dot * 0.3 + (0.2 * dist_to_light / 100);
 }
-return (intensity * transp + AMBIENT_LIGHT);
+return (intensity * transp + AMBIENT_LIGHT);*/
 }
 
 float		diff_intensity(t_obj obj, float dot)

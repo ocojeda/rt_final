@@ -74,6 +74,61 @@ t_rt				*copy_rt(t_rt *e)
 	if ((copy = (t_rt *)malloc(sizeof(t_rt))) == NULL)
 		exit(42);
 	copy->scene = e->scene;
+/*	copy->scene.obj[0].type = SPHERE;
+    copy->scene.obj[0].color = c_color(180, 190, 200);
+    copy->scene.obj[0].pos = vec_new3(400, 400, 1000);
+	copy->scene.obj[0].r = 200;
+	copy->scene.obj[0].mat.diff = 0.5;
+
+    copy->scene.obj[1].type = PLANE;
+    copy->scene.obj[1].color = c_color(200, 200, 100);
+    copy->scene.obj[1].pos = vec_new3(400, 400, 900);
+	copy->scene.obj[1].vector = vec_norme3(vec_new3(0, 0, 1));
+	copy->scene.obj[1].mat.diff = 1;
+
+    copy->scene.obj[2].type = PLANE;
+    copy->scene.obj[2].color = c_color(0, 200, 0);
+    copy->scene.obj[2].pos = vec_new3(900, -100, 800);
+    copy->scene.obj[2].vector = vec_norme3(vec_new3(0, 0.9, 0));
+	copy->scene.obj[2].mat.diff = 0.5;
+
+    copy->scene.obj[3].type = CYLINDER;
+    copy->scene.obj[3].r = 30;
+    copy->scene.obj[3].color = c_color(5, 20, 100);
+    copy->scene.obj[3].pos = vec_new3(500, 400, 300);
+	copy->scene.obj[3].vector = vec_norme3(vec_new3(0.5, 1, 0));
+	copy->scene.obj[3].mat.diff = 0.5;
+
+	copy->scene.obj[4].type = CONE;
+    copy->scene.obj[4].k = 0.1;
+	copy->scene.obj[4].color = c_color(100, 15, 100);
+	copy->scene.obj[4].pos = vec_new3(600, 400, 300);
+    copy->scene.obj[4].vector = vec_norme3(vec_new3(1, 0.5, 0));
+	copy->scene.obj[4].mat.diff = 0.5;
+
+    copy->scene.nbr_obj = 5;
+    copy->scene.obj[5].type = END;
+	
+	copy->scene.lights[0].ray = c_ray(vec_new3(800, 400, -800), vec_new3(0, 0, 0));
+	copy->scene.lights[0].color = c_color(255, 000, 000);
+	copy->scene.lights[0].intensity = 0.4;
+	copy->scene.lights[0].is_init = 0;
+
+	copy->scene.lights[1].ray = c_ray(vec_new3(400, 400, -300), vec_new3(0, 0, 0));
+	copy->scene.lights[1].color = c_color(255, 000, 000);
+	copy->scene.lights[1].intensity = 0.4;
+	copy->scene.lights[1].is_init = 0;
+
+	copy->scene.ambient = 0.2;
+	copy->scene.nbr_light = 2;
+	
+	copy->scene.cam.pos.x = 400;
+	copy->scene.cam.pos.y = 400;
+    copy->scene.cam.pos.z = -2000;
+
+    copy->scene.cam.focus_point.x = 401;
+	copy->scene.cam.focus_point.y = 401;
+    copy->scene.cam.focus_point.z = 0;*/
 	copy->file.larg = e->file.larg;
 	copy->file.haut = e->file.haut;
 	copy->file.reso = e->file.reso;
