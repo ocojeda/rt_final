@@ -1,5 +1,5 @@
-PROJECT		=	RTV1
-NAME		=	rtv1
+PROJECT		=	RT
+NAME		=	rt
 OBJDIR		=	objs/
 SRCDIR		=	srcs/
 SRC			=	main.c \
