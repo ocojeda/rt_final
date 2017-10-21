@@ -46,13 +46,13 @@ void			init_rt(t_rt *e)
 	e->file.reso_buff = e->file.reso;
     
     e->scene.obj[0].type = SPHERE;
-    e->scene.obj[0].color = c_color(0, 0, 200);
+    e->scene.obj[0].color = c_color(180, 190, 200);
     e->scene.obj[0].pos = vec_new3(400, 400, 1000);
 	e->scene.obj[0].r = 200;
 	e->scene.obj[0].mat.diff = 0.5;
 
     e->scene.obj[1].type = PLANE;
-    e->scene.obj[1].color = c_color(200, 200, 0);
+    e->scene.obj[1].color = c_color(200, 200, 100);
     e->scene.obj[1].pos = vec_new3(400, 400, 900);
 	e->scene.obj[1].vector = vec_norme3(vec_new3(0, 0, 1));
 	e->scene.obj[1].mat.diff = 1;
@@ -96,11 +96,11 @@ void			init_rt(t_rt *e)
 	//e->scene.lights[1] = END;
 
 	e->scene.cam.pos.x = 400;
-	e->scene.cam.pos.y = 800;
+	e->scene.cam.pos.y = 400;
     e->scene.cam.pos.z = -2000;
 
-    e->scene.cam.focus_point.x = 399;
-	e->scene.cam.focus_point.y = 799;
+    e->scene.cam.focus_point.x = 401;
+	e->scene.cam.focus_point.y = 401;
     e->scene.cam.focus_point.z = 0;
     
 	//if (!(e->scene.obj = (t_obj *)malloc(sizeof(t_obj) * MAXOBJ)))

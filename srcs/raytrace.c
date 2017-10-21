@@ -26,13 +26,9 @@ t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi)
 	i = -1;
 	intensity = (!e->scene.nbr_light) ? AMBIENT_LIGHT : 0;
 	while (++i < e->scene.nbr_light)
-	{
-		intensity += intensity_obj(e, poi, obj, e->CLIGHT) ;//* e->CLIGHT.intensity;
-	}
+		intensity += intensity_obj(e, poi, obj, e->CLIGHT) ;
 	if (intensity != 0)
 	{
-		if(intensity == 1)
-			ft_putchar('@');
 		return (color_mult(obj.color, intensity, 1));
 	}
 	return ((t_color){0, 0, 0, 0});

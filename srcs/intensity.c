@@ -18,16 +18,14 @@ float			obj_isnt_in_shadow(t_rt *e, t_vec3 poi, t_light *light)
 	{
 		dist = intersect_obj(ray, &e->scene.obj[i]);
 		if (dist > 0 && dist < dist_to_light)
-		{
 			opac = 0;
-		}
 	}
 	return (opac);
 }
 
 float		intensity_obj(t_rt *e, t_vec3 poi, t_obj obj, t_light light)
 {
-	float	intensity;
+/*	float	intensity;
 	t_vec3	norm;
 	float	transp;
 	float	dot;
@@ -45,12 +43,27 @@ float		intensity_obj(t_rt *e, t_vec3 poi, t_obj obj, t_light light)
 		intensity = vec_dot3(vec_scale3(light.ray.dir, -1), refl);
 		if(intensity < 0)
 			intensity = 0;
-		intensity = pow(intensity, 50);
-		//dist_to_light = get_length(vec_sub3(light.ray.pos, poi));
-		//dist_to_light = 1;
-		//intensity += dot * 0.3 + (0.2 * dist_to_light / 100);
+		intensity = pow(intensity, 50) * 0.9;
 	}
 	return (intensity * transp + AMBIENT_LIGHT);
+*/
+float	intensity;
+t_vec3	norm;
+float	transp;
+float	dot;
+float	dist_to_light;
+
+intensity = 0;
+transp = 0;
+light.ray.dir = vec_norme3(vec_sub3(light.ray.pos, poi));
+norm = color_norm(obj, poi, vec_sub3(e->scene.cam.pos, poi));
+if ((dot = vec_dot3(light.ray.dir, norm)) > 0
+&& (transp = obj_isnt_in_shadow(e, poi, &light)))
+{
+	dist_to_light = get_length(light.ray.dir);
+	intensity += dot * 0.3 + (0.2 * dist_to_light / 100);
+}
+return (intensity * transp + AMBIENT_LIGHT);
 }
 
 float		diff_intensity(t_obj obj, float dot)
