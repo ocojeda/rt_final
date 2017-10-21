@@ -58,9 +58,9 @@ void			init_rt(t_rt *e)
 	e->scene.obj[1].mat.diff = 1;
 
     e->scene.obj[2].type = PLANE;
-    e->scene.obj[2].color = c_color(0, 200, 0);
-    e->scene.obj[2].pos = vec_new3(900, -100, 800);
-    e->scene.obj[2].vector = vec_norme3(vec_new3(0, 0.9, 0));
+    e->scene.obj[2].color = c_color(255, 200, 0);
+    e->scene.obj[2].pos = vec_new3(900, -300, 0);
+    e->scene.obj[2].vector = vec_norme3(vec_new3(0, 1, 0));
 	e->scene.obj[2].mat.diff = 0.5;
 
     e->scene.obj[3].type = CYLINDER;
@@ -84,7 +84,7 @@ void			init_rt(t_rt *e)
 
 	e->scene.lights[0].ray.pos = vec_new3(800, 1200, 0);
 	e->scene.lights[0].color = c_color(255, 000, 000);
-	e->scene.lights[0].intensity = 1;
+	e->scene.lights[0].intensity = 0.5;
 	e->scene.lights[0].is_init = 0;
 
 

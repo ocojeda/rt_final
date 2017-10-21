@@ -43,7 +43,7 @@ float		intensity_obj(t_rt *e, t_vec3 poi, t_obj obj, t_light light)
 		intensity = vec_dot3(vec_scale3(light.ray.dir, -1), refl);
 		if(intensity < 0)
 			intensity = 0;
-		intensity = pow(intensity, 10);
+		intensity = pow(intensity, (light.intensity * 10)) * (obj.mat.diff * 0.9);
 	}
 	return (intensity * transp + AMBIENT_LIGHT);
 /*
