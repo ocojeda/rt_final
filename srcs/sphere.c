@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "../includes/rt.h"
 
 float			get_res_of_quadratic(t_calc *op, t_obj *obj)
 {

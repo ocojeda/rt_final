@@ -1,4 +1,4 @@
-# include "rtv1.h"
+#include "../includes/rt.h"
 
 t_ray			c_ray(t_vec3 i, t_vec3 j)
 {

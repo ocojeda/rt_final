@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "../includes/rt.h"
 
 t_vec3			plane_norm(t_obj plane)
 {

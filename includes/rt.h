@@ -1,7 +1,7 @@
-#ifndef RTV1_H
-# define RTV1_H
+#ifndef RT_H
+# define RT_H
 
-# include "libft.h"
+# include "../libs/libft/includes/libft.h"
 # include "../libs/minilibx/mlx.h"
 # include "../libs/libvec/includes/libvec.h"
 # include <math.h>
@@ -82,6 +82,7 @@
 # define RES_W (LARGEUR / RES)
 
 # define MAXOBJ 50
+# define NR_ITER 6
 # define MAXLIGHT 21
 # define NB_THREADS 8
 # define DIST_MAX 20000
@@ -152,11 +153,9 @@ typedef struct		s_matiere
 	//t_checker		checker;
 	float			diff;
 	float			spec;
-	float			reflect;
 	float			refract;
 	float			reflex;
 	//t_texture		tex;
-	float			transparency;
 	float			absorbtion;
 	char			*coeff;
 	char			opacite;
@@ -294,6 +293,7 @@ void			frame(t_rt *e);
 unsigned int	ret_colors(t_color colo);
 t_color			c_color(float r, float g, float b);
 t_color			color_mult(t_color color, float taux, float limit);
+t_color			ft_map_color(t_color color1, t_color color2, float taux1);
 
 /*
 *raytracing basic fonctions
@@ -302,6 +302,7 @@ t_color			raytrace(int x, int y, t_rt *e);
 t_ray			ray_init(t_rt *e, int x, int y);
 
 t_ray			c_ray(t_vec3 i, t_vec3 j);
+t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi);
 
 /*
 *mlx relative fonctions
@@ -350,6 +351,12 @@ float		diff_intensity(t_obj obj, float dot);
 */
 
 void		matrix_init(t_rt *e);
-t_ray		find_cam_ray(t_rt *e, int x, int y);
+/*
+*	reflexion fonctions
+*/
+t_color		get_reflected_color(t_rt *e, t_vec3 poi,
+t_color base_color, t_reflect ref);
+t_color		ret_reflected_pixel(t_rt *e, t_reflect ref, t_ray ray,
+		float min_dist);
 
 #endif

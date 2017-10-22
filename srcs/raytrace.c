@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "../includes/rt.h"
 
 float			intersect_obj(t_ray ray, t_obj *obj)
 {
@@ -63,32 +63,15 @@ static t_color	get_pxl_color(t_rt *e, t_ray ray)
 
 	e->scene.id = -1;
 	if ((ref.min_dist = get_min_dist(e, ray)) == -1)
-		return (c_color(0,0,0));
+		return (c_color(0,0,0)); // a ajouter ici la skybox
 	ref.tmp_id = e->scene.id;
 	ref.poi = vec_add3(ray.pos, vec_scale3(ray.dir, ref.min_dist));
-//	ref.counter = NR_ITER;
+	ref.counter = NR_ITER;
 	ref.ray = c_ray(ray.pos, ray.dir);
 	ref.total_distance = ref.min_dist;
-//	if (e->scene.id != -1)
-//	{
-//		if (CMAT.reflex)
-//			return (ret_reflected_pixel(e, ref, ray, 0));
-//		if (CMAT.refract)
-//		{
-//			ref.color = get_color(e, CID, ref.poi);
-//			e->scene.id = ref.tmp_id;
-//			return (get_refracted_color(e, ref.poi, ref.color, ref));
-//		}
-//		if (CMAT.checker.l > 0)
-//			return (get_checker_col(CMAT.checker, ref.poi));
-//		return (get_color(e, CID, ref.poi));
-//	}
-	/*printf("%f ",ray.dir.x);
-	printf("%f ",ray.dir.y);
-	printf("%f ",ray.dir.z);
-	ft_putchar('\n');*/
-	//ft_putnbr((int)e->scene.obj[1].color.r);
-	//ref.color = c_color(e->scene.obj[e->scene.id].color.r, e->scene.obj[e->scene.id].color.g, e->scene.obj[e->scene.id].color.b);
+	ref.tmp_id = e->scene.id;
+	if (e->scene.obj[e->scene.id].mat.reflex)
+		return (ret_reflected_pixel(e, ref, ray, 0));
 	ref.color = get_color(e, e->scene.obj[e->scene.id], ref.poi);
 	return (ref.color);
 }

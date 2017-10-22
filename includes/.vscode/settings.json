@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.cl": "c",
+        "__tuple": "c",
+        "type_traits": "c",
+        "utility": "c"
+    }
+}

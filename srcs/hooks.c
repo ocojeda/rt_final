@@ -1,5 +1,4 @@
-#include "rtv1.h"
-
+#include "../includes/rt.h"
 int				keypress(int keycode, void *param)
 {
 	t_rt	*e;

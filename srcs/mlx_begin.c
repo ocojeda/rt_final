@@ -1,5 +1,4 @@
-#include "rtv1.h"
-
+#include "../includes/rt.h"
 int				calcul_res(t_rt *e, int limit)
 {
 	int res;
@@ -21,7 +20,7 @@ void			ft_start_rt(t_rt *e)
 //	e->gtk.started = 1;
 	//if (!e->file.haut || !e->file.larg)
 	//	exit(0);
-	e->mlx.window = mlx_new_window(e->mlx.init, e->file.larg, e->file.haut, "RTV1");
+	e->mlx.window = mlx_new_window(e->mlx.init, e->file.larg, e->file.haut, "Raytracer");
 	e->mlx.image = mlx_new_image(e->mlx.init, e->file.larg, e->file.haut);
     e->mlx.data = mlx_get_data_addr(e->mlx.image, &e->mlx.bpp, 
         &e->mlx.size_l, &e->mlx.endian);
@@ -46,37 +45,41 @@ void			init_rt(t_rt *e)
 	e->file.reso_buff = e->file.reso;
     
     e->scene.obj[0].type = SPHERE;
-    e->scene.obj[0].color = c_color(180, 190, 200);
-    e->scene.obj[0].pos = vec_new3(400, 400, 1000);
-	e->scene.obj[0].r = 200;
-	e->scene.obj[0].mat.diff = 0.5;
+    e->scene.obj[0].color = c_color(100, 100, 255);
+    e->scene.obj[0].pos = vec_new3(300, 600, -300);
+	e->scene.obj[0].r = 100;
+	e->scene.obj[0].mat.reflex = 1;
+	e->scene.obj[0].mat.diff = 1;
 
-    e->scene.obj[1].type = PLANE;
+	e->scene.obj[1].type = PLANE;
     e->scene.obj[1].color = c_color(200, 200, 100);
     e->scene.obj[1].pos = vec_new3(400, 400, 900);
 	e->scene.obj[1].vector = vec_norme3(vec_new3(0, 0, -1));
-	e->scene.obj[1].mat.diff = 1;
+	e->scene.obj[1].mat.diff = 0.4;
+	e->scene.obj[1].mat.reflex = 0;
 
-    e->scene.obj[2].type = PLANE;
+	e->scene.obj[2].type = PLANE;
+	e->scene.obj[2].mat.reflex = 0;
     e->scene.obj[2].color = c_color(255, 200, 0);
     e->scene.obj[2].pos = vec_new3(900, -300, 0);
     e->scene.obj[2].vector = vec_norme3(vec_new3(0, 1, 0));
-	e->scene.obj[2].mat.diff = 0.5;
+	e->scene.obj[2].mat.diff = 0.4;
 
     e->scene.obj[3].type = CYLINDER;
     e->scene.obj[3].r = 30;
     e->scene.obj[3].color = c_color(5, 20, 100);
     e->scene.obj[3].pos = vec_new3(500, 400, 300);
 	e->scene.obj[3].vector = vec_norme3(vec_new3(0.5, 1, 0));
-	e->scene.obj[3].mat.diff = 0.5;
+	e->scene.obj[3].mat.diff = 0.2;
+	e->scene.obj[3].mat.reflex = 0.9;
 
 	e->scene.obj[4].type = CONE;
-	//k is for angle
     e->scene.obj[4].k = 0.1;
 	e->scene.obj[4].color = c_color(100, 15, 100);
 	e->scene.obj[4].pos = vec_new3(600, 400, 300);
     e->scene.obj[4].vector = vec_norme3(vec_new3(1, 0.5, 0));
-	e->scene.obj[4].mat.diff = 0.5;
+	e->scene.obj[4].mat.diff = 0.4;
+	e->scene.obj[4].mat.reflex = 0;
 
     e->scene.nbr_obj = 5;
     e->scene.obj[5].type = END;
@@ -84,16 +87,16 @@ void			init_rt(t_rt *e)
 
 	e->scene.lights[0].ray.pos = vec_new3(800, 1200, 0);
 	e->scene.lights[0].color = c_color(255, 000, 000);
-	e->scene.lights[0].intensity = 0.5;
+	e->scene.lights[0].intensity = 0.1;
 	e->scene.lights[0].is_init = 0;
 
 
-	e->scene.lights[1].ray = c_ray(vec_new3(400, 400, -300), vec_new3(0, 0, 0));
+	e->scene.lights[1].ray = c_ray(vec_new3(-100, 400, -300), vec_new3(0, 0, 0));
 	e->scene.lights[1].color = c_color(255, 000, 000);
 	e->scene.lights[1].intensity = 0.4;
 	e->scene.lights[1].is_init = 0;
 
-	e->scene.ambient = 0.3;
+	e->scene.ambient = 0.2;
 	e->scene.nbr_light = 2;
 	//e->scene.lights[1] = END;
 

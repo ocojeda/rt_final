@@ -1,5 +1,5 @@
-PROJECT		=	RTV1
-NAME		=	rtv1
+PROJECT		=	RT
+NAME		=	rt
 OBJDIR		=	objs/
 SRCDIR		=	srcs/
 SRC			=	main.c \
@@ -15,7 +15,8 @@ SRC			=	main.c \
 				cone.c \
 				normal.c \
 				intensity.c \
-				matrix.c
+				matrix.c \
+				reflex.c
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a
 LIBVEC		=	libs/libvec/libvec.a
