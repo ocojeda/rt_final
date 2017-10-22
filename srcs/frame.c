@@ -174,8 +174,8 @@ void			frame(t_rt *e)
     int         nx;
 
     e->frame++;
-    th_e = NULL;
-//	matrix_init(e);
+	th_e = NULL;
+	matrix_init(e);
     th_e = launch_thread(e);
 	i = -1;
 	while (++i < NB_THREADS)
