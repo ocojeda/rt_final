@@ -65,7 +65,7 @@
 # define KEY_DOWN 125
 # define KEY_UP 126
 # define KEY_ESC 53
-
+# define CCAM e->scene.cam
 # define CLIGHT scene.lights[i]
 # define AMBIENT_LIGHT e->scene.ambient
 # define ALIASING e->file.aliasing
@@ -331,5 +331,7 @@ t_color		get_reflected_color(t_rt *e, t_vec3 poi,
 t_color base_color, t_reflect ref);
 t_color		ret_reflected_pixel(t_rt *e, t_reflect ref, t_ray ray,
 		float min_dist);
+
+void		matrix_init(t_rt *e);
 
 #endif

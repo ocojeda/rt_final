@@ -100,14 +100,16 @@ void			init_rt(t_rt *e)
 	e->scene.nbr_light = 2;
 	//e->scene.lights[1] = END;
 
-	e->scene.cam.pos.x = 400;
-	e->scene.cam.pos.y = 400;
-    e->scene.cam.pos.z = -2000;
+	e->scene.cam.pos.x = 0;
+	e->scene.cam.pos.y = 0;
+    e->scene.cam.pos.z = 000;
 
     e->scene.cam.focus_point.x = 401;
 	e->scene.cam.focus_point.y = 401;
     e->scene.cam.focus_point.z = 0;
-    
+	CCAM.ratio_x = HAUTEUR / LARGEUR;
+	CCAM.ratio_y = LARGEUR / HAUTEUR;
+	e->scene.cam.is_circular = 0;
 	//if (!(e->scene.obj = (t_obj *)malloc(sizeof(t_obj) * MAXOBJ)))
     //   exit(42);
     //if (!(e->scene.lights = (t_light *)malloc(sizeof(t_light) * MAXLIGHT)))
