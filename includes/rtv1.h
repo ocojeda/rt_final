@@ -66,6 +66,7 @@
 # define KEY_UP 126
 # define KEY_ESC 53
 
+# define CCAM	e->scene.cam
 # define CLIGHT scene.lights[i]
 # define AMBIENT_LIGHT e->scene.ambient
 # define ALIASING e->file.aliasing
@@ -125,6 +126,26 @@ typedef struct		s_camera
 	t_vec3			tmp_pos;
 	t_vec3			tmp_rot;
 }					t_camera;
+
+typedef struct		s_keys
+{
+	char			key_up;
+	char			key_down;
+	char			key_left;
+	char			key_right;
+	char			key_pagup;
+	char			key_pagdwn;
+	char			key_w;
+	char			key_a;
+	char			key_s;
+	char			key_d;
+	char			key_q;
+	char			key_e;
+	char			key_n;
+	char			key_o;
+	char			key_plus;
+	char			key_minus;
+}					t_keys;
 
 typedef struct		s_matiere
 {
@@ -192,7 +213,7 @@ typedef struct		s_scene
 //	int				supersampling;
 //	int				filters;
 //	int				selected;
-//	int				max_iter;
+	int				max_iter;
 }					t_scene;
 
 typedef struct		s_file
@@ -220,7 +241,7 @@ typedef struct		s_mlx
 typedef struct		s_rt
 {
 	t_mlx			mlx;
-//	t_keys			keys;
+	t_keys			keys;
 //	t_gtk			gtk;
 	t_scene			scene;
 	t_file			file;
@@ -322,5 +343,13 @@ t_vec3				cylinder_norm(t_obj obj, t_vec3 poi);
 
 float		intensity_obj(t_rt *e, t_vec3 poi, t_obj obj, t_light light);
 float		diff_intensity(t_obj obj, float dot);
+
+
+/*
+* matrix
+*/
+
+void		matrix_init(t_rt *e);
+t_ray		find_cam_ray(t_rt *e, int x, int y);
 
 #endif
