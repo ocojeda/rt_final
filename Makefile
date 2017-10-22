@@ -15,7 +15,6 @@ SRC			=	main.c \
 				cone.c \
 				normal.c \
 				intensity.c \
-				matrix.c \
 				reflex.c
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a
