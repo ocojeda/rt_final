@@ -1,5 +1,4 @@
-#include "rtv1.h"
-
+#include "../includes/rt.h"
 int				calcul_res(t_rt *e, int limit)
 {
 	int res;
@@ -21,7 +20,7 @@ void			ft_start_rt(t_rt *e)
 //	e->gtk.started = 1;
 	//if (!e->file.haut || !e->file.larg)
 	//	exit(0);
-	e->mlx.window = mlx_new_window(e->mlx.init, e->file.larg, e->file.haut, "RTV1");
+	e->mlx.window = mlx_new_window(e->mlx.init, e->file.larg, e->file.haut, "Raytracer");
 	e->mlx.image = mlx_new_image(e->mlx.init, e->file.larg, e->file.haut);
     e->mlx.data = mlx_get_data_addr(e->mlx.image, &e->mlx.bpp, 
         &e->mlx.size_l, &e->mlx.endian);

@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "../includes/rt.h"
 
 float			obj_isnt_in_shadow(t_rt *e, t_vec3 poi, t_light *light)
 {

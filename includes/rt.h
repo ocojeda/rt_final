@@ -1,7 +1,7 @@
-#ifndef RTV1_H
-# define RTV1_H
+#ifndef RT_H
+# define RT_H
 
-# include "libft.h"
+# include "../libs/libft/includes/libft.h"
 # include "../libs/minilibx/mlx.h"
 # include "../libs/libvec/includes/libvec.h"
 # include <math.h>

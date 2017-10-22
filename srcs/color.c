@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "../includes/rt.h"
 
 t_color			ft_map_color(t_color color1, t_color color2, float taux1)
 {

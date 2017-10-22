@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "../includes/rt.h"
 
 float			intersect_obj(t_ray ray, t_obj *obj)
 {

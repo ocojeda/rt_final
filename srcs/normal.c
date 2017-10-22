@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "../includes/rt.h"
 
 t_vec3			color_norm(t_obj obj, t_vec3 poi, t_vec3 cam)
 {

@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "../includes/rt.h"
 
 void			mlx_pixel(int x, int y, t_rt *e, int color)
 {
