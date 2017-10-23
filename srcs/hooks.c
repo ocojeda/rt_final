@@ -28,8 +28,7 @@ int				keypress(int keycode, void *param)
 	if (keycode == KEY_X)
 	{
 		t_mtrx4		transl;
-		
-			transl = transl_matrx4(CCAM.pos.x, CCAM.pos.y, CCAM.pos.z);
+		transl = transl_matrx4(CCAM.pos.x, CCAM.pos.y, CCAM.pos.z);
 		CCAM.is_circular = (CCAM.is_circular == 1) ? 0 : 1;
 		if (CCAM.is_circular == 1)
         CCAM.ctw = transl ;//prod_matrx4(transl, CCAM.ctw);

@@ -65,6 +65,60 @@ void			*drawline(void *arg)
 	}
 	return (NULL);
 }
+t_light				copy_light(t_light light)
+{
+	t_light			copy;
+
+	copy.is_init = light.is_init;
+	copy.ray = light.ray;
+	copy.color = light.color;
+	copy.intensity = light.intensity;
+	return (copy);
+}
+
+t_obj				copy_objs(t_obj obj)
+{
+	t_obj			copy;
+
+	copy.is_init = obj.is_init;
+	copy.type = obj.type;
+	copy.color = obj.color;
+	copy.pos = obj.pos;
+	copy.dir = obj.dir;
+	copy.k = obj.k;
+	copy.vector = obj.vector;
+	copy.r = obj.r;
+	copy.t = obj.t;
+	copy.vector = obj.vector;
+	copy.mat = obj.mat;
+	copy.plimit_valid = obj.plimit_valid;
+	return (copy);
+}
+
+t_scene				copy_scene(t_scene scene)
+{
+	t_scene			copy;
+	int				i;
+
+	i = -1;
+	if (!(copy.lights = (t_light *)malloc(scene.nbr_light *
+	sizeof(t_light))))
+		exit(42);
+	while (++i < scene.nbr_light)
+		copy.lights[i] = copy_light(scene.lights[i]);
+	if (!(copy.obj = (t_obj *)malloc(scene.nbr_obj * sizeof(t_obj))))
+		exit(42);
+	i = -1;
+	while (++i < scene.nbr_obj)
+		copy.obj[i] = copy_objs(scene.obj[i]);
+
+	copy.nbr_light = scene.nbr_light;
+	copy.nbr_obj = scene.nbr_obj;
+	copy.ambient = scene.ambient;
+	copy.id = scene.id;
+	copy.cam = scene.cam;
+	return (copy);
+}
 
 t_rt				*copy_rt(t_rt *e)
 {
@@ -73,65 +127,19 @@ t_rt				*copy_rt(t_rt *e)
 	copy = NULL;
 	if ((copy = (t_rt *)malloc(sizeof(t_rt))) == NULL)
 		exit(42);
-	copy->scene = e->scene;
-/*	copy->scene.obj[0].type = SPHERE;
-    copy->scene.obj[0].color = c_color(180, 190, 200);
-    copy->scene.obj[0].pos = vec_new3(400, 400, 1000);
-	copy->scene.obj[0].r = 200;
-	copy->scene.obj[0].mat.diff = 0.5;
-
-    copy->scene.obj[1].type = PLANE;
-    copy->scene.obj[1].color = c_color(200, 200, 100);
-    copy->scene.obj[1].pos = vec_new3(400, 400, 900);
-	copy->scene.obj[1].vector = vec_norme3(vec_new3(0, 0, 1));
-	copy->scene.obj[1].mat.diff = 1;
-
-    copy->scene.obj[2].type = PLANE;
-    copy->scene.obj[2].color = c_color(0, 200, 0);
-    copy->scene.obj[2].pos = vec_new3(900, -100, 800);
-    copy->scene.obj[2].vector = vec_norme3(vec_new3(0, 0.9, 0));
-	copy->scene.obj[2].mat.diff = 0.5;
-
-    copy->scene.obj[3].type = CYLINDER;
-    copy->scene.obj[3].r = 30;
-    copy->scene.obj[3].color = c_color(5, 20, 100);
-    copy->scene.obj[3].pos = vec_new3(500, 400, 300);
-	copy->scene.obj[3].vector = vec_norme3(vec_new3(0.5, 1, 0));
-	copy->scene.obj[3].mat.diff = 0.5;
-
-	copy->scene.obj[4].type = CONE;
-    copy->scene.obj[4].k = 0.1;
-	copy->scene.obj[4].color = c_color(100, 15, 100);
-	copy->scene.obj[4].pos = vec_new3(600, 400, 300);
-    copy->scene.obj[4].vector = vec_norme3(vec_new3(1, 0.5, 0));
-	copy->scene.obj[4].mat.diff = 0.5;
-
-    copy->scene.nbr_obj = 5;
-    copy->scene.obj[5].type = END;
 	
-	copy->scene.lights[0].ray = c_ray(vec_new3(800, 400, -800), vec_new3(0, 0, 0));
-	copy->scene.lights[0].color = c_color(255, 000, 000);
-	copy->scene.lights[0].intensity = 0.4;
-	copy->scene.lights[0].is_init = 0;
+	copy->scene = copy_scene(e->scene);
+	//copy->scene->obj = e->scene->obj;
+	//copy->scene->lights = e->scene->lights;
 
-	copy->scene.lights[1].ray = c_ray(vec_new3(400, 400, -300), vec_new3(0, 0, 0));
-	copy->scene.lights[1].color = c_color(255, 000, 000);
-	copy->scene.lights[1].intensity = 0.4;
-	copy->scene.lights[1].is_init = 0;
+	copy->mlx.bpp = e->mlx.bpp;
+	copy->mlx.size_l = e->mlx.size_l;
+	copy->mlx.endian = e->mlx.endian;
 
-	copy->scene.ambient = 0.2;
-	copy->scene.nbr_light = 2;
-	
-	copy->scene.cam.pos.x = 400;
-	copy->scene.cam.pos.y = 400;
-    copy->scene.cam.pos.z = -2000;
-
-    copy->scene.cam.focus_point.x = 401;
-	copy->scene.cam.focus_point.y = 401;
-    copy->scene.cam.focus_point.z = 0;*/
 	copy->file.larg = e->file.larg;
 	copy->file.haut = e->file.haut;
 	copy->file.reso = e->file.reso;
+	copy->file.reso_buff = e->file.reso_buff;
 	copy->file.aliasing = e->file.aliasing;
 	return (copy);
 }
@@ -195,6 +203,8 @@ void			frame(t_rt *e)
 	while (i < NB_THREADS)
 	{
 		free(th_e[i]->thread.colors);
+		free(th_e[i]->scene.lights);
+		free(th_e[i]->scene.obj);
 		free(th_e[i]);
 		i++;
 	}
