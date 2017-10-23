@@ -11,8 +11,6 @@ int				mousse_hook(int button, int x, int y, void *param)
 	{
 		ray = ray_init(e, x, y);
         temp = get_min_dist(e, ray);
-        ft_putnbr(temp);
-        ft_putnbr(e->scene.id);
         if (temp >= 0)
 			e->scene.selected_obj = e->scene.id;
 		else
