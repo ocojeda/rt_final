@@ -13,7 +13,7 @@ int				keypress(int keycode, void *param)
 		exit(42);
 	if (keycode == PAGE_UP)
 	{
-		RES++;
+		RES += 10;
 		if(RES > 20)
 			RES = 20;
 		frame(e);
@@ -37,29 +37,63 @@ int				keypress(int keycode, void *param)
 			CCAM.ctw = prod_matrx4(CCAM.ctw, transl);
 		frame(e);
 	}
-	if (keycode == KEY_DOWN)
-	{
-		CCAM.rot.x += 1;
-		CCAM.rot.x = (CCAM.rot.x > 360) ? 0 : CCAM.rot.x;
-		frame(e);
-	}
+	if (keycode == KEY_HOME)
+		e->scene.selected_obj = -1;
 	if (keycode == KEY_UP)
 	{
-		CCAM.rot.x -= 1;
-		CCAM.rot.x = (CCAM.rot.x < 0) ? 360 : CCAM.rot.x;
-		frame(e);
+		if (e->scene.selected_obj >= 0)
+		{
+			e->scene.obj[e->scene.selected_obj].pos.y += 10;
+			frame(e);
+		}
+		else
+		{
+			CCAM.rot.x += 1;
+			CCAM.rot.x = (CCAM.rot.x > 360) ? 0 : CCAM.rot.x;
+			frame(e);
+		}
+	}
+	if (keycode == KEY_DOWN)
+	{
+		if (e->scene.selected_obj >= 0)
+		{
+			e->scene.obj[e->scene.selected_obj].pos.y -= 10;
+			frame(e);
+		}
+		else
+		{
+			CCAM.rot.x -= 1;
+			CCAM.rot.x = (CCAM.rot.x < 0) ? 360 : CCAM.rot.x;
+			frame(e);
+		}
 	}
 	if (keycode == KEY_RIGHT)
 	{
-		CCAM.rot.y += 1;
-		CCAM.rot.y = (CCAM.rot.y > 360) ? 0 : CCAM.rot.y;
-		frame(e);
+		if (e->scene.selected_obj >= 0)
+		{
+			e->scene.obj[e->scene.selected_obj].pos.x += 10;
+			frame(e);
+		}
+		else
+		{
+			CCAM.rot.y += 1;
+			CCAM.rot.y = (CCAM.rot.y > 360) ? 0 : CCAM.rot.y;
+			frame(e);
+		}
 	}
 	if (keycode == KEY_LEFT)
 	{
-		CCAM.rot.y -= 1;
-		CCAM.rot.y = (CCAM.rot.y < 0) ? 360 : CCAM.rot.y;
-		frame(e);
+		if (e->scene.selected_obj >= 0)
+		{
+			e->scene.obj[e->scene.selected_obj].pos.x -= 10;
+			frame(e);
+		}
+		else
+		{
+			CCAM.rot.y -= 1;
+			CCAM.rot.y = (CCAM.rot.y < 0) ? 360 : CCAM.rot.y;
+			frame(e);
+		}
 	}
 	if (keycode == KEY_Q)
 	{
@@ -75,13 +109,29 @@ int				keypress(int keycode, void *param)
 	}
 	if (keycode == KEY_PLUS)
 	{
-		CCAM.pos.y += (dir.dir.y < 0) ? dir.dir.y * -(20 / dir.dir.y) : dir.dir.y * (20 / dir.dir.y);
-		frame(e);
+    if (e->scene.selected_obj >= 0)
+		{
+			e->scene.obj[e->scene.selected_obj].pos.z += 10;
+			frame(e);
+		}
+		else
+		{
+			CCAM.pos.y += (dir.dir.y < 0) ? dir.dir.y * -(20 / dir.dir.y) : dir.dir.y * (20 / dir.dir.y);
+		  frame(e);
+		
 	}
 	if (keycode == KEY_MINUS)
 	{
-		CCAM.pos.y += (dir.dir.y < 0) ? dir.dir.y * (20 / dir.dir.y) : dir.dir.y * -(20 / dir.dir.y);
-		frame(e);
+		if (e->scene.selected_obj >= 0)
+		{
+			e->scene.obj[e->scene.selected_obj].pos.z -= 10;
+			frame(e);
+		}
+		else
+		{
+			CCAM.pos.y += (dir.dir.y < 0) ? dir.dir.y * (20 / dir.dir.y) : dir.dir.y * -(20 / dir.dir.y);
+			frame(e);
+		}
 	}
 	if (keycode == KEY_W)
 	{
@@ -96,11 +146,13 @@ int				keypress(int keycode, void *param)
 	{
 		CCAM.pos.x -= dir.dir.x * (15 / dir.dir.x);
 		frame(e);
-	}if (keycode == KEY_D)
+	}
+	if (keycode == KEY_D)
 	{
 		CCAM.pos.x += dir.dir.x * (15 / dir.dir.x);
 		frame(e);
 	}
+
 	// e->keys.key_w = (keycode == KEY_W) ? 1 : e->keys.key_w;
 	// e->keys.key_a = (keycode == KEY_A) ? 1 : e->keys.key_a;
 	// e->keys.key_s = (keycode == KEY_S) ? 1 : e->keys.key_s;
