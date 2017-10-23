@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceRoot}/rt",
+            "cwd": "${workspaceRoot}",
+            "stopOnEntry": false,
+            "terminal": "console",
+            "sourceLanguages": [
+                "c"
+            ],
+            }
+    ]
+}
