@@ -16,7 +16,8 @@ SRC			=	main.c \
 				normal.c \
 				intensity.c \
 				reflex.c \
-				matrix.c
+				matrix.c \
+				filters.c
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a
 LIBVEC		=	libs/libvec/libvec.a

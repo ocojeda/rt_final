@@ -11,6 +11,21 @@ int				keypress(int keycode, void *param)
 		vec_new3(dir.dir.x, 0, dir.dir.z), roty_matrx4(-90)));
 	if (keycode == KEY_ESC)
 		exit(42);
+	if (keycode == KEY_ONE)
+	{
+		e->scene.filters = (e->scene.filters == 1) ? 0 : 1;
+		frame(e);
+	}
+	if (keycode == KEY_TWO)
+		{
+			e->scene.filters = (e->scene.filters == 2) ? 0 : 2;
+			frame(e);
+		}
+	if (keycode == KEY_THREE)
+	{
+		e->scene.filters = (e->scene.filters == 3) ? 0 : 3;
+		frame(e);
+	}
 	if (keycode == PAGE_UP)
 	{
 		RES++;

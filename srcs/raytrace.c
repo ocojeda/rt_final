@@ -1,15 +1,33 @@
 #include "../includes/rt.h"
 
-float			intersect_obj(t_ray ray, t_obj *obj)
+float			check_negative_objects(float dist_obj, t_rt *e, t_ray ray)
+{
+	int i;
+
+	i = 0;
+	while (i++ <= e->scene.nbr_obj -1)
+	if (e->scene.obj[i].neg == 1)
+	{
+		if (e->scene.obj[i].type == CYLINDER)
+			return(intersect_cylinder_neg(ray, &e->scene.obj[i] , dist_obj));
+		else if (e->scene.obj[i].type == SPHERE)
+			return (intersect_sphere_neg(ray, &e->scene.obj[i], dist_obj));
+		else if (e->scene.obj[i].type == CONE)
+			return (intersect_cone_neg(ray, &e->scene.obj[i],dist_obj));
+	}
+	return (dist_obj);
+}
+
+float			intersect_obj(t_ray ray, t_obj *obj, t_rt *e)
 {
 	if (obj->type == CYLINDER)
-		return (intersect_cylinder(ray, obj));
-	if (obj->type == SPHERE)
-		return (intersect_sphere(ray, obj));
+		return (check_negative_objects(intersect_cylinder(ray, obj), e, ray));
+	else if (obj->type == SPHERE)
+		return (check_negative_objects(intersect_sphere(ray, obj), e, ray));
 	else if (obj->type == PLANE)
-		return (intersect_plane(ray, obj));
+		return (check_negative_objects(intersect_plane(ray, obj), e, ray));
 	else if (obj->type == CONE)
-		return (intersect_cone(ray, obj));
+		return (check_negative_objects(intersect_cone(ray, obj), e, ray));
 	return (DIST_MAX);
 }
 
@@ -46,8 +64,8 @@ float			get_min_dist(t_rt *e, t_ray ray)
 	min_dist = DIST_MAX;
 	while (i < e->scene.nbr_obj)
 	{
-		dist = intersect_obj(ray, &e->scene.obj[i]);
-		if (dist < min_dist)
+		dist = intersect_obj(ray, &e->scene.obj[i], e);
+		if (dist < min_dist && e->scene.obj[i].neg != 1)
 		{
 			min_dist = (dist < 0) ? min_dist : dist;
 			e->scene.id = i;

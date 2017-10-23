@@ -199,7 +199,7 @@ void			frame(t_rt *e)
 		free(th_e[i]);
 		i++;
 	}
-//	filters(e);
+	filters(e);
 	free(th_e);
     mlx_put_image_to_window(INIT, WIN, IMG, 0, 0);
     //ft_putstr("exit succesful\n");
