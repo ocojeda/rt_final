@@ -6,7 +6,7 @@ int				keypress(int keycode, void *param)
 	t_vec3	rx;
 
 	e = (t_rt *)param;
-	dir = ray_init(e, LARGEUR / 2, HAUTEUR / 2);
+	dir = ray_init(e, LARGEUR / 2 /RES, HAUTEUR / 2/RES);
 	rx = vec_norme3(prod_vec3_matrx4(
 		vec_new3(dir.dir.x, 0, dir.dir.z), roty_matrx4(-90)));
 	if (keycode == KEY_ESC)
@@ -25,13 +25,25 @@ int				keypress(int keycode, void *param)
 			RES = 1;
 		frame(e);
 	}
-	if (keycode == KEY_UP)
+	if (keycode == KEY_X)
+	{
+		t_mtrx4		transl;
+		
+			transl = transl_matrx4(CCAM.pos.x, CCAM.pos.y, CCAM.pos.z);
+		CCAM.is_circular = (CCAM.is_circular == 1) ? 0 : 1;
+		if (CCAM.is_circular == 1)
+        CCAM.ctw = transl ;//prod_matrx4(transl, CCAM.ctw);
+    	else
+			CCAM.ctw = prod_matrx4(CCAM.ctw, transl);
+		frame(e);
+	}
+	if (keycode == KEY_DOWN)
 	{
 		CCAM.rot.x += 1;
 		CCAM.rot.x = (CCAM.rot.x > 360) ? 0 : CCAM.rot.x;
 		frame(e);
 	}
-	if (keycode == KEY_DOWN)
+	if (keycode == KEY_UP)
 	{
 		CCAM.rot.x -= 1;
 		CCAM.rot.x = (CCAM.rot.x < 0) ? 360 : CCAM.rot.x;
@@ -63,43 +75,30 @@ int				keypress(int keycode, void *param)
 	}
 	if (keycode == KEY_PLUS)
 	{
-		CCAM.pos.y += dir.dir.y * 20;
+		CCAM.pos.y += (dir.dir.y < 0) ? dir.dir.y * -(20 / dir.dir.y) : dir.dir.y * (20 / dir.dir.y);
 		frame(e);
 	}
 	if (keycode == KEY_MINUS)
 	{
-		CCAM.pos.y -= dir.dir.y * 20;
+		CCAM.pos.y += (dir.dir.y < 0) ? dir.dir.y * (20 / dir.dir.y) : dir.dir.y * -(20 / dir.dir.y);
 		frame(e);
 	}
-	
 	if (keycode == KEY_W)
 	{
-		if (dir.dir.z < 0)
-		CCAM.pos.z -= dir.dir.z * 20;
-		else
-		CCAM.pos.z += dir.dir.z * 20;
+		CCAM.pos.z += (dir.dir.z < 0) ? dir.dir.z * -(20 / dir.dir.z) : dir.dir.z * (20 / dir.dir.z);
 		frame(e);
 	}
 	if (keycode == KEY_S)
 	{
-		if (dir.dir.z < 0)
-		CCAM.pos.z += dir.dir.z * 20;
-		else
-		CCAM.pos.z -= dir.dir.z * 20;
+		CCAM.pos.z += (dir.dir.z < 0) ? dir.dir.z * (20 / dir.dir.z) : dir.dir.z * -(20 / dir.dir.z);
 		frame(e);
 	}if (keycode == KEY_A)
 	{
-		if (rx.x < 0)
-		CCAM.pos.x += rx.x * 20;
-		else
-		CCAM.pos.x -= rx.x * 20;
+		CCAM.pos.x -= dir.dir.x * (15 / dir.dir.x);
 		frame(e);
 	}if (keycode == KEY_D)
 	{
-		if (rx.x < 0)
-		CCAM.pos.x -= rx.x * 20;
-		else
-		CCAM.pos.x += rx.x * 20;
+		CCAM.pos.x += dir.dir.x * (15 / dir.dir.x);
 		frame(e);
 	}
 	// e->keys.key_w = (keycode == KEY_W) ? 1 : e->keys.key_w;

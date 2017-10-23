@@ -21,6 +21,5 @@ t_ray		ray_init(t_rt *e, int x, int y)
 	ray.pos = prod_vec3_matrx4(vec_new3(0, 0, 0), CCAM.ctw);
 	px = prod_vec3_matrx4(px, CCAM.ctw);
 	ray.dir = vec_norme3(vec_sub3(px, ray.pos));
-//	e->scene.max_iter = 3;
 	return (ray);
 }
