@@ -118,7 +118,7 @@ int				keypress(int keycode, void *param)
 		{
 			CCAM.pos.y += (dir.dir.y < 0) ? dir.dir.y * -(20 / dir.dir.y) : dir.dir.y * (20 / dir.dir.y);
 		  frame(e);
-		
+		}
 	}
 	if (keycode == KEY_MINUS)
 	{
@@ -142,7 +142,8 @@ int				keypress(int keycode, void *param)
 	{
 		CCAM.pos.z += (dir.dir.z < 0) ? dir.dir.z * (20 / dir.dir.z) : dir.dir.z * -(20 / dir.dir.z);
 		frame(e);
-	}if (keycode == KEY_A)
+	}
+	if (keycode == KEY_A)
 	{
 		CCAM.pos.x -= dir.dir.x * (15 / dir.dir.x);
 		frame(e);

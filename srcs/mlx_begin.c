@@ -109,8 +109,8 @@ void			init_rt(t_rt *e)
 	e->scene.cam.focus_point.y = 401;
     e->scene.cam.focus_point.z = 0;
 	CCAM.ratio_x = HAUTEUR / LARGEUR;
-	CCAM.ratio_y = LARGEUR / HAUTEUR;
 	e->scene.cam.is_circular = 0;
+	CCAM.ratio_y = LARGEUR / HAUTEUR;
 	e->scene.selected_obj = -1;
 	//if (!(e->scene.obj = (t_obj *)malloc(sizeof(t_obj) * MAXOBJ)))
     //   exit(42);
