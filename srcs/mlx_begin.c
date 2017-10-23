@@ -54,7 +54,7 @@ void			init_rt(t_rt *e)
 
 	e->scene.obj[1].type = PLANE;
     e->scene.obj[1].color = c_color(200, 200, 100);
-    e->scene.obj[1].pos = vec_new3(400, 400, 900);
+    e->scene.obj[1].pos = vec_new3(400, 1000, 900);
 	e->scene.obj[1].vector = vec_norme3(vec_new3(0, 0, -1));
 	e->scene.obj[1].mat.diff = 0.4;
 	e->scene.obj[1].mat.reflex = 0;
@@ -62,7 +62,7 @@ void			init_rt(t_rt *e)
 	e->scene.obj[2].type = PLANE;
 	e->scene.obj[2].mat.reflex = 0;
     e->scene.obj[2].color = c_color(255, 200, 0);
-    e->scene.obj[2].pos = vec_new3(900, -300, 0);
+    e->scene.obj[2].pos = vec_new3(900, -1000, 0);
     e->scene.obj[2].vector = vec_norme3(vec_new3(0, 1, 0));
 	e->scene.obj[2].mat.diff = 0.4;
 
@@ -101,17 +101,18 @@ void			init_rt(t_rt *e)
 	e->scene.nbr_light = 2;
 	//e->scene.lights[1] = END;
 
-	e->scene.cam.pos.x = 0;
-	e->scene.cam.pos.y = 0;
-    e->scene.cam.pos.z = 000;
+	e->scene.cam.pos.x = 1000;
+	e->scene.cam.pos.y = -600;
+    e->scene.cam.pos.z = -1000;
 
-    e->scene.cam.focus_point.x = 401;
-	e->scene.cam.focus_point.y = 401;
-    e->scene.cam.focus_point.z = 0;
+    //e->scene.cam.focus_point.x = 401;
+	//e->scene.cam.focus_point.y = 401;
+    //e->scene.cam.focus_point.z = 0;
 	CCAM.ratio_x = HAUTEUR / LARGEUR;
-	e->scene.cam.is_circular = 0;
+	e->scene.cam.is_circular = 1;
 	CCAM.ratio_y = LARGEUR / HAUTEUR;
 	e->scene.selected_obj = -1;
+
 	//if (!(e->scene.obj = (t_obj *)malloc(sizeof(t_obj) * MAXOBJ)))
     //   exit(42);
     //if (!(e->scene.lights = (t_light *)malloc(sizeof(t_light) * MAXLIGHT)))
