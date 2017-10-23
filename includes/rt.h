@@ -66,6 +66,7 @@
 # define KEY_UP 126
 # define KEY_ESC 53
 # define KEY_HOME 115
+
 # define CCAM e->scene.cam
 # define CLIGHT scene.lights[i]
 # define AMBIENT_LIGHT e->scene.ambient
@@ -83,7 +84,7 @@
 
 # define MAXOBJ 50
 # define NR_ITER 6
-# define MAXLIGHT 21
+# define MAXLIGHT 5
 # define NB_THREADS 8
 # define DIST_MAX 20000
 # define DIST_MIN -80000
@@ -124,7 +125,6 @@ typedef struct		s_camera
 	float			ratio_x;
 	float			ratio_y;
 	char			is_circular;
-	t_vec3			tmp_pos;
 	t_vec3			tmp_rot;
 }					t_camera;
 
@@ -179,8 +179,8 @@ typedef struct		s_light
 typedef struct		s_scene
 {
 	t_camera		cam;
-	t_light			lights[MAXLIGHT];
-	t_obj			obj[MAXOBJ];
+	t_light			*lights;
+	t_obj			*obj;
 //	t_texture		skybox;
 //	int				last;
 	float			ambient;
@@ -191,8 +191,12 @@ typedef struct		s_scene
 	int				id;
 //	int				supersampling;
 //	int				filters;
+
+	int				selected;
+
 	int				selected_obj;
-//	int				max_iter;
+
+
 }					t_scene;
 
 typedef struct		s_file

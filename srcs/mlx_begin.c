@@ -44,7 +44,13 @@ void			init_rt(t_rt *e)
     e->file.aliasing = 1;
     e->file.reso = calcul_res(e, 400000);
 	e->file.reso_buff = e->file.reso;
-    
+
+	if (!(e->scene.obj = (t_obj *)malloc(sizeof(t_obj) * MAXOBJ)))
+		exit(42);
+	if (!(e->scene.lights = (t_light *)malloc(sizeof(t_light) * MAXLIGHT)))
+		exit(5);
+
+
     e->scene.obj[0].type = SPHERE;
     e->scene.obj[0].color = c_color(100, 100, 255);
     e->scene.obj[0].pos = vec_new3(300, 600, 300);
@@ -99,19 +105,19 @@ void			init_rt(t_rt *e)
 
 	e->scene.ambient = 0.2;
 	e->scene.nbr_light = 2;
-	//e->scene.lights[1] = END;
 
-	e->scene.cam.pos.x = 1000;
-	e->scene.cam.pos.y = -600;
-    e->scene.cam.pos.z = -1000;
 
-    //e->scene.cam.focus_point.x = 401;
-	//e->scene.cam.focus_point.y = 401;
-    //e->scene.cam.focus_point.z = 0;
-	CCAM.ratio_x = HAUTEUR / LARGEUR;
-	e->scene.cam.is_circular = 1;
-	CCAM.ratio_y = LARGEUR / HAUTEUR;
-	e->scene.selected_obj = -1;
+	e->scene.cam.pos.x = 0;
+	e->scene.cam.pos.y = 0;
+	e->scene.cam.pos.z = -1000;
+	e->scene.cam.fov = 45;
+
+    e->scene.cam.focus_point.x = 401;
+	e->scene.cam.focus_point.y = 401;
+    e->scene.cam.focus_point.z = 0;
+	e->scene.cam.ratio_x = HAUTEUR / LARGEUR;
+	e->scene.cam.ratio_y = LARGEUR / HAUTEUR;
+	e->scene.cam.is_circular = 0;
 
 	//if (!(e->scene.obj = (t_obj *)malloc(sizeof(t_obj) * MAXOBJ)))
     //   exit(42);
