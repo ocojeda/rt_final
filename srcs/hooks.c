@@ -101,7 +101,6 @@ int				keypress(int keycode, void *param)
 		CCAM.pos.x += dir.dir.x * (15 / dir.dir.x);
 		frame(e);
 	}
-	
 	// e->keys.key_w = (keycode == KEY_W) ? 1 : e->keys.key_w;
 	// e->keys.key_a = (keycode == KEY_A) ? 1 : e->keys.key_a;
 	// e->keys.key_s = (keycode == KEY_S) ? 1 : e->keys.key_s;
