@@ -124,7 +124,6 @@ typedef struct		s_camera
 	float			ratio_x;
 	float			ratio_y;
 	char			is_circular;
-	t_vec3			tmp_pos;
 	t_vec3			tmp_rot;
 }					t_camera;
 
@@ -179,8 +178,8 @@ typedef struct		s_light
 typedef struct		s_scene
 {
 	t_camera		cam;
-	t_light			lights[MAXLIGHT];
-	t_obj			obj[MAXOBJ];
+	t_light			*lights;
+	t_obj			*obj;
 //	t_texture		skybox;
 //	int				last;
 	float			ambient;
@@ -192,6 +191,7 @@ typedef struct		s_scene
 //	int				supersampling;
 //	int				filters;
 	int				selected_obj;
+	int				selected;
 //	int				max_iter;
 }					t_scene;
 
