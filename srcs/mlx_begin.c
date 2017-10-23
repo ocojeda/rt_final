@@ -25,7 +25,8 @@ void			ft_start_rt(t_rt *e)
     e->mlx.data = mlx_get_data_addr(e->mlx.image, &e->mlx.bpp, 
         &e->mlx.size_l, &e->mlx.endian);
     frame(e);
-    mlx_put_image_to_window(INIT, WIN, IMG, 0, 0);
+	mlx_put_image_to_window(INIT, WIN, IMG, 0, 0);
+	mlx_mouse_hook(WIN, mousse_hook, e);
     mlx_hook(e->mlx.window, 2, 0, keypress, e);
     mlx_loop(e->mlx.init);
 	/*mlx_hook(WIN, 3, 0, keyrelease, e);
@@ -52,14 +53,14 @@ void			init_rt(t_rt *e)
 
     e->scene.obj[0].type = SPHERE;
     e->scene.obj[0].color = c_color(100, 100, 255);
-    e->scene.obj[0].pos = vec_new3(300, 600, -300);
+    e->scene.obj[0].pos = vec_new3(300, 600, 300);
 	e->scene.obj[0].r = 100;
-	e->scene.obj[0].mat.reflex = 1;
+	e->scene.obj[0].mat.reflex = 0.5;
 	e->scene.obj[0].mat.diff = 1;
 
 	e->scene.obj[1].type = PLANE;
     e->scene.obj[1].color = c_color(200, 200, 100);
-    e->scene.obj[1].pos = vec_new3(400, 400, 900);
+    e->scene.obj[1].pos = vec_new3(400, 1000, 900);
 	e->scene.obj[1].vector = vec_norme3(vec_new3(0, 0, -1));
 	e->scene.obj[1].mat.diff = 0.4;
 	e->scene.obj[1].mat.reflex = 0;
@@ -67,7 +68,7 @@ void			init_rt(t_rt *e)
 	e->scene.obj[2].type = PLANE;
 	e->scene.obj[2].mat.reflex = 0;
     e->scene.obj[2].color = c_color(255, 200, 0);
-    e->scene.obj[2].pos = vec_new3(900, -300, 0);
+    e->scene.obj[2].pos = vec_new3(900, -1000, 0);
     e->scene.obj[2].vector = vec_norme3(vec_new3(0, 1, 0));
 	e->scene.obj[2].mat.diff = 0.4;
 
@@ -105,6 +106,7 @@ void			init_rt(t_rt *e)
 	e->scene.ambient = 0.2;
 	e->scene.nbr_light = 2;
 
+
 	e->scene.cam.pos.x = 0;
 	e->scene.cam.pos.y = 0;
 	e->scene.cam.pos.z = -1000;
@@ -116,6 +118,7 @@ void			init_rt(t_rt *e)
 	e->scene.cam.ratio_x = HAUTEUR / LARGEUR;
 	e->scene.cam.ratio_y = LARGEUR / HAUTEUR;
 	e->scene.cam.is_circular = 0;
+
 	//if (!(e->scene.obj = (t_obj *)malloc(sizeof(t_obj) * MAXOBJ)))
     //   exit(42);
     //if (!(e->scene.lights = (t_light *)malloc(sizeof(t_light) * MAXLIGHT)))

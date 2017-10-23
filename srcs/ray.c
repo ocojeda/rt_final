@@ -15,9 +15,9 @@ t_ray		ray_init(t_rt *e, int x, int y)
 	t_vec3	px;
     float	fov;
 
-    fov = tan(CCAM.fov / 2 * DEG2RAD);
-	px = vec_new3((2 * ((x + 0.5) / LARGEUR) - 1) * fov * CCAM.ratio_x,
-		(1 - 2 * ((y +0.5) / HAUTEUR)) * fov * CCAM.ratio_y, 1);
+	fov = tan(CCAM.fov / 2 * DEG2RAD);
+	px = vec_new3((2 * (((float)x) / LARGEUR) - 1) * fov * CCAM.ratio_x,
+		(1 - 2 * (((float)y) / HAUTEUR)) * fov * CCAM.ratio_y, 1);
 	ray.pos = prod_vec3_matrx4(vec_new3(0, 0, 0), CCAM.ctw);
 	px = prod_vec3_matrx4(px, CCAM.ctw);
 	ray.dir = vec_norme3(vec_sub3(px, ray.pos));

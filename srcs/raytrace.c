@@ -40,7 +40,6 @@ float			get_min_dist(t_rt *e, t_ray ray)
 	float		dist;
 	int			i;
 
-	(void)ray;
 	i = 0;
 	dist = DIST_MAX;
 	min_dist = DIST_MAX;

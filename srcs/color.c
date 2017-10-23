@@ -1,5 +1,5 @@
 #include "../includes/rt.h"
-
+   
 t_color			ft_map_color(t_color color1, t_color color2, float taux1)
 {
 	t_color		new_color;
