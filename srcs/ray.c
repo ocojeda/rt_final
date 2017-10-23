@@ -23,3 +23,4 @@ t_ray		ray_init(t_rt *e, int x, int y)
 	ray.dir = vec_norme3(vec_sub3(px, ray.pos));
 	return (ray);
 }
+

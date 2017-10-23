@@ -165,6 +165,7 @@ t_rt			**launch_thread(t_rt *e)
 	return (th_e);
 }
 
+
 void			frame(t_rt *e)
 {
     t_rt		**th_e;

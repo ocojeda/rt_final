@@ -124,6 +124,7 @@ void			init_rt(t_rt *e)
 	*/
 	/*e->scene.selected = -1;
 	e->file.path  = NULL;
+	
 	e->scene.max_iter = 3;
 	key_init(e);*/
 }

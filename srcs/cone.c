@@ -37,6 +37,7 @@ float			intersect_cone(t_ray ray, t_obj *cone)
 	//if (op.eq == op.t0)
 	//	return (limit_dist(*cone, ray, op.eq, op.t1));
 	//else
-    //	return (limit_dist(*cone, ray, op.eq, op.t0));
+	//	return (limit_dist(*cone, ray, op.eq, op.t0));
+	
     return (op.eq);
 }

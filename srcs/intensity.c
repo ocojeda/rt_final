@@ -31,6 +31,7 @@ float		intensity_obj(t_rt *e, t_vec3 poi, t_obj obj, t_light light)
 	float	dot;
 	t_vec3	refl;
 
+	
 	intensity = 0;
 	transp = 0;
 	light.ray.dir = vec_norme3(vec_sub3(light.ray.pos, poi));

@@ -38,6 +38,7 @@ t_color			add_refref_colors(t_rt *e, int a, t_color base_color,
 	t_color		final_color;
 	float		temp_rate;
 	float		distance_rate;
+	
 
 	distance_rate = ft_map(ref.min_dist, ref.total_distance, 0, 1);
 	temp_rate = e->scene.obj[e->scene.id].mat.reflex;
