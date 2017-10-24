@@ -401,5 +401,6 @@ GtkWidget			*new_txt(gchar *str);
 GtkWidget			*new_btn(int x, int y, char *name);
 void				ft_gtk_link_css(GtkWidget *window, gchar *css);
 void				gtk_hook(int keycode, t_rt *e);
+int					calcul_res(t_rt *e, int limit);
 
 #endif

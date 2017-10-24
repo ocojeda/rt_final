@@ -22,8 +22,8 @@ void		ft_update(GtkButton *btn, t_rt *e)
 		RES = e->gtk.values.res > 200 ? 199 : e->gtk.values.res;
 		RES_BUFF = RES;
 	}
-	//else
-		//RES = calcul_res(e, 400000);
+	else
+		RES = calcul_res(e, 400000);
 	CCAM.ratio_x = (LARGEUR > HAUTEUR) ?
 		(float)LARGEUR / (float)HAUTEUR : 1;
 	CCAM.ratio_y = (HAUTEUR > LARGEUR) ?
@@ -54,7 +54,7 @@ void		ft_settings(t_rt *e)
 	gtk_widget_show_all(e->gtk.settings.window);
 	ft_add_resolution(e);
 	gtk_layout_put(GTK_LAYOUT(e->gtk.settings.layout),
-		new_txt("anti-aliasing"), 20, 160);
+		new_txt("Anti-aliasing"), 20, 160);
 	gtk_widget_show_all(e->gtk.settings.window);
 	ft_add_antialiasing(e);
 	ft_btn_update(e);
