@@ -65,15 +65,13 @@ void			init_rt(t_rt *e)
 	e->scene.obj[1].vector = vec_norme3(vec_new3(0, 0, -1));
 	e->scene.obj[1].mat.diff = 0.4;
 	e->scene.obj[1].mat.reflex = 0;
-	e->scene.obj[3].neg = 0;
 
 	e->scene.obj[2].type = PLANE;
-	e->scene.obj[2].mat.reflex = 0;
     e->scene.obj[2].color = c_color(255, 200, 0);
     e->scene.obj[2].pos = vec_new3(900, -1000, 0);
     e->scene.obj[2].vector = vec_norme3(vec_new3(0, 1, 0));
 	e->scene.obj[2].mat.diff = 0.4;
-	e->scene.obj[2].mat.reflex = 1;
+	e->scene.obj[2].mat.reflex = 0;
 	e->scene.obj[2].neg = 0;
 
     e->scene.obj[3].type = CYLINDER;
@@ -94,8 +92,17 @@ void			init_rt(t_rt *e)
 	e->scene.obj[4].mat.reflex = 0;
 	e->scene.obj[4].neg = 1;
 
-    e->scene.nbr_obj = 5;
-    e->scene.obj[5].type = END;
+	e->scene.obj[5].type = SPHERE;
+    e->scene.obj[5].r = 150;
+	e->scene.obj[5].color = c_color(800, 600, -150);
+    e->scene.obj[5].pos = vec_new3(500, 400, 300);
+	e->scene.obj[5].mat.diff = 0.2;
+	e->scene.obj[5].mat.reflex = 0;
+	e->scene.obj[5].mat.refract = 1;
+	e->scene.obj[5].neg = 0;
+
+    e->scene.nbr_obj = 6;
+    e->scene.obj[6].type = END;
 	
 
 	e->scene.lights[0].ray.pos = vec_new3(800, 1200, 0);

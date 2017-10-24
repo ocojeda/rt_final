@@ -82,7 +82,7 @@
 # define RES_W (LARGEUR / RES)
 
 # define MAXOBJ 50
-# define NR_ITER 6
+# define NR_ITER 50
 # define MAXLIGHT 21
 # define NB_THREADS 8
 # define DIST_MAX 20000
@@ -255,6 +255,24 @@ typedef struct		s_calc
 	float			sqrtdisc;
 }					t_calc;
 
+typedef struct		s_norme
+{
+	int				x;
+	int				y;
+	int				a;
+	float			min_dist;
+	t_ray			ray;
+	float			taux_temp;
+	t_color			temp_color1;
+	float			distance_rate;
+	int				counter;
+	t_color			base_color;
+	t_color			final_color;
+	t_vec3			newpoi;
+	t_vec3			point_of_impact;
+	t_color			color;
+}					t_norme;
+
 /*
 * parsing fonctions
 */
@@ -341,5 +359,6 @@ float			get_res_of_quadratic_neg(t_calc *op, t_obj *obj, float dist_obj);
 float			intersect_cone_neg(t_ray ray, t_obj *cone, float dist_obj);
 float		intersect_cylinder_neg(t_ray ray, t_obj *cyl, float dist_obj);
 float			intersect_sphere_neg(t_ray ray, t_obj *sphere, float dist_obj);
+float			find_min_dist_for_refref(t_rt *e, int *a, t_ray ray);
 
 #endif

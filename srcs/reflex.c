@@ -90,9 +90,9 @@ t_color			ret_reflected_pixel(t_rt *e, t_reflect ref, t_ray ray,
 	(void)min_dist;
 	ref.color = get_color(e, e->scene.obj[e->scene.id], ref.poi);
 	e->scene.id = ref.tmp_id;
+	
 	ref.color = ft_map_color(ref.color,
-	get_reflected_color(e, ref.poi, ref.color, ref),
-			e->scene.obj[ref.tmp_id].mat.reflex);
+	get_reflected_color(e, ref.poi, ref.color, ref),e->scene.obj[ref.tmp_id].mat.reflex);
 	e->scene.id = ref.tmp_id;
 	/*	if (e->scene.obj[e->scene.id].mat.refract)
 		{
