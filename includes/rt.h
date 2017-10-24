@@ -82,7 +82,7 @@
 # define RES_W (LARGEUR / RES)
 
 # define MAXOBJ 50
-# define NR_ITER 50
+# define NR_ITER 15
 # define MAXLIGHT 21
 # define NB_THREADS 8
 # define DIST_MAX 20000
@@ -346,10 +346,17 @@ float		diff_intensity(t_obj obj, float dot);
 /*
 *	reflexion fonctions
 */
-t_color		get_reflected_color(t_rt *e, t_vec3 poi,
-t_color base_color, t_reflect ref);
-t_color		ret_reflected_pixel(t_rt *e, t_reflect ref, t_ray ray,
-		float min_dist);
+t_color			get_reflected_color(t_rt *e, t_vec3 poi, t_color base_color,
+	t_reflect ref);
+
+/*
+*	REFRACTION
+*/
+float			find_min_dist_for_refref(t_rt *e, int *a, t_ray ray);
+t_color			get_refracted_color(t_rt *e, t_vec3 poi, t_color base_color,
+	t_reflect ref);
+t_ray			get_reflected_ray(t_rt *e, t_ray rayon, t_vec3 poi);
+
 
 void		matrix_init(t_rt *e);
 void		filter_black_and_white(t_rt *e);
@@ -359,6 +366,5 @@ float			get_res_of_quadratic_neg(t_calc *op, t_obj *obj, float dist_obj);
 float			intersect_cone_neg(t_ray ray, t_obj *cone, float dist_obj);
 float		intersect_cylinder_neg(t_ray ray, t_obj *cyl, float dist_obj);
 float			intersect_sphere_neg(t_ray ray, t_obj *sphere, float dist_obj);
-float			find_min_dist_for_refref(t_rt *e, int *a, t_ray ray);
 
 #endif
