@@ -17,7 +17,7 @@ float			obj_isnt_in_shadow(t_rt *e, t_vec3 poi, t_light *light)
 	while (++i < e->scene.nbr_obj)
 	{
 		dist = intersect_obj(ray, &e->scene.obj[i], e);
-		if (dist > 0 && dist < dist_to_light)
+		if (dist > 0 && dist < dist_to_light && e->scene.obj[i].neg != 1)
 			opac = 0;
 	}
 	return (opac);
