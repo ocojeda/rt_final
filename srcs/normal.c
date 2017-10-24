@@ -5,6 +5,12 @@ t_vec3			color_norm(t_obj obj, t_vec3 poi)
 	t_vec3	norm;
 
 	norm = object_norm(obj, poi);
+<<<<<<< HEAD
+=======
+	//if (obj.nbr_t == 1 && vec_dot3(norm, cam) < 0)
+	//	norm = vec_scale3(norm, -1);
+	(void)cam;
+>>>>>>> 1c6307f62aac134b565d690c87ee778fb1171a5b
 	return (norm);
 }
 
