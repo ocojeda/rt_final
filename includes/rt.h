@@ -15,6 +15,7 @@
 # define PLANE 2
 # define SPHERE 3
 # define CYLINDER 4
+# define PARABOLOID 5
 
 # define KEY_A 0
 # define KEY_S 1
@@ -319,6 +320,7 @@ float			intersect_cone(t_ray ray, t_obj *cone);
 t_vec3			plane_norm(t_obj plane);
 float			get_res_of_quadratic(t_calc *op, t_obj *obj);
 float			get_min_dist(t_rt *e, t_ray ray);
+float			intersect_paraboloid(t_ray ray, t_obj *parab);
 
 /*
 * math aux fonctions
@@ -329,12 +331,13 @@ float			get_length(t_vec3 v);
 /*
 * fonction pour les normales
 */
-t_vec3				color_norm(t_obj obj, t_vec3 poi, t_vec3 light);
+t_vec3				color_norm(t_obj obj, t_vec3 poi);
 t_vec3				object_norm(t_obj obj, t_vec3 poi);
 t_vec3				cone_norm(t_obj obj, t_vec3 poi);
 t_vec3				plane_norm(t_obj obj);
 t_vec3				sphere_norm(t_obj obj, t_vec3 poi);
 t_vec3				cylinder_norm(t_obj obj, t_vec3 poi);
+t_vec3				paraboloid_norm(t_obj cone, t_vec3 poi);
 
 /*
 *	que le lumiere soit
@@ -364,7 +367,8 @@ void		filters(t_rt *e);
 
 float			get_res_of_quadratic_neg(t_calc *op, t_obj *obj, float dist_obj);
 float			intersect_cone_neg(t_ray ray, t_obj *cone, float dist_obj);
-float		intersect_cylinder_neg(t_ray ray, t_obj *cyl, float dist_obj);
+float			intersect_cylinder_neg(t_ray ray, t_obj *cyl, float dist_obj);
 float			intersect_sphere_neg(t_ray ray, t_obj *sphere, float dist_obj);
+float			intersect_paraboloid_neg(t_ray ray, t_obj *parab, float dist_obj);
 
 #endif

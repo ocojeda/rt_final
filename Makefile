@@ -19,7 +19,8 @@ SRC			=	main.c \
 				matrix.c \
 				hooks_mousse.c \
 				filters.c \
-				refraction.c
+				refraction.c \
+				paraboloid.c
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a
 LIBVEC		=	libs/libvec/libvec.a
