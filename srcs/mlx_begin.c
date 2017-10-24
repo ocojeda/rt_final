@@ -77,14 +77,9 @@ void			init_rt(t_rt *e)
 	e->scene.obj[2].neg = 0;
 
     e->scene.obj[3].type = CYLINDER;
-    e->scene.obj[3].r = 30;
-<<<<<<< HEAD
-    e->scene.obj[3].color = c_color(0, 255, 0);
-    e->scene.obj[3].pos = vec_new3(200, 400, 300);
-=======
-    e->scene.obj[3].color = c_color(0, 255, 255);
+	e->scene.obj[3].r = 30;
+ 	e->scene.obj[3].color = c_color(0, 255, 255);
     e->scene.obj[3].pos = vec_new3(500, 400, 300);
->>>>>>> 1c6307f62aac134b565d690c87ee778fb1171a5b
 	e->scene.obj[3].vector = vec_norme3(vec_new3(0.5, 1, 0));
 	e->scene.obj[3].mat.diff = 0.2;
 	e->scene.obj[3].mat.reflex = 0;
@@ -97,7 +92,7 @@ void			init_rt(t_rt *e)
     e->scene.obj[4].vector = vec_norme3(vec_new3(1, 0.5, 0));
 	e->scene.obj[4].mat.diff = 0.4;
 	e->scene.obj[4].mat.reflex = 0;
-	e->scene.obj[4].neg = 1;
+	e->scene.obj[4].neg = 0;
 
     e->scene.nbr_obj = 5;
     e->scene.obj[5].type = END;

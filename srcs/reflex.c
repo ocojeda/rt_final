@@ -74,7 +74,7 @@ t_color			get_reflected_color(t_rt *e, t_vec3 poi,
 	return (base_color);
 	ref.counter--;
 	ref.new_ray = c_ray(poi, color_norm(e->scene.obj[e->scene.id],
-					poi, vec_sub3(CCAM.pos, poi)));
+					poi));
 	temp_rate = e->scene.obj[e->scene.id].mat.reflex;
 	ref.min_dist = find_min_dist_for_refref(e, &a, ref.new_ray);
 	ref.total_distance = ref.total_distance + ref.min_dist;
