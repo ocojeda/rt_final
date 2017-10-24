@@ -18,15 +18,23 @@ SRC			=	main.c \
 				reflex.c \
 				matrix.c \
 				hooks_mousse.c \
-				filters.c
+				filters.c \
+				gtk/gtk_add.c \
+				gtk/gtk_add2.c \
+				gtk/gtk_init.c \
+				gtk/gtk_launcher.c \
+				gtk/gtk_settings.c \
+				gtk/gtk_new.c \
+
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a
 LIBVEC		=	libs/libvec/libvec.a
-
+LIB_GTK		=	`pkg-config --libs gtk+-3.0`
+LIB_GTK_H	=	`pkg-config --cflags gtk+-3.0`
 OBJ			=	$(addprefix $(OBJDIR),$(SRC:.c=.o))
 CC			=	gcc
 INC 		=	includes
-CFLAGS		=	-Wall -Werror -Wextra -g -I includes/ -I libs/libft/includes/ -I libs/libvec/includes/
+CFLAGS		=	-Wall -Werror -Wextra -g -I includes/ -I libs/libft/includes/ -I libs/libvec/includes/ $(LIB_GTK_H)
 MLXF		=	-framework OpenGL -framework AppKit -lxml2
 WHITE		=	\033[7;49;39m
 BLUE		=	\033[7;49;34m
@@ -42,7 +50,7 @@ all: mlx lib vec $(NAME)
 $(NAME): $(MINILIBX) $(LIBFT) $(OBJDIR) $(OBJ)
 	@printf "\r$(GREEN)[$(PROJECT)] Obj compilation done.                                                        \n"
 	@printf "$(YELLOW)[$(PROJECT)] Compiling $(NAME)..."
-	@$(CC) $(CFLAGS) $(MLXF) -o $(NAME) $(OBJ) $(MINILIBX) $(LIBFT) $(LIBVEC)
+	@$(CC) $(CFLAGS) $(MLXF) -o $(NAME) $(OBJ) $(MINILIBX) $(LIBFT) $(LIBVEC) $(LIB_GTK)
 	@printf "\r$(GREEN)[$(PROJECT)] Compilation done.                          \n$(NO_COLOR)"
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
@@ -61,6 +69,7 @@ vec:
 
 $(OBJDIR):
 	@mkdir $(OBJDIR)
+	@mkdir $(OBJDIR)gtk
 
 clean:
 	@make -s -C libs/libft clean

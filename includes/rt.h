@@ -10,6 +10,8 @@
 # include <fcntl.h>
 # include <unistd.h>
 
+# include <gtk/gtk.h>
+
 # define END 0
 # define CONE 1
 # define PLANE 2
@@ -78,6 +80,8 @@
 # define HAUTEUR e->file.haut
 # define LARGEUR e->file.larg
 # define RES e->file.reso
+# define RES_BUFF e->file.reso_buff
+# define SFILE e->file.path
 # define RES_H (HAUTEUR / RES)
 # define RES_W (LARGEUR / RES)
 
@@ -216,16 +220,6 @@ typedef struct		s_mlx
 	int				endian;
 }					t_mlx;
 
-typedef struct		s_rt
-{
-	t_mlx			mlx;
-//	t_keys			keys;
-//	t_gtk			gtk;
-	t_scene			scene;
-	t_file			file;
-	t_mthread		thread;
-	int				frame;
-}					t_rt;
 
 typedef struct		s_reflect
 {
@@ -255,6 +249,46 @@ typedef struct		s_calc
 	float			sqrtdisc;
 }					t_calc;
 
+typedef struct		s_gtk_input
+{
+	gint			max_size;
+	gint			max_char;
+	gchar			*placeholder;
+	gchar			*deflaut_value;
+}					t_gtk_input;
+
+typedef struct		s_gtk_win
+{
+	GtkWidget		*window;
+	GtkWidget		*layout;
+}					t_gtk_win;
+
+typedef struct		s_gtk_settings
+{
+	int				width;
+	int				height;
+	int				res;
+	GtkWidget		*anti_aliasing;
+}					t_gtk_settings;
+
+typedef struct		s_gtk
+{
+	t_gtk_win		menu;
+	t_gtk_win		settings;
+	t_gtk_settings	values;
+	int				started;
+}					t_gtk;
+
+typedef struct		s_rt
+{
+	t_mlx			mlx;
+//	t_keys			keys;
+	t_gtk			gtk;
+	t_scene			scene;
+	t_file			file;
+	t_mthread		thread;
+	int				frame;
+}					t_rt;
 /*
 * parsing fonctions
 */
@@ -341,5 +375,31 @@ float			get_res_of_quadratic_neg(t_calc *op, t_obj *obj, float dist_obj);
 float			intersect_cone_neg(t_ray ray, t_obj *cone, float dist_obj);
 float		intersect_cylinder_neg(t_ray ray, t_obj *cyl, float dist_obj);
 float			intersect_sphere_neg(t_ray ray, t_obj *sphere, float dist_obj);
+
+void				ft_init_values(t_rt *e);
+gboolean			hook(GtkWidget *widget, GdkEventKey *event,
+		gpointer user_data);
+void				ft_gtk_start_launcher(t_rt *e);
+void				ft_gtk_start_settings(t_rt *e);
+void				ft_settings(t_rt *e);
+void				ft_gtk_launcher(t_rt *e);
+GtkWidget			*new_window(gint w, gint h, gchar *name);
+GtkWidget			*new_input(t_gtk_input *data);
+GtkWidget			*new_txt(gchar *str);
+GtkWidget			*new_btn(int x, int y, char *name);
+void				ft_gtk_link_css(GtkWidget *window, gchar *css);
+void				ft_add_w(GtkEntry *entry, t_rt *e);
+void				ft_add_h(GtkEntry *entry, t_rt *e);
+void				ft_add_res(GtkEntry *entry, t_rt *e);
+void				ft_add_anti(GObject *sw, GParamSpec *ps, t_rt *e);
+void				ft_add_antialiasing(t_rt *e);
+void				ft_add_resolution(t_rt *e);
+void				ft_add_win_size(t_rt *e);
+GtkWidget			*new_window(gint w, gint h, gchar *name);
+GtkWidget			*new_input(t_gtk_input *data);
+GtkWidget			*new_txt(gchar *str);
+GtkWidget			*new_btn(int x, int y, char *name);
+void				ft_gtk_link_css(GtkWidget *window, gchar *css);
+void				gtk_hook(int keycode, t_rt *e);
 
 #endif
