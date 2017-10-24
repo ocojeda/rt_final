@@ -13,8 +13,8 @@ float			find_min_dist_for_refref(t_rt *e, int *a, t_ray ray)
 	{
 		if (i != e->scene.id)
 		{
-			dist = intersect_obj(ray, &e->scene.obj[i]);
-			if (dist < min_dist)
+			dist = intersect_obj(ray, &e->scene.obj[i], e);
+			if (dist < min_dist && e->scene.obj[i].neg != 1)
 			{
 				min_dist = dist;
 				*a = i;
@@ -38,6 +38,7 @@ t_color			add_refref_colors(t_rt *e, int a, t_color base_color,
 	t_color		final_color;
 	float		temp_rate;
 	float		distance_rate;
+	
 
 	distance_rate = ft_map(ref.min_dist, ref.total_distance, 0, 1);
 	temp_rate = e->scene.obj[e->scene.id].mat.reflex;

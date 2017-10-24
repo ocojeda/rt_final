@@ -64,6 +64,7 @@ t_color			color_mult(t_color color, float taux, float limit)
 {
 	t_color		new_color;
 
+	
 	new_color = copy_color(color);
 	new_color.r = (color.r == 0 && taux > limit) ? 128 * taux : color.r * taux;
 	new_color.g = (color.g == 0 && taux > limit) ? 128 * taux : color.g * taux;

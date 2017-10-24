@@ -92,6 +92,7 @@ t_obj				copy_objs(t_obj obj)
 	copy.vector = obj.vector;
 	copy.mat = obj.mat;
 	copy.plimit_valid = obj.plimit_valid;
+	copy.neg = obj.neg;
 	return (copy);
 }
 
@@ -173,6 +174,7 @@ t_rt			**launch_thread(t_rt *e)
 	return (th_e);
 }
 
+
 void			frame(t_rt *e)
 {
     t_rt		**th_e;
@@ -208,7 +210,7 @@ void			frame(t_rt *e)
 		free(th_e[i]);
 		i++;
 	}
-//	filters(e);
+	filters(e);
 	free(th_e);
     mlx_put_image_to_window(INIT, WIN, IMG, 0, 0);
     //ft_putstr("exit succesful\n");

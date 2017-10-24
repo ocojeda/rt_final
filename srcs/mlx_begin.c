@@ -55,8 +55,9 @@ void			init_rt(t_rt *e)
     e->scene.obj[0].color = c_color(100, 100, 255);
     e->scene.obj[0].pos = vec_new3(300, 600, 300);
 	e->scene.obj[0].r = 100;
-	e->scene.obj[0].mat.reflex = 0.5;
+	e->scene.obj[0].mat.reflex = 0.3;
 	e->scene.obj[0].mat.diff = 1;
+	e->scene.obj[3].neg = 0;
 
 	e->scene.obj[1].type = PLANE;
     e->scene.obj[1].color = c_color(200, 200, 100);
@@ -64,6 +65,7 @@ void			init_rt(t_rt *e)
 	e->scene.obj[1].vector = vec_norme3(vec_new3(0, 0, -1));
 	e->scene.obj[1].mat.diff = 0.4;
 	e->scene.obj[1].mat.reflex = 0;
+	e->scene.obj[3].neg = 0;
 
 	e->scene.obj[2].type = PLANE;
 	e->scene.obj[2].mat.reflex = 0;
@@ -71,22 +73,25 @@ void			init_rt(t_rt *e)
     e->scene.obj[2].pos = vec_new3(900, -1000, 0);
     e->scene.obj[2].vector = vec_norme3(vec_new3(0, 1, 0));
 	e->scene.obj[2].mat.diff = 0.4;
+	e->scene.obj[3].neg = 0;
 
     e->scene.obj[3].type = CYLINDER;
     e->scene.obj[3].r = 30;
-    e->scene.obj[3].color = c_color(5, 20, 100);
+    e->scene.obj[3].color = c_color(0, 255, 0);
     e->scene.obj[3].pos = vec_new3(500, 400, 300);
 	e->scene.obj[3].vector = vec_norme3(vec_new3(0.5, 1, 0));
 	e->scene.obj[3].mat.diff = 0.2;
 	e->scene.obj[3].mat.reflex = 0.9;
+	e->scene.obj[3].neg = 1;
 
 	e->scene.obj[4].type = CONE;
     e->scene.obj[4].k = 0.1;
-	e->scene.obj[4].color = c_color(100, 15, 100);
+	e->scene.obj[4].color = c_color(255, 15, 10);
 	e->scene.obj[4].pos = vec_new3(600, 400, 300);
     e->scene.obj[4].vector = vec_norme3(vec_new3(1, 0.5, 0));
 	e->scene.obj[4].mat.diff = 0.4;
 	e->scene.obj[4].mat.reflex = 0;
+	e->scene.obj[4].neg = 0;
 
     e->scene.nbr_obj = 5;
     e->scene.obj[5].type = END;
@@ -116,9 +121,14 @@ void			init_rt(t_rt *e)
 	e->scene.cam.pos.z = -1000;
 	e->scene.cam.fov = 45;
 
-	e->scene.cam.ratio_x = HAUTEUR / LARGEUR;
-	e->scene.cam.ratio_y = LARGEUR / HAUTEUR;
+    // e->scene.cam.focus_point.x = 401;
+	// e->scene.cam.focus_point.y = 401;
+	// e->scene.cam.focus_point.z = 0;
+	e->scene.cam.fov = 35;
+	CCAM.ratio_x = HAUTEUR / LARGEUR;
+	CCAM.ratio_y = LARGEUR / HAUTEUR;
 	e->scene.cam.is_circular = 0;
+	e->scene.filters = 0;
 	//if (!(e->scene.obj = (t_obj *)malloc(sizeof(t_obj) * MAXOBJ)))
     //   exit(42);
     //if (!(e->scene.lights = (t_light *)malloc(sizeof(t_light) * MAXLIGHT)))
@@ -133,6 +143,7 @@ void			init_rt(t_rt *e)
 	*/
 	/*e->scene.selected = -1;
 	e->file.path  = NULL;
+	
 	e->scene.max_iter = 3;
 	key_init(e);*/
 }

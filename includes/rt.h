@@ -116,7 +116,7 @@ typedef struct		s_camera
 {
 	int				fov;
 	t_vec3			pos;
-	t_vec3			focus_point;
+//	t_vec3			focus_point;
 	t_vec3			rot;
 	t_mtrx4			ctw;
 	float			reso;
@@ -159,11 +159,10 @@ typedef struct		s_obj
 	int				nbr_t;
 	t_vec3			normal;
 	t_matiere		mat;
+	char			neg;
 	int				plimit_active;
 	int				plimit_type;
 	int				plimit_valid;
-	int				nbr_limit;
-	struct s_obj	*plimit;
 	int				id;
 }					t_obj;
 
@@ -189,9 +188,9 @@ typedef struct		s_scene
 //	char			nbr_tot;
 	int				id;
 //	int				supersampling;
-//	int				filters;
 	int				selected_obj;
 	int				selected;
+	int				filters;
 //	int				max_iter;
 }					t_scene;
 
@@ -294,7 +293,7 @@ int				mousse_hook(int button, int x, int y, void *param);
 * intersect fonctions
 */
 
-float			intersect_obj(t_ray ray, t_obj *obj);
+float			intersect_obj(t_ray ray, t_obj *obj, t_rt *e);
 float			intersect_sphere(t_ray ray, t_obj *sphere);
 float			intersect_plane(t_ray ray, t_obj *plane);
 float			intersect_cylinder(t_ray ray, t_obj *cyl);
@@ -335,5 +334,12 @@ t_color		ret_reflected_pixel(t_rt *e, t_reflect ref, t_ray ray,
 		float min_dist);
 
 void		matrix_init(t_rt *e);
+void		filter_black_and_white(t_rt *e);
+void		filters(t_rt *e);
+
+float			get_res_of_quadratic_neg(t_calc *op, t_obj *obj, float dist_obj);
+float			intersect_cone_neg(t_ray ray, t_obj *cone, float dist_obj);
+float		intersect_cylinder_neg(t_ray ray, t_obj *cyl, float dist_obj);
+float			intersect_sphere_neg(t_ray ray, t_obj *sphere, float dist_obj);
 
 #endif
