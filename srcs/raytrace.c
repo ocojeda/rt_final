@@ -46,9 +46,7 @@ t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi)
 	while (++i < e->scene.nbr_light)
 		intensity += intensity_obj(e, poi, obj, e->CLIGHT) ;
 	if (intensity != 0)
-	{
 		return (color_mult(obj.color, intensity, 1));
-	}
 	return ((t_color){0, 0, 0, 0});
 }
 
@@ -86,9 +84,8 @@ static t_color	get_pxl_color(t_rt *e, t_ray ray)
 	ref.counter = NR_ITER;
 	ref.ray = c_ray(ray.pos, ray.dir);
 	ref.total_distance = ref.min_dist;
-	ref.tmp_id = e->scene.id;
 	if (e->scene.obj[e->scene.id].mat.reflex)
-		return (ret_reflected_pixel(e, ref, ray, 0));
+		return (ret_reflected_pixel(e, ref, ray, ref.total_distance));
 	ref.color = get_color(e, e->scene.obj[e->scene.id], ref.poi);
 	return (ref.color);
 }
