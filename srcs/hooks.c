@@ -28,7 +28,7 @@ int				keypress(int keycode, void *param)
 	}
 	if (keycode == PAGE_UP)
 	{
-		RES += 10;
+		RES += 1;
 		if(RES > 20)
 			RES = 20;
 		frame(e);
