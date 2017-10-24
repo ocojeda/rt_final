@@ -14,6 +14,8 @@ float			check_negative_objects(float dist_obj, t_rt *e, t_ray ray)
 			return (intersect_sphere_neg(ray, &e->scene.obj[i], dist_obj));
 		else if (e->scene.obj[i].type == CONE)
 			return (intersect_cone_neg(ray, &e->scene.obj[i],dist_obj));
+		else if (e->scene.obj[i].type == PARABOLOID)
+			return (intersect_paraboloid_neg(ray, &e->scene.obj[i],dist_obj));
 	}
 	return (dist_obj);
 }
@@ -28,6 +30,8 @@ float			intersect_obj(t_ray ray, t_obj *obj, t_rt *e)
 		return (check_negative_objects(intersect_plane(ray, obj), e, ray));
 	else if (obj->type == CONE)
 		return (check_negative_objects(intersect_cone(ray, obj), e, ray));
+	else if (obj->type == PARABOLOID)
+		return (check_negative_objects(intersect_paraboloid(ray, obj), e, ray));
 	return (DIST_MAX);
 }
 

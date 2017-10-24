@@ -78,14 +78,14 @@ void			init_rt(t_rt *e)
     e->scene.obj[3].type = CYLINDER;
     e->scene.obj[3].r = 30;
     e->scene.obj[3].color = c_color(0, 255, 0);
-    e->scene.obj[3].pos = vec_new3(500, 400, 300);
+    e->scene.obj[3].pos = vec_new3(200, 400, 300);
 	e->scene.obj[3].vector = vec_norme3(vec_new3(0.5, 1, 0));
 	e->scene.obj[3].mat.diff = 0.2;
 	e->scene.obj[3].mat.reflex = 0.9;
 	e->scene.obj[3].neg = 1;
 
-	e->scene.obj[4].type = CONE;
-    e->scene.obj[4].k = 0.1;
+	e->scene.obj[4].type = PARABOLOID;
+    e->scene.obj[4].k = 60;
 	e->scene.obj[4].color = c_color(255, 15, 10);
 	e->scene.obj[4].pos = vec_new3(600, 400, 300);
     e->scene.obj[4].vector = vec_norme3(vec_new3(1, 0.5, 0));
@@ -97,9 +97,9 @@ void			init_rt(t_rt *e)
     e->scene.obj[5].type = END;
 	
 
-	e->scene.lights[0].ray.pos = vec_new3(800, 1200, 0);
+	e->scene.lights[0].ray.pos = vec_new3(1000, 1000, 100);
 	e->scene.lights[0].color = c_color(255, 000, 000);
-	e->scene.lights[0].intensity = 0.1;
+	e->scene.lights[0].intensity = 0.4;
 	e->scene.lights[0].is_init = 0;
 
 
