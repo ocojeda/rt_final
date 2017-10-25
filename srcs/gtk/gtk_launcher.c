@@ -3,7 +3,7 @@
 void		btn_settings_clicked(GtkWidget *btn, t_rt *e)
 {
 	(void)btn;
-	e->gtk.settings.window = new_window(200, 300, "Settings");
+	e->gtk.settings.window = new_window(200, 400, "Settings");
 	e->gtk.settings.layout = gtk_layout_new(NULL, NULL);
 	gtk_container_add(GTK_CONTAINER(e->gtk.settings.window),
 									e->gtk.settings.layout);

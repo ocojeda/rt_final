@@ -35,3 +35,12 @@ void	ft_add_anti(GObject *sw, GParamSpec *ps, t_rt *e)
 	else
 		ALIASING = 1;
 }
+
+void	ft_add_filt(GtkEntry *entry, t_rt *e)
+{
+	int val;
+
+	val = ft_atoi(gtk_entry_get_text(GTK_ENTRY(entry)));
+	if (val >= 1)
+		e->gtk.values.filt = val;
+}

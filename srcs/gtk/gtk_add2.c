@@ -48,3 +48,17 @@ void	ft_add_antialiasing(t_rt *e)
 	gtk_layout_put(GTK_LAYOUT(e->gtk.settings.layout), sw, 20, 180);
 	gtk_widget_show_all(e->gtk.settings.window);
 }
+
+void	ft_add_filter(t_rt *e)
+{
+	t_gtk_input	input;
+	GtkWidget	*filt;
+
+	input.max_char = 3;
+	input.max_size = 3;
+	input.placeholder = "FILT";
+	input.deflaut_value = ft_itoa(FILT);
+	filt = new_input(&input);
+	gtk_layout_put(GTK_LAYOUT(e->gtk.settings.layout), filt, 20, 250);
+	g_signal_connect(filt, "activate", G_CALLBACK(ft_add_filt), e);
+}

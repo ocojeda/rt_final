@@ -86,6 +86,7 @@
 # define SFILE e->file.path
 # define RES_H (HAUTEUR / RES)
 # define RES_W (LARGEUR / RES)
+# define FILT e->scene.filters
 
 # define MAXOBJ 50
 # define NR_ITER 6
@@ -270,6 +271,7 @@ typedef struct		s_gtk_settings
 	int				width;
 	int				height;
 	int				res;
+	int 			filt;
 	GtkWidget		*anti_aliasing;
 }					t_gtk_settings;
 
@@ -401,6 +403,8 @@ void				ft_add_anti(GObject *sw, GParamSpec *ps, t_rt *e);
 void				ft_add_antialiasing(t_rt *e);
 void				ft_add_resolution(t_rt *e);
 void				ft_add_win_size(t_rt *e);
+void				ft_add_filter(t_rt *e);
+void				ft_add_filt(GtkEntry *entry, t_rt *e);
 GtkWidget			*new_window(gint w, gint h, gchar *name);
 GtkWidget			*new_input(t_gtk_input *data);
 GtkWidget			*new_txt(gchar *str);

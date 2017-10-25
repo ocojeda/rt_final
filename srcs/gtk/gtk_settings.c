@@ -39,7 +39,7 @@ void		ft_btn_update(t_rt *e)
 	GtkWidget	*btn;
 
 	btn = new_btn(100, 40, "UPDATE");
-	gtk_layout_put(GTK_LAYOUT(e->gtk.settings.layout), btn, 50, 250);
+	gtk_layout_put(GTK_LAYOUT(e->gtk.settings.layout), btn, 50, 350);
 	g_signal_connect(btn, "clicked", G_CALLBACK(ft_update), e);
 }
 
@@ -57,6 +57,10 @@ void		ft_settings(t_rt *e)
 		new_txt("Anti-aliasing"), 20, 160);
 	gtk_widget_show_all(e->gtk.settings.window);
 	ft_add_antialiasing(e);
+	gtk_layout_put(GTK_LAYOUT(e->gtk.settings.layout),
+		new_txt("Filters"), 20, 230);
+	gtk_widget_show_all(e->gtk.settings.window);
+	ft_add_filter(e);
 	ft_btn_update(e);
 	g_signal_connect(e->gtk.settings.window,
 		"delete-event", G_CALLBACK(close_settings2), e);
