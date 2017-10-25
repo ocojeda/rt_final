@@ -67,6 +67,7 @@
 # define KEY_UP 126
 # define KEY_ESC 53
 # define KEY_HOME 115
+
 # define CCAM e->scene.cam
 # define CLIGHT scene.lights[i]
 # define AMBIENT_LIGHT e->scene.ambient
@@ -83,10 +84,10 @@
 # define RES_W (LARGEUR / RES)
 
 # define MAXOBJ 50
-# define NR_ITER 10
+# define NR_ITER 30
 # define MAXLIGHT 21
 # define NB_THREADS 8
-# define DIST_MAX 20000
+# define DIST_MAX 800000
 # define DIST_MIN -80000
 # define EPSILON 1e-7
 
@@ -128,6 +129,18 @@ typedef struct		s_camera
 	t_vec3			tmp_rot;
 }					t_camera;
 
+typedef struct		s_texture
+{
+	char			is_init;
+	void			*ptr;
+	char			*data;
+	int				bpp;
+	int				sizl;
+	int				endian;
+	int				width;
+	int				height;
+}					t_texture;
+
 typedef struct		s_matiere
 {
 	//t_checker		checker;
@@ -135,7 +148,7 @@ typedef struct		s_matiere
 	float			spec;
 	float			refract;
 	float			reflex;
-	//t_texture		tex;
+	t_texture		tex;
 	float			absorbtion;
 	char			*coeff;
 	char			opacite;
@@ -180,7 +193,7 @@ typedef struct		s_scene
 	t_camera		cam;
 	t_light			*lights;
 	t_obj			*obj;
-//	t_texture		skybox;
+	t_texture		skybox;
 //	int				last;
 	float			ambient;
 	int				nbr_light;

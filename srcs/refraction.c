@@ -68,7 +68,7 @@ t_color			get_refracted_color(t_rt *e, t_vec3 poi, t_color base_color,
             {
                 n.distance_rate /= e->scene.obj[n.a].mat.reflex;
                 n.temp_color1 = get_refracted_color(e, n.newpoi, base_color, ref);
-                return (ft_map_color(base_color, n.temp_color1, 1 - n.distance_rate));
+				return (ft_map_color(base_color, n.temp_color1, 1 - n.distance_rate));
             }
 			return (base_color);
 		}

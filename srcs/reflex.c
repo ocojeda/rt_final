@@ -1,5 +1,6 @@
 #include "../includes/rt.h"
 
+
 float			find_min_dist_for_refref(t_rt *e, int *a, t_ray ray)
 {
 	float		min_dist;

@@ -119,6 +119,7 @@ t_scene				copy_scene(t_scene scene)
 	copy.nbr_obj = scene.nbr_obj;
 	copy.ambient = scene.ambient;
 	copy.id = scene.id;
+	copy.skybox = scene.skybox;
 	copy.cam = scene.cam;
 	return (copy);
 }
@@ -134,7 +135,6 @@ t_rt				*copy_rt(t_rt *e)
 	copy->scene = copy_scene(e->scene);
 	//copy->scene->obj = e->scene->obj;
 	//copy->scene->lights = e->scene->lights;
-
 	copy->mlx.bpp = e->mlx.bpp;
 	copy->mlx.size_l = e->mlx.size_l;
 	copy->mlx.endian = e->mlx.endian;
