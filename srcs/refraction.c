@@ -6,8 +6,7 @@ t_ray			get_refracted_ray(t_rt *e, t_ray rayon, t_vec3 poi)
 	t_ray		ray;
 
 	ray.pos = poi;
-	normale = color_norm(e->scene.obj[e->scene.id], poi,
-						vec_sub3(CCAM.pos, poi));
+	normale = color_norm(e->scene.obj[e->scene.id], poi, e->scene.cam.pos);
 	source = rayon.dir;
 	ray.dir = vec_scale3(vec_mul3(source, normale),
 	e->scene.obj[e->scene.id].mat.refract);

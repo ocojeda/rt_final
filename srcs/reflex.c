@@ -32,8 +32,7 @@ t_ray			get_reflected_ray(t_rt *e, t_ray rayon, t_vec3 poi)
 
 	(void)rayon;
 	ray.pos = poi;
-	normale = color_norm(e->scene.obj[e->scene.id], poi,
-						vec_sub3(CCAM.pos, poi));
+	normale = color_norm(e->scene.obj[e->scene.id], poi, e->scene.cam.pos);
 	ray.dir = normale;
 	return (ray);
 }

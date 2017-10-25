@@ -83,6 +83,7 @@ t_color	get_pxl_color(t_rt *e, t_ray ray)
 	e->scene.id = -1;
 	if ((ref.min_dist = get_min_dist(e, ray)) == -1)
 		return (c_color(0,0,0)); // a ajouter ici la skybox
+	ref.type = e->scene.obj[e->scene.id].type;
 	ref.tmp_id = e->scene.id;
 	ref.poi = vec_add3(ray.pos, vec_scale3(ray.dir, ref.min_dist));
 	ref.counter = NR_ITER;

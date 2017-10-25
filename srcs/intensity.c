@@ -35,7 +35,7 @@ float		intensity_obj(t_rt *e, t_vec3 poi, t_obj obj, t_light light)
 	intensity = 0;
 	transp = 0;
 	light.ray.dir = vec_norme3(vec_sub3(light.ray.pos, poi));
-	norm = color_norm(obj, poi);
+	norm = color_norm(obj, poi, e->scene.cam.pos);
 	if ((dot = vec_dot3(light.ray.dir, norm)) > 0
 	&& (transp = obj_isnt_in_shadow(e, poi, &light)))
 	{

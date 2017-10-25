@@ -83,7 +83,7 @@
 # define RES_W (LARGEUR / RES)
 
 # define MAXOBJ 50
-# define NR_ITER 15
+# define NR_ITER 10
 # define MAXLIGHT 21
 # define NB_THREADS 8
 # define DIST_MAX 20000
@@ -234,6 +234,7 @@ typedef struct		s_reflect
 	t_ray			new_ray;
 	t_vec3			poi;
 	t_color			color;
+	int				type;
 	float			total_distance;
 	int				counter;
 	float			min_dist;
@@ -331,8 +332,8 @@ float			get_length(t_vec3 v);
 /*
 * fonction pour les normales
 */
-t_vec3				color_norm(t_obj obj, t_vec3 poi);
-t_vec3				object_norm(t_obj obj, t_vec3 poi);
+t_vec3				color_norm(t_obj obj, t_vec3 poi, t_vec3 cam);
+t_vec3				object_norm(t_obj obj, t_vec3 poi, t_vec3 cam);
 t_vec3				cone_norm(t_obj obj, t_vec3 poi);
 t_vec3				plane_norm(t_obj obj);
 t_vec3				sphere_norm(t_obj obj, t_vec3 poi);
