@@ -169,5 +169,9 @@ int				keypress(int keycode, void *param)
 	}
 	if (keycode == KEY_G || keycode == KEY_H)
 		gtk_hook(keycode, e);
+	if (keycode == KEY_END)
+		screenshot_xpm(e);
+	if (keycode == KEY_DEL)
+		screenshot_ppm(e);
 	return (keycode);
 }

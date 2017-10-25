@@ -68,6 +68,8 @@
 # define KEY_UP 126
 # define KEY_ESC 53
 # define KEY_HOME 115
+# define KEY_DEL 117
+# define KEY_END 119
 # define CCAM e->scene.cam
 # define CLIGHT scene.lights[i]
 # define AMBIENT_LIGHT e->scene.ambient
@@ -203,7 +205,7 @@ typedef struct		s_file
 	char			*path;
 	int				haut;
 	int				larg;
-//	int				fdp;
+	int				fd_exp;
 	int				reso;
 	int				reso_buff;
 	int				aliasing;
@@ -402,5 +404,7 @@ GtkWidget			*new_btn(int x, int y, char *name);
 void				ft_gtk_link_css(GtkWidget *window, gchar *css);
 void				gtk_hook(int keycode, t_rt *e);
 int					calcul_res(t_rt *e, int limit);
+void				screenshot_xpm(t_rt *e);
+void				screenshot_ppm(t_rt *e);
 
 #endif

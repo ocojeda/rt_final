@@ -19,6 +19,7 @@ SRC			=	main.c \
 				matrix.c \
 				hooks_mousse.c \
 				filters.c \
+				screen.c \
 				gtk/gtk_add.c \
 				gtk/gtk_add2.c \
 				gtk/gtk_init.c \
