@@ -25,6 +25,7 @@ SRC			=	main.c \
 				gtk/gtk_launcher.c \
 				gtk/gtk_settings.c \
 				gtk/gtk_new.c \
+				gtk/gtk_hook.c \
 
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a
