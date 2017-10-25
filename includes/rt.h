@@ -325,10 +325,11 @@ t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi);
 void			pixel_to_image(int x, int y, t_rt *e, int color);
 int				keypress(int keycode, void *param);
 int				mousse_hook(int button, int x, int y, void *param);
+int				mouse_hook_escape(t_rt *e);
+
 /*
 * intersect fonctions
 */
-
 float			intersect_obj(t_ray ray, t_obj *obj, t_rt *e);
 float			intersect_sphere(t_ray ray, t_obj *sphere);
 float			intersect_plane(t_ray ray, t_obj *plane);
@@ -378,6 +379,9 @@ float			intersect_cone_neg(t_ray ray, t_obj *cone, float dist_obj);
 float		intersect_cylinder_neg(t_ray ray, t_obj *cyl, float dist_obj);
 float			intersect_sphere_neg(t_ray ray, t_obj *sphere, float dist_obj);
 
+/*
+*	GTK fonctions
+*/
 void				ft_init_values(t_rt *e);
 gboolean			hook(GtkWidget *widget, GdkEventKey *event,
 		gpointer user_data);
@@ -404,6 +408,10 @@ GtkWidget			*new_btn(int x, int y, char *name);
 void				ft_gtk_link_css(GtkWidget *window, gchar *css);
 void				gtk_hook(int keycode, t_rt *e);
 int					calcul_res(t_rt *e, int limit);
+
+/*
+*	Screenshot
+*/
 void				screenshot_xpm(t_rt *e);
 void				screenshot_ppm(t_rt *e);
 

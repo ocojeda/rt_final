@@ -28,6 +28,7 @@ void			ft_start_rt(t_rt *e)
 	mlx_put_image_to_window(INIT, WIN, IMG, 0, 0);
 	mlx_mouse_hook(WIN, mousse_hook, e);
     mlx_hook(e->mlx.window, 2, 0, keypress, e);
+    mlx_hook(e->mlx.window, 17, 0, mouse_hook_escape, e);
     mlx_loop(e->mlx.init);
 	/*mlx_hook(WIN, 3, 0, keyrelease, e);
 	mlx_hook(WIN, 17, 0, ft_close, NULL);

@@ -175,3 +175,10 @@ int				keypress(int keycode, void *param)
 		screenshot_ppm(e);
 	return (keycode);
 }
+
+int		mouse_hook_escape(t_rt *e)
+{
+	if (e)
+		exit(0);
+	return (1);
+}

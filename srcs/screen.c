@@ -9,9 +9,8 @@ void			screenshot_xpm(t_rt *e)
 	char		*name;
 
 	ft_putendl("Exporting image in xpm...");
-	nbr = ft_itoa(nb);
+	nbr = ft_itoa(nb++);
 	name = ft_strjoin( nbr ,"screenshot.xpm");
-	nb++;
 	if (!(export.fd_exp = open(name, O_WRONLY | O_CREAT, 00755)))
 		return ;
 	ft_putstr_fd("P6 ", export.fd_exp);
@@ -44,9 +43,8 @@ void			screenshot_ppm(t_rt *e)
 	char		*name;
 
 	ft_putendl("Exporting image in ppm...");
-	nbr = ft_itoa(nb);
+	nbr = ft_itoa(nb++);
 	name = ft_strjoin( nbr ,"screenshot.ppm");
-	nb++;
 	if (!(export.fd_exp = open(name, O_WRONLY | O_CREAT, 00755)))
 		return ;
 	ft_putstr_fd("P6 ", export.fd_exp);
