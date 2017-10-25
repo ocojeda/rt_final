@@ -1,6 +1,6 @@
 #include "../includes/rt.h"
 
-void			screenshot_xpm(t_rt *e)
+/*void			screenshot_xpm(t_rt *e)
 {
 	t_file		export;
 	int			pos;
@@ -32,7 +32,7 @@ void			screenshot_xpm(t_rt *e)
 	}
 	close(export.fd_exp);
 	ft_putendl("Image exported !");
-}
+}*/
 
 void			screenshot_ppm(t_rt *e)
 {
