@@ -42,10 +42,10 @@ void		open_scene_clicked(GtkWidget *btn, t_rt *e)
 		SFILE = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
 		gtk_widget_destroy(dialog);
 		/*if (parse_doc(e))
-		{
+		{*/
 			gtk_widget_destroy(e->gtk.menu.window);
 			ft_start_rt(e);
-		}*/
+		//}
 		g_free(SFILE);
 	}
 	else

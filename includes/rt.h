@@ -416,7 +416,6 @@ int					calcul_res(t_rt *e, int limit);
 /*
 *	Screenshot
 */
-void				screenshot_xpm(t_rt *e);
 void				screenshot_ppm(t_rt *e);
 
 #endif
