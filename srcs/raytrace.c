@@ -158,6 +158,6 @@ t_color			raytrace(int x, int y, t_rt *e)
 
 	ray = ray_init(e, x * RES / ALIASING, y * RES / ALIASING);
 	color = get_pxl_color(e, ray);
-	return (skybox(e, ray));
+//	return (skybox(e, ray));
 	return (color);
 }

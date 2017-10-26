@@ -77,8 +77,8 @@ void			init_rt(t_rt *e)
 	e->file.reso_buff = e->file.reso;
 
 	e->scene.obj[0].type = PLANE;
-	e->scene.obj[0].color = c_color(70,30,100);
-	e->scene.obj[0].pos = vec_new3(2000, 0, 0);
+	e->scene.obj[0].color = c_color(70,30,255);
+	e->scene.obj[0].pos = vec_new3(4000, 0, 0);
 	e->scene.obj[0].vector = vec_norme3(vec_new3(-1, 0, 0));
 	e->scene.obj[0].mat.diff = 0.4;
 	e->scene.obj[0].mat.reflex = 0;
@@ -88,19 +88,18 @@ void			init_rt(t_rt *e)
 	
 
 	e->scene.obj[7].type = PLANE;
-	e->scene.obj[7].color = c_color(70,30,100);
-	e->scene.obj[7].pos = vec_new3(-2000, 0, 0);
+	e->scene.obj[7].color = c_color(70,30,255);
+	e->scene.obj[7].pos = vec_new3(-3000, 0, 0);
 	e->scene.obj[7].vector = vec_norme3(vec_new3(-1, 0, 0));
 	e->scene.obj[7].mat.diff = 0.4;
 	e->scene.obj[7].mat.reflex = 0;
 	e->scene.obj[7].mat.refract = 0;
-
 	e->scene.obj[7].neg = 0;
 	
     e->scene.obj[1].type = PLANE;
     e->scene.obj[1].color = c_color(0,150,200);
     e->scene.obj[1].pos = vec_new3(0, 0, 4000);
-	e->scene.obj[1].vector = vec_norme3(vec_new3(0, 0, -1));
+	e->scene.obj[1].vector = vec_norme3(vec_new3(0, 0, 1));
 	e->scene.obj[1].mat.diff = 0.4;
 	e->scene.obj[1].mat.reflex = 0;
 	e->scene.obj[1].mat.refract = 0;
@@ -119,7 +118,7 @@ void			init_rt(t_rt *e)
 
 	e->scene.obj[2].type = PLANE;
     e->scene.obj[2].color = c_color(70,30,100);
-    e->scene.obj[2].pos = vec_new3(0, -2000, 0);
+    e->scene.obj[2].pos = vec_new3(0, -4000, 0);
     e->scene.obj[2].vector = vec_norme3(vec_new3(0, 1, 0));
 	e->scene.obj[2].mat.diff = 0.4;
 	e->scene.obj[2].mat.reflex = 0;
@@ -129,7 +128,7 @@ void			init_rt(t_rt *e)
 
 	e->scene.obj[9].type = PLANE;
     e->scene.obj[9].color = c_color(70,30,100);
-    e->scene.obj[9].pos = vec_new3(0, 2000, 0);
+    e->scene.obj[9].pos = vec_new3(0, 4000, 0);
     e->scene.obj[9].vector = vec_norme3(vec_new3(0, -1, 0));
 	e->scene.obj[9].mat.diff = 0.4;
 	e->scene.obj[9].mat.reflex = 0;
@@ -173,7 +172,7 @@ void			init_rt(t_rt *e)
     e->scene.obj[6].color = c_color(150, 150, 0);
     e->scene.obj[6].pos = vec_new3(0, 0, -100);
 	e->scene.obj[6].r = 200;
-	e->scene.obj[6].mat.reflex = 1;
+	e->scene.obj[6].mat.reflex = 0;
 	e->scene.obj[6].mat.refract = 0;
 	e->scene.obj[6].mat.diff = 0;
 	e->scene.obj[6].neg = 0;
