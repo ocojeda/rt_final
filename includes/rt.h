@@ -374,6 +374,11 @@ t_color			get_refracted_color(t_rt *e, t_vec3 poi, t_color base_color,
 	t_reflect ref);
 t_ray			get_reflected_ray(t_rt *e, t_ray rayon, t_vec3 poi);
 
+ /*
+ *	skybox
+ */
+t_color			skybox(t_rt *e, t_ray ray);
+t_color			get_text_color(int x, int y, t_texture tex);
 
 void		matrix_init(t_rt *e);
 void		filter_black_and_white(t_rt *e);
