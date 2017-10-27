@@ -1,19 +1,4 @@
 #include "../includes/rt.h"
-int				calcul_res(t_rt *e, int limit)
-{
-	int res;
-	int air;
-
-	air = e->file.larg * e->file.haut;
-    res = 1;
-    limit /= 2;
-	//if (ALIASING == 2) antialiasing on
-    //	limit *= 2;
-    //while ((air / res) > limit)
-	while ((air / res) > limit)
-		res++;
-	return (res);
-}
 
 void			ft_start_rt(t_rt *e)
 {
@@ -39,18 +24,16 @@ void			ft_start_rt(t_rt *e)
 void			init_rt(t_rt *e)
 {
     e->mlx.init = mlx_init();
-    e->file.larg = 800;
-    e->file.haut= 800;
-    e->file.aliasing = 1;
-    e->file.reso = calcul_res(e, 400000);
-	e->file.reso_buff = e->file.reso;
+    //e->file.larg = 800;
+    //e->file.haut= 800;
+    //e->file.aliasing = 1;
+   // e->file.reso = calcul_res(e, 400000);
+	//e->file.reso_buff = e->file.reso;
 
-	if (!(e->scene.obj = (t_obj *)malloc(sizeof(t_obj) * MAXOBJ)))
-		exit(42);
 	if (!(e->scene.lights = (t_light *)malloc(sizeof(t_light) * MAXLIGHT)))
 		exit(5);
 
-
+/*
 	e->scene.obj[0].type = PLANE;
 	e->scene.obj[0].color = c_color(0,50,0);
 	e->scene.obj[0].pos = vec_new3(4000, 0, 0);
@@ -143,7 +126,7 @@ void			init_rt(t_rt *e)
 	e->scene.obj[6].mat.diff = 0;
 	e->scene.obj[6].neg = 0;
 
-	/*
+
 	e->scene.obj[7].type = PLANE;
     e->scene.obj[7].color = c_color(255, 200, 0);
     e->scene.obj[7].pos = vec_new3(900, -1000, 0);
@@ -154,8 +137,6 @@ void			init_rt(t_rt *e)
 */
 	
 	e->scene.nbr_obj = 10;
-    e->scene.obj[10].type = END;
-	
 
 	e->scene.lights[0].ray.pos = vec_new3(1000, 1000, 100);
 	e->scene.lights[0].color = c_color(255, 000, 000);
@@ -168,32 +149,15 @@ void			init_rt(t_rt *e)
 	e->scene.lights[1].intensity = 0.4;
 	e->scene.lights[1].is_init = 0;
 
-	e->scene.ambient = 0.29;
 	e->scene.nbr_light = 2;
-
-	CCAM.ratio_x = HAUTEUR / LARGEUR;
-	e->scene.cam.is_circular = 0;
-	CCAM.ratio_y = LARGEUR / HAUTEUR;
-	e->scene.selected_obj = -1;
-
-	e->scene.cam.pos.x = 0;
-	e->scene.cam.pos.y = 0;
-	e->scene.cam.pos.z = -4000;
-	e->scene.cam.fov = 45;
 
     // e->scene.cam.focus_point.x = 401;
 	// e->scene.cam.focus_point.y = 401;
 	// e->scene.cam.focus_point.z = 0;
-	e->scene.cam.fov = 35;
-	CCAM.ratio_x = HAUTEUR / LARGEUR;
-	CCAM.ratio_y = LARGEUR / HAUTEUR;
-	e->scene.cam.is_circular = 0;
-	e->scene.filters = 0;
 	//if (!(e->scene.obj = (t_obj *)malloc(sizeof(t_obj) * MAXOBJ)))
     //   exit(42);
     //if (!(e->scene.lights = (t_light *)malloc(sizeof(t_light) * MAXLIGHT)))
     //    exit(5);
-    e->frame = 0;
     /*e->scene.nbr_obj = 0;
 	e->scene.nbr_complex = 0;
 	e->scene.nbr_light = 0;
