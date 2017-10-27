@@ -21,7 +21,8 @@ SRC			=	main.c \
 				filters.c \
 				refraction.c \
 				paraboloid.c \
-				skybox.c
+				skybox.c \
+				limit_intersect.c
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a
 LIBVEC		=	libs/libvec/libvec.a

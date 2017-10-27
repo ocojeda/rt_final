@@ -84,6 +84,7 @@ void			init_rt(t_rt *e)
 	e->scene.obj[0].mat.reflex = 0;
 	e->scene.obj[0].mat.refract = 0;
 	e->scene.obj[0].neg = 0;
+	e->scene.obj[0].limit_active = 0;
 
 	
 
@@ -92,14 +93,31 @@ void			init_rt(t_rt *e)
 	e->scene.obj[7].pos = vec_new3(-3000, 0, 0);
 	e->scene.obj[7].vector = vec_norme3(vec_new3(-1, 0, 0));
 	e->scene.obj[7].mat.diff = 0.4;
-	e->scene.obj[7].mat.reflex = 0;
+	e->scene.obj[7].mat.reflex = 1;
 	e->scene.obj[7].mat.refract = 0;
 	e->scene.obj[7].neg = 0;
-	
-    e->scene.obj[1].type = PLANE;
-    e->scene.obj[1].color = c_color(0,150,200);
+	e->scene.obj[7].limit_active = 0;
+
+    e->scene.obj[1].type = SPHERE;
+    e->scene.obj[1].color = c_color(55,150,200);
     e->scene.obj[1].pos = vec_new3(0, 0, 4000);
-	e->scene.obj[1].vector = vec_norme3(vec_new3(0, 0, 1));
+	e->scene.obj[1].vector = vec_norme3(vec_new3(0, 0, -1));
+	e->scene.obj[1].r = 500;
+	
+	e->scene.obj[1].mat.reflex = 0;
+	e->scene.obj[1].limit_active = 1;
+	e->scene.obj[1].limit_nbr = 1;
+
+	e->scene.obj[1].limit[0].type = PLANE;
+	e->scene.obj[1].limit[0].pos = vec_new3(0, 0, 4000);
+	e->scene.obj[1].limit[0].vector = vec_norme3(vec_new3(-0.99, 0.01, 0.1));
+	e->scene.obj[1].limit[0].r = 500;
+	
+	e->scene.obj[1].limit[1].type = PLANE;
+	e->scene.obj[1].limit[1].pos = vec_new3(0, 0, 4000);
+	e->scene.obj[1].limit[1].vector = vec_norme3(vec_new3(0.99,0.1,0.1));
+	
+
 	e->scene.obj[1].mat.diff = 0.4;
 	e->scene.obj[1].mat.reflex = 0;
 	e->scene.obj[1].mat.refract = 0;
@@ -114,7 +132,7 @@ void			init_rt(t_rt *e)
 	e->scene.obj[8].mat.reflex = 0;
 	e->scene.obj[8].mat.refract = 0;
 	e->scene.obj[8].neg = 0;
-
+	e->scene.obj[8].limit_active = 0;
 
 	e->scene.obj[2].type = PLANE;
     e->scene.obj[2].color = c_color(70,30,100);
@@ -124,7 +142,7 @@ void			init_rt(t_rt *e)
 	e->scene.obj[2].mat.reflex = 0;
 	e->scene.obj[2].mat.refract = 0;
 	e->scene.obj[2].neg = 0;
-
+	e->scene.obj[2].limit_active = 0;
 
 	e->scene.obj[9].type = PLANE;
     e->scene.obj[9].color = c_color(70,30,100);
@@ -134,6 +152,7 @@ void			init_rt(t_rt *e)
 	e->scene.obj[9].mat.reflex = 0;
 	e->scene.obj[9].mat.refract = 0;
 	e->scene.obj[9].neg = 0;
+	e->scene.obj[9].limit_active = 0;
 
 
 	e->scene.obj[3].type = CYLINDER;
@@ -145,7 +164,7 @@ void			init_rt(t_rt *e)
 	e->scene.obj[3].mat.reflex = 0;
 	e->scene.obj[3].mat.refract = 0;
 	e->scene.obj[3].neg = 0;
-
+	e->scene.obj[3].limit_active = 0;
 
 	e->scene.obj[4].type = PARABOLOID;
     e->scene.obj[4].k = 50;
@@ -156,17 +175,17 @@ void			init_rt(t_rt *e)
 	e->scene.obj[4].mat.reflex = 0;
 	e->scene.obj[4].mat.refract = 0;
 	e->scene.obj[4].neg = 0;
-
+	e->scene.obj[4].limit_active = 0;
 
 	e->scene.obj[5].type = SPHERE;
     e->scene.obj[5].r = 200;
 	e->scene.obj[5].color = c_color(250, 100, 100);
     e->scene.obj[5].pos = vec_new3(300, 200, 300);
 	e->scene.obj[5].mat.diff = 0.2;
-	e->scene.obj[5].mat.reflex = 0;
+	e->scene.obj[5].mat.reflex = 1;
 	e->scene.obj[5].mat.refract = 0;
 	e->scene.obj[5].neg = 0;
-
+	e->scene.obj[5].limit_active = 0;
 	
 	e->scene.obj[6].type = SPHERE;
     e->scene.obj[6].color = c_color(150, 150, 0);
@@ -176,7 +195,7 @@ void			init_rt(t_rt *e)
 	e->scene.obj[6].mat.refract = 0;
 	e->scene.obj[6].mat.diff = 0;
 	e->scene.obj[6].neg = 0;
-
+	e->scene.obj[6].limit_active = 0;
 
 	/*
 	e->scene.obj[7].type = PLANE;
@@ -215,7 +234,7 @@ void			init_rt(t_rt *e)
 
 	e->scene.cam.pos.x = 0;
 	e->scene.cam.pos.y = 0;
-	e->scene.cam.pos.z = -3000;
+	e->scene.cam.pos.z = -6000;
 	e->scene.cam.fov = 45;
 
     // e->scene.cam.focus_point.x = 401;

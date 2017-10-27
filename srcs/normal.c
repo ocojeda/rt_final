@@ -23,7 +23,7 @@ t_vec3			object_norm(t_obj obj, t_vec3 poi, t_vec3 cam)
 	else if (obj.type == PLANE)
 	{
 		norm = vec_norme3(plane_norm(obj));
-		norm = vec_scale3(norm, 1.5);
+	//	norm = vec_scale3(norm, 1.5);
 	}
 	else if (obj.type == CONE)
 		norm = vec_norme3(cone_norm(obj, poi));

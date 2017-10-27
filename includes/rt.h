@@ -157,26 +157,32 @@ typedef struct		s_matiere
 	//t_texture		texture;
 }					t_matiere;
 
+typedef	struct		s_limit
+{
+	int				type;
+	int				r;
+	t_vec3			pos;
+	t_vec3			vector;
+	t_vec3			normal;
+
+}					t_limit;
+
 typedef struct		s_obj
 {
 	char			is_init;
-	char			is_disp;
 	int				type;
 	t_color			color;
 	t_vec3			pos;
-	t_vec2			last_pos;
-	t_vec3			dir;
 	float			k;
 	t_vec3			vector;
 	int				r;
-	float			t;
 	int				nbr_t;
 	t_vec3			normal;
 	t_matiere		mat;
 	char			neg;
-	int				plimit_active;
-	int				plimit_type;
-	int				plimit_valid;
+	int				limit_active;
+	int				limit_nbr;
+	t_limit			limit[4];
 	int				id;
 }					t_obj;
 
@@ -335,6 +341,9 @@ t_vec3			plane_norm(t_obj plane);
 float			get_res_of_quadratic(t_calc *op, t_obj *obj);
 float			get_min_dist(t_rt *e, t_ray ray);
 float			intersect_paraboloid(t_ray ray, t_obj *parab);
+
+float			intersect_obj_limit(t_ray ray, t_limit *obj, t_rt *e);
+float			intersect_limit_sphere(t_ray ray, t_limit *sphere);
 
 /*
 * math aux fonctions

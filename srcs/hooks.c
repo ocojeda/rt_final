@@ -4,11 +4,14 @@ int				keypress(int keycode, void *param)
 	t_rt	*e;
 	t_ray	dir;
 	t_vec3	rx;
+	int		i;
 
+	i = 0;
 	e = (t_rt *)param;
 	dir = ray_init(e, LARGEUR / 2 /RES, HAUTEUR / 2/RES);
 	rx = vec_norme3(prod_vec3_matrx4(
 		vec_new3(dir.dir.x, 0, dir.dir.z), roty_matrx4(-90)));
+
 	if (keycode == KEY_ESC)
 		exit(42);
 	if (keycode == KEY_ONE)
@@ -58,6 +61,16 @@ int				keypress(int keycode, void *param)
 		if (e->scene.selected_obj >= 0)
 		{
 			e->scene.obj[e->scene.selected_obj].pos.y += 10;
+			if(e->scene.obj[e->scene.selected_obj].limit_active)
+			{
+				while(i < e->scene.obj[e->scene.selected_obj].limit_nbr)
+				{
+					e->scene.obj[e->scene.selected_obj].limit[i].pos.y += 10;
+					i++;
+				}
+				i = 0;
+
+			}
 			frame(e);
 		}
 		else
@@ -72,6 +85,15 @@ int				keypress(int keycode, void *param)
 		if (e->scene.selected_obj >= 0)
 		{
 			e->scene.obj[e->scene.selected_obj].pos.y -= 10;
+			if(e->scene.obj[e->scene.selected_obj].limit_active)
+			{
+				while(i < e->scene.obj[e->scene.selected_obj].limit_nbr)
+				{
+					e->scene.obj[e->scene.selected_obj].limit[i].pos.y -= 10;
+					i++;
+				}
+				i = 0;
+			}
 			frame(e);
 		}
 		else
@@ -86,6 +108,16 @@ int				keypress(int keycode, void *param)
 		if (e->scene.selected_obj >= 0)
 		{
 			e->scene.obj[e->scene.selected_obj].pos.x += 10;
+			if(e->scene.obj[e->scene.selected_obj].limit_active)
+			{
+				while(i < e->scene.obj[e->scene.selected_obj].limit_nbr)
+				{
+					e->scene.obj[e->scene.selected_obj].limit[i].pos.x += 10;
+					i++;
+				}
+				i = 0;
+
+			}
 			frame(e);
 		}
 		else
@@ -100,6 +132,16 @@ int				keypress(int keycode, void *param)
 		if (e->scene.selected_obj >= 0)
 		{
 			e->scene.obj[e->scene.selected_obj].pos.x -= 10;
+			if(e->scene.obj[e->scene.selected_obj].limit_active)
+			{
+				while(i < e->scene.obj[e->scene.selected_obj].limit_nbr)
+				{
+					e->scene.obj[e->scene.selected_obj].limit[i].pos.x -= 10;
+					i++;
+				}
+				i = 0;
+
+			}
 			frame(e);
 		}
 		else

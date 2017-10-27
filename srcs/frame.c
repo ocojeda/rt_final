@@ -79,21 +79,31 @@ t_light				copy_light(t_light light)
 t_obj				copy_objs(t_obj obj)
 {
 	t_obj			copy;
-
+	int 			i;
+	
+	i = 0;
 	copy.is_init = obj.is_init;
 	copy.type = obj.type;
 	copy.color = obj.color;
 	copy.pos = obj.pos;
-	copy.dir = obj.dir;
+	copy.limit_active = obj.limit_active;
+	copy.limit_nbr = obj.limit_nbr;
+	if (obj.limit_active == 1)
+		while(i < obj.limit_nbr)
+		{
+			copy.limit[i].type = obj.limit[i].type;
+			copy.limit[i].pos = obj.limit[i].pos;
+			copy.limit[i].vector = obj.limit[i].vector;
+			copy.limit[i].r = obj.limit[i].r;
+			i++;
+		}
 	copy.k = obj.k;
 	copy.vector = obj.vector;
 	copy.r = obj.r;
-	copy.t = obj.t;
 	copy.vector = obj.vector;
 	copy.mat = obj.mat;
 	copy.mat.reflex = obj.mat.reflex;
 	copy.mat.refract = obj.mat.refract;
-	copy.plimit_valid = obj.plimit_valid;
 	copy.neg = obj.neg;
 	return (copy);
 }
@@ -114,7 +124,6 @@ t_scene				copy_scene(t_scene scene)
 	i = -1;
 	while (++i < scene.nbr_obj)
 		copy.obj[i] = copy_objs(scene.obj[i]);
-
 	copy.nbr_light = scene.nbr_light;
 	copy.nbr_obj = scene.nbr_obj;
 	copy.ambient = scene.ambient;

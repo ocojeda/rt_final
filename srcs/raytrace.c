@@ -58,19 +58,35 @@ float			get_min_dist(t_rt *e, t_ray ray)
 {
 	float		min_dist;
 	float		dist;
+	float		dist2;
 	int			i;
+	int			u;
 
 	i = 0;
+	u = 0;
 	dist = DIST_MAX;
+
 	min_dist = DIST_MAX;
 	while (i < e->scene.nbr_obj)
 	{
 		dist = intersect_obj(ray, &e->scene.obj[i], e);
-		if (dist < min_dist && e->scene.obj[i].neg != 1)
+		if(e->scene.obj[i].limit_active)
+		{
+			while(u < e->scene.obj[i].limit_nbr)
+			{
+				dist2 = intersect_obj_limit(ray, &e->scene.obj[i].limit[u], e);
+				if(dist2 > 0 && dist2 < dist)
+					dist = min_dist;
+				
+				u++;
+			}
+		}
+		if(dist < min_dist && e->scene.obj[i].neg != 1)
 		{
 			min_dist = (dist < 0) ? min_dist : dist;
 			e->scene.id = i;
 		}
+		u = 0;
 		i++;
 	}
 	return ((min_dist < DIST_MAX) ? min_dist : -1);
@@ -83,6 +99,7 @@ t_color	get_pxl_color(t_rt *e, t_ray ray)
 	e->scene.id = -1;
 	if ((ref.min_dist = get_min_dist(e, ray)) == -1)
 		return (c_color(0,0,0)); // a ajouter ici la skybox
+
 	ref.type = e->scene.obj[e->scene.id].type;
 	ref.tmp_id = e->scene.id;
 	ref.poi = vec_add3(ray.pos, vec_scale3(ray.dir, ref.min_dist));
