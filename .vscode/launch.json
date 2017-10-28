@@ -6,6 +6,9 @@
             "type": "lldb",
             "request": "launch",
             "program": "${workspaceRoot}/rt",
+            "args": [
+                "scenes/example.xml"
+            ],
             "cwd": "${workspaceRoot}",
             "stopOnEntry": false,
             "terminal": "console",

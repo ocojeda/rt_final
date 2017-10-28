@@ -20,15 +20,27 @@ SRC			=	main.c \
 				hooks_mousse.c \
 				filters.c \
 				refraction.c \
-				paraboloid.c
+				paraboloid.c \
+				parsing/parse.c \
+				parsing/checks.c \
+				parsing/parser_utils.c \
+				parsing/parse_objects.c \
+				parsing/parse_camera.c \
+				parsing/parse_attributes.c \
+				parsing/parse_lights.c
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a
 LIBVEC		=	libs/libvec/libvec.a
+LIBXML		=	`xml2-config --libs`
+LIBXML_H	=	`xml2-config --cflags`
+VPATH		=	$(SRCDIR):$(SRCDIR)parsing
 
-OBJ			=	$(addprefix $(OBJDIR),$(SRC:.c=.o))
+OBJ			=	$(SRC:.c=.o)
+OBJ			:=	$(notdir $(OBJ))
+OBJ			:=	$(addprefix $(OBJDIR), $(OBJ))
 CC			=	gcc
 INC 		=	includes
-CFLAGS		=	-Wall -Werror -Wextra -g -I includes/ -I libs/libft/includes/ -I libs/libvec/includes/
+CFLAGS		=	-Wall -Wextra -g -I includes/ -I libs/libft/includes/ -I libs/libvec/includes/ $(LIBXML_H) # add werror
 MLXF		=	-framework OpenGL -framework AppKit -lxml2
 WHITE		=	\033[7;49;39m
 BLUE		=	\033[7;49;34m
@@ -44,10 +56,10 @@ all: mlx lib vec $(NAME)
 $(NAME): $(MINILIBX) $(LIBFT) $(OBJDIR) $(OBJ)
 	@printf "\r$(GREEN)[$(PROJECT)] Obj compilation done.                                                        \n"
 	@printf "$(YELLOW)[$(PROJECT)] Compiling $(NAME)..."
-	@$(CC) $(CFLAGS) $(MLXF) -o $(NAME) $(OBJ) $(MINILIBX) $(LIBFT) $(LIBVEC)
+	@$(CC) $(CFLAGS) $(MLXF) -o $(NAME) $(OBJ) $(MINILIBX) $(LIBFT) $(LIBVEC) $(LIBXML)
 	@printf "\r$(GREEN)[$(PROJECT)] Compilation done.                          \n$(NO_COLOR)"
 
-$(OBJDIR)%.o: $(SRCDIR)%.c
+$(OBJDIR)%.o: %.c
 	@printf "$(YELLOW)\r[$(PROJECT)] Compiling $< to $@                                                          \r"
 	@$(CC) $(CFLAGS) -o $@ -c $<
 
@@ -85,5 +97,7 @@ fclean:
 	@printf "\r$(GREEN)[$(PROJECT)] $(NAME) removed.                                               \n$(NO_COLOR)"
 
 re: fclean all
+
+norme: norminette srcs libs includes
 
 .PHONY: all clean fclean re
