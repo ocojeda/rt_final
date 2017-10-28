@@ -10,6 +10,15 @@
 # include <fcntl.h>
 # include <unistd.h>
 
+# include <libxml/parser.h>
+# include <libxml/tree.h>
+# include <libxml/xmlIO.h>
+# include <libxml/xinclude.h>
+# include <libxml/valid.h>
+# include <libxml/xmlschemas.h>
+# include <libxml/xmlstring.h>
+# include <libxml/xmlreader.h>
+
 # define END 0
 # define CONE 1
 # define PLANE 2
@@ -91,6 +100,8 @@
 # define DIST_MIN -80000
 # define EPSILON 1e-7
 
+# define VALIDATOR_XSD "validator.xsd"
+
 typedef struct		s_ray
 {
 	t_vec3			pos;
@@ -163,7 +174,6 @@ typedef	struct		s_limit
 	int				r;
 	t_vec3			pos;
 	t_vec3			vector;
-	t_vec3			normal;
 
 }					t_limit;
 
@@ -177,9 +187,9 @@ typedef struct		s_obj
 	t_vec3			vector;
 	int				r;
 	int				nbr_t;
-	t_vec3			normal;
+	//t_vec3			normal;
 	t_matiere		mat;
-	char			neg;
+	int				neg;
 	int				limit_active;
 	int				limit_nbr;
 	t_limit			limit[4];
@@ -294,11 +304,7 @@ typedef struct		s_norme
 	t_color			color;
 }					t_norme;
 
-/*
-* parsing fonctions
-*/
 void			ft_start_rt(t_rt *e);
-void			init_rt(t_rt *e);
 
 /*
 * multhread fonctions
@@ -398,5 +404,23 @@ float			intersect_cone_neg(t_ray ray, t_obj *cone, float dist_obj);
 float			intersect_cylinder_neg(t_ray ray, t_obj *cyl, float dist_obj);
 float			intersect_sphere_neg(t_ray ray, t_obj *sphere, float dist_obj);
 float			intersect_paraboloid_neg(t_ray ray, t_obj *parab, float dist_obj);
+
+/*
+** Parse
+*/
+
+void				parse(t_rt *e, int argc, char **argv);
+void				check_doc(xmlDocPtr	doc);
+void				get_nodes_by_name(xmlNodePtr cur,
+						char *node_name, t_list **lst);
+void				parse_objects(t_rt *e, t_list *lst);
+t_vec3				get_vec_from_node(xmlNodePtr node);
+t_color				parse_color(xmlNodePtr node);
+xmlNodePtr			has_child(xmlNodePtr a_node, char *attr);
+void				parse_camera(t_rt *e, xmlNodePtr node);
+void				parse_lights(t_rt *e, t_list *lst);
+void				set_attrs(t_obj *obj, xmlNodePtr node);
+void				parse_limits(xmlNodePtr node_obj, t_obj *obj);
+void				set_attrs_limits(t_limit *limit, xmlNodePtr node);
 
 #endif
