@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<scene width="800" height="800" ambient="0.29">
+	<lights>
+		<light intensity="0.4">
+		    <pos x="1000" y="1000" z="100"/>
+			<color r="255" g="0" b="0"/>
+		</light>
+		<light intensity="0.4">
+		    <pos x="-100" y="400" z="-300"/>
+			<color r="255" g="0" b="0"/>
+		</light>
+	</lights>
+
+	<camera fov="35">
+		<pos x="0" y="0" z="-1000"/>
+	</camera>
+
+	<objects>
+	<!--
+		<plane shine="0.4">
+			<pos x="4000" y="0" z="0" />
+			<normal x="-1" y="0" z="0"/>
+			<color r="70" g="30" b="255"/>
+		</plane>
+
+		<plane shine="0.4">
+			<pos x="-3000" y="0" z="0" />
+			<normal x="-1" y="0" z="0"/>
+			<color r="70" g="30" b="255"/>
+		</plane>
+
+		<sphere radius="500" shine="0.4">
+			<pos x="0" y="0" z="4000"/>
+			<color r="55" g="150" b="200"/>
+		</sphere>
+
+		<plane shine="0.4">
+			<pos x="0" y="0" z="-8000" />
+			<normal x="0" y="0" z="1"/>
+			<color r="70" g="30" b="100"/>
+		</plane>
+
+		<plane shine="0.4">
+			<pos x="0" y="-4000" z="0" />
+			<normal x="0" y="1" z="0"/>
+			<color r="70" g="30" b="100"/>
+		</plane>
+
+		<plane shine="0.4">
+			<pos x="0" y="4000" z="0" />
+			<normal x="0" y="-1" z="0"/>
+			<color r="70" g="30" b="100"/>
+		</plane>
+
+		<cylinder radius="200" shine="0.2">
+			<pos x="200" y="100" z="300" />
+			<normal x="0.5" y="1" z="0"/>
+			<color r="0" g="255" b="255"/>
+		</cylinder>
+
+		<cone angle="0.3" shine="0.4">
+			<pos x="-300" y="200" z="1000" />
+			<normal x="-1" y="0" z="0"/>
+			<color r="250" g="100" b="100"/>
+		</cone>
+
+		<plane shine="0">
+			<pos x="250" y="0" z="500" />
+			<normal x="0" y="0" z="1"/>
+			<color r="150" g="150" b="0"/>
+		</plane>-->
+
+		<paraboloid angle="50" shine="0.4">
+			<pos x="60" y="900" z="3000" />
+			<normal x="1" y="0.5" z="0"/>
+			<color r="255" g="15" b="10"/>
+			<limits>
+				<limit_plane>
+					<pos x="60" y="1000" z="3000" />
+					<normal x="0.2" y="1" z="0"/>
+				</limit_plane>
+			</limits>
+		</paraboloid>
+	</objects>
+</scene>

@@ -6,12 +6,15 @@
             "type": "lldb",
             "request": "launch",
             "program": "${workspaceRoot}/rt",
+            "args": [
+                "scenes/limits.xml"
+            ],
             "cwd": "${workspaceRoot}",
             "stopOnEntry": false,
             "terminal": "console",
             "sourceLanguages": [
                 "c"
-            ],
-            }
+            ]
+        }
     ]
 }
