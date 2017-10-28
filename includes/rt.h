@@ -89,6 +89,7 @@
 # define DIST_MAX 20000
 # define DIST_MIN -80000
 # define EPSILON 1e-7
+# define SIZE_LP 50
 
 typedef struct		s_ray
 {
