@@ -41,27 +41,26 @@ static void		create_limit_obj(t_obj *obj, t_list *lst)
 	}
 }
 
-void			parse_limits(t_obj *obj, t_list *lst)
+void			parse_limits(xmlNodePtr node_limits, t_obj *obj)
 {
-	t_list		*lst2;
+	t_list		*lst;
 	t_list		*newlst;
 	xmlNodePtr	temp;
 
-	lst2 = NULL;
+	lst = NULL;
 	temp = NULL;
-	if (!lst)
-		return ;
-	temp = ((xmlNodePtr)lst->content)->children;
+	temp = node_limits->children;
 	while (temp)
 	{
 		if (!ft_strequ((char *)temp->name, "text") &&
 			!ft_strequ((char *)temp->name, "comment"))
 		{
+			ft_putendl((char *)temp->name);
 			newlst = ft_lstnew((void *)temp, sizeof(*temp));
-			ft_lstpush(&lst2, newlst);
+			ft_lstpush(&lst, newlst);
 		}
 		temp = temp->next;
 	}
-	create_limit_obj(obj, lst2);
-	ft_lstfree(&lst2);
+	create_limit_obj(obj, lst);
+	ft_lstfree(&lst);
 }

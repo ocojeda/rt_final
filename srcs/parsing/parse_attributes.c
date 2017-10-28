@@ -53,4 +53,3 @@ void			set_attrs_limits(t_limit *limit, xmlNodePtr node)
 		xmlFree(val);
 	}
 }
-

@@ -13,9 +13,7 @@ static void		default_value(t_obj *obj)
 static void		parse_obj_node(t_obj *obj, xmlNodePtr node)
 {
 	xmlNodePtr	child;
-	t_list		*lst;
 
-	lst = NULL;
 	set_attrs(obj, node);
 	if ((child = has_child(node, "pos")))
 		obj->pos = get_vec_from_node(child);
@@ -23,9 +21,8 @@ static void		parse_obj_node(t_obj *obj, xmlNodePtr node)
 		obj->vector = vec_norme3(get_vec_from_node(child));
 	if ((child = has_child(node, "color")))
 		obj->color = parse_color(child);
-	get_nodes_by_name(node, "limits", &lst);
-	parse_limits(obj, lst);
-	ft_lstfree(&lst);
+	if ((child = has_child(node, "limits")))
+		parse_limits(child, obj);
 }
 
 static t_obj	dispatch_obj(xmlNodePtr node)

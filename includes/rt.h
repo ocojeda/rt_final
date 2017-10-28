@@ -420,7 +420,7 @@ xmlNodePtr			has_child(xmlNodePtr a_node, char *attr);
 void				parse_camera(t_rt *e, xmlNodePtr node);
 void				parse_lights(t_rt *e, t_list *lst);
 void				set_attrs(t_obj *obj, xmlNodePtr node);
-void				parse_limits(t_obj *obj, t_list *lst);
+void				parse_limits(xmlNodePtr node_obj, t_obj *obj);
 void				set_attrs_limits(t_limit *limit, xmlNodePtr node);
 
 #endif
