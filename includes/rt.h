@@ -169,7 +169,7 @@ typedef	struct		s_limit
 
 typedef struct		s_obj
 {
-	char			is_init;
+	float				max_dist;
 	int				type;
 	t_color			color;
 	t_vec3			pos;

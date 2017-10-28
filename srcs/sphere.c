@@ -15,9 +15,15 @@ float			get_res_of_quadratic(t_calc *op, t_obj *obj)
 	//if (op->t0 <= 0 || op->t1 <= 0)
 	//	obj->nbr_t = 1;
 	if ((op->t0 < op->t1 || op->t1 < EPSILON) && op->t0 > EPSILON)
+	{
+		obj->max_dist = op->t1;
 		return (op->t0);
+	}
 	else if ((op->t1 < op->t0 || op->t0 < EPSILON) && op->t1 > EPSILON)
+	{
+		obj->max_dist = op->t0;
 		return (op->t1);
+	}
 	return (DIST_MAX);
 }
 

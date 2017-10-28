@@ -82,7 +82,7 @@ t_obj				copy_objs(t_obj obj)
 	int 			i;
 	
 	i = 0;
-	copy.is_init = obj.is_init;
+	copy.max_dist = obj.max_dist;
 	copy.type = obj.type;
 	copy.color = obj.color;
 	copy.pos = obj.pos;

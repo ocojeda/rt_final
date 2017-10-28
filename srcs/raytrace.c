@@ -59,25 +59,45 @@ float			get_min_dist(t_rt *e, t_ray ray)
 	float		min_dist;
 	float		dist;
 	float		dist2;
+	float		dist3;
+	float		dist4;
+	t_ray		poi;
 	int			i;
 	int			u;
 
 	i = 0;
 	u = 0;
 	dist = DIST_MAX;
-
+	dist2 = DIST_MAX;
+	dist3 = DIST_MAX;
+	dist3 = DIST_MAX;
 	min_dist = DIST_MAX;
+	
 	while (i < e->scene.nbr_obj)
 	{
 		dist = intersect_obj(ray, &e->scene.obj[i], e);
-		if(e->scene.obj[i].limit_active)
+		if(e->scene.obj[i].limit_active == 1 && dist != DIST_MAX)
 		{
+			poi = c_ray(vec_add3(ray.pos, vec_scale3(ray.dir, dist)), vec_new3(0,0,0));
 			while(u < e->scene.obj[i].limit_nbr)
 			{
-				dist2 = intersect_obj_limit(ray, &e->scene.obj[i].limit[u], e);
-				if(dist2 > 0 && dist2 < dist)
-					dist = min_dist;
-				
+				poi.dir = vec_norme3(vec_sub3(e->scene.obj[i].limit[u].pos, poi.pos));
+				dist2 = intersect_obj_limit(poi, &e->scene.obj[i].limit[u], e);
+				if (e->scene.obj[i].limit[u].type == SPHERE)
+					e->scene.obj[i].limit[u].r += 1;
+				else if (e->scene.obj[i].limit[u].type == PLANE)
+					e->scene.obj[i].limit[u].pos = vec_add3(e->scene.obj[i].limit[u].pos, e->scene.obj[i].limit[u].vector);
+				poi.dir = vec_norme3(vec_sub3(e->scene.obj[i].limit[u].pos, poi.pos));
+				dist3 = intersect_obj_limit(poi, &e->scene.obj[i].limit[u], e);
+				if (e->scene.obj[i].limit[u].type == SPHERE)
+					e->scene.obj[i].limit[u].r -= 1;
+				else if (e->scene.obj[i].limit[u].type == PLANE)
+					e->scene.obj[i].limit[u].pos = vec_sub3(e->scene.obj[i].limit[u].pos, e->scene.obj[i].limit[u].vector);
+				dist4 = intersect_obj_limit(ray, &e->scene.obj[i].limit[u], e);
+				if (dist3 < dist2 && dist4 <= e->scene.obj[i].max_dist && dist4 < DIST_MAX && dist <= dist4)
+					dist = dist4;
+				else if (dist3 < dist2)
+					dist = DIST_MAX;
 				u++;
 			}
 		}
