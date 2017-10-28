@@ -7,6 +7,7 @@ static void		default_value(t_obj *obj)
 	obj->mat.diff = 0.5;
 	obj->neg = 0;
 	obj->limit_active = 0;
+	obj->limit_nbr = 0;
 }
 
 static void		parse_obj_node(t_obj *obj, xmlNodePtr node)
@@ -17,11 +18,11 @@ static void		parse_obj_node(t_obj *obj, xmlNodePtr node)
 	lst = NULL;
 	set_attrs(obj, node);
 	if ((child = has_child(node, "pos")))
-	obj->pos = get_vec_from_node(child);
+		obj->pos = get_vec_from_node(child);
 	if ((child = has_child(node, "normal")))
-	obj->vector = vec_norme3(get_vec_from_node(child));
+		obj->vector = vec_norme3(get_vec_from_node(child));
 	if ((child = has_child(node, "color")))
-	obj->color = parse_color(child);
+		obj->color = parse_color(child);
 	get_nodes_by_name(node, "limits", &lst);
 	parse_limits(obj, lst);
 	ft_lstfree(&lst);
@@ -61,6 +62,7 @@ static void		create_obj(t_rt *e, t_list *lst)
 		lst = lst->next;
 		i++;
 	}
+	e->scene.obj[i].type = END;
 }
 
 void			parse_objects(t_rt *e, t_list *lst)

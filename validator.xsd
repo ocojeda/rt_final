@@ -106,7 +106,7 @@
 
 	<xsd:element name="limits">
 		<xsd:complexType>
-			<xsd:choice maxOccurs="unbounded" minOccurs="1">
+			<xsd:choice maxOccurs="4" minOccurs="1">
 				<xsd:element ref="limit_sphere" minOccurs="0"/>
 				<xsd:element ref="limit_plane" minOccurs="0"/>
 			</xsd:choice>

@@ -136,7 +136,7 @@ void			init_rt(t_rt *e)
 	e->scene.obj[3].limit[0].vector = vec_norme3(vec_new3(-0.5, 1, 0));*/
 
 	// AU DESSUS LES LIMITES
-	
+	/*
 	e->scene.obj[4].type = PARABOLOID;
     e->scene.obj[4].k = 50;
 	e->scene.obj[4].color = c_color(255, 15, 10);
@@ -150,7 +150,7 @@ void			init_rt(t_rt *e)
 	e->scene.obj[4].limit_nbr = 1;
 	e->scene.obj[4].limit[0].type = PLANE;
 	e->scene.obj[4].limit[0].pos = vec_new3(60, 1000, 3000);
-	e->scene.obj[4].limit[0].vector = vec_norme3(vec_new3(0.2, 1, 0));
+	e->scene.obj[4].limit[0].vector = vec_norme3(vec_new3(0.2, 1, 0));*/
 
 	/*e->scene.obj[5].type = CONE;
 	e->scene.obj[5].color = c_color(250, 100, 100);

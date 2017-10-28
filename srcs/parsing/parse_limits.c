@@ -19,6 +19,7 @@ static t_limit	dispatch_limit_obj(xmlNodePtr node)
 		new_limit.type = SPHERE;
 	else if (xmlStrEqual(node->name, (xmlChar *)"limit_plane"))
 		new_limit.type = PLANE;
+	new_limit.r = 0;
 	parse_limit_node(&new_limit, node);
 	return (new_limit);
 }
@@ -32,7 +33,6 @@ static void		create_limit_obj(t_obj *obj, t_list *lst)
 	if (obj->limit_nbr == 0)
 		return ;
 	obj->limit_active = 1;
-	obj->limit = (t_limit *)semalloc(sizeof(t_limit) * obj->limit_nbr);
 	while (lst)
 	{
 		obj->limit[i] = dispatch_limit_obj((xmlNodePtr)lst->content);

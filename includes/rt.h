@@ -187,12 +187,12 @@ typedef struct		s_obj
 	t_vec3			vector;
 	int				r;
 	int				nbr_t;
-	t_vec3			normal;
+	//t_vec3			normal;
 	t_matiere		mat;
-	char			neg;
+	int				neg;
 	int				limit_active;
 	int				limit_nbr;
-	t_limit			*limit;
+	t_limit			limit[4];
 	int				id;
 }					t_obj;
 
