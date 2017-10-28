@@ -1,9 +1,9 @@
 #include "rt.h"
 
-void		parse_camera(t_rt *e, xmlNodePtr node)
+void			parse_camera(t_rt *e, xmlNodePtr node)
 {
 	xmlNodePtr	child;
-	xmlChar			*val;	
+	xmlChar		*val;
 
 	if ((child = has_child(node, "pos")))
 		e->scene.cam.pos = get_vec_from_node(child);

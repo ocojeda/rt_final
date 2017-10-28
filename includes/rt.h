@@ -171,7 +171,7 @@ typedef struct		s_obj
 	int				nbr_t;
 	t_vec3			normal;
 	t_matiere		mat;
-	char			neg;
+	int				neg;
 	int				plimit_active;
 	int				plimit_type;
 	int				plimit_valid;
@@ -286,11 +286,7 @@ typedef struct		s_norme
 	t_color			color;
 }					t_norme;
 
-/*
-* parsing fonctions
-*/
 void			ft_start_rt(t_rt *e);
-void			init_rt(t_rt *e);
 
 /*
 * multhread fonctions
@@ -397,5 +393,6 @@ t_color				parse_color(xmlNodePtr node);
 xmlNodePtr			has_child(xmlNodePtr a_node, char *attr);
 void				parse_camera(t_rt *e, xmlNodePtr node);
 void				parse_lights(t_rt *e, t_list *lst);
+void				set_attrs(t_obj *obj, xmlNodePtr node);
 
 #endif

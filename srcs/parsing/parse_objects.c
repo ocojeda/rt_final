@@ -1,24 +1,11 @@
 #include "rt.h"
 
-static void		set_attrs(t_obj *obj, xmlNodePtr node)
+static void		default_value(t_obj *obj)
 {
-	xmlChar		*val;
-
-	if ((val = xmlGetProp(node, BAD_CAST"radius")))
-	{
-		obj->r = ft_atof((char *)val);
-		xmlFree(val);
-	}
-	if ((val = xmlGetProp(node, BAD_CAST"shine")))
-	{
-		obj->mat.diff = ft_atof((char *)val);
-		xmlFree(val);
-	}
-	if ((val = xmlGetProp(node, BAD_CAST"angle")))
-	{
-		obj->k = ft_atof((char *)val);
-		xmlFree(val);
-	}
+	obj->mat.refract = 0;
+	obj->mat.reflex = 0;
+	obj->mat.diff = 0.5;
+	obj->neg = 0;
 }
 
 static void		parse_obj_node(t_obj *obj, xmlNodePtr node)
@@ -46,6 +33,7 @@ static t_obj	dispatch_obj(xmlNodePtr node)
 		new_obj.type = CONE;
 	else if (xmlStrEqual(node->name, (xmlChar *)"cylinder"))
 		new_obj.type = CYLINDER;
+	default_value(&new_obj);
 	parse_obj_node(&new_obj, node);
 	return (new_obj);
 }
@@ -80,8 +68,11 @@ void			parse_objects(t_rt *e, t_list *lst)
 	temp = ((xmlNodePtr)lst->content)->children;
 	while (temp)
 	{
-		newlst = ft_lstnew((void *)temp, sizeof(*temp));
-		ft_lstpush(&lst2, newlst);
+		if (!ft_strequ((char *)temp->name, "text"))
+		{
+			newlst = ft_lstnew((void *)temp, sizeof(*temp));
+			ft_lstpush(&lst2, newlst);
+		}
 		temp = temp->next;
 	}
 	create_obj(e, lst2);

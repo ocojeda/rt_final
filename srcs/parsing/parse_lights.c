@@ -29,6 +29,7 @@ void			parse_lights(t_rt *e, t_list *lst)
 	e->scene.nbr_light = ft_lstlen(lst);
 	if (!e->scene.nbr_light)
 		return ;
+	e->scene.lights = (t_light *)semalloc(sizeof(t_light) * e->scene.nbr_light);
 	while (lst)
 	{
 		e->scene.lights[i] = parse_light((xmlNodePtr)lst->content);

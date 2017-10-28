@@ -26,6 +26,7 @@ SRC			=	main.c \
 				parsing/parser_utils.c \
 				parsing/parse_objects.c \
 				parsing/parse_camera.c \
+				parsing/parse_attributes.c \
 				parsing/parse_lights.c
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a
@@ -39,7 +40,7 @@ OBJ			:=	$(notdir $(OBJ))
 OBJ			:=	$(addprefix $(OBJDIR), $(OBJ))
 CC			=	gcc
 INC 		=	includes
-CFLAGS		=	-Wall -Werror -Wextra -g -I includes/ -I libs/libft/includes/ -I libs/libvec/includes/ $(LIBXML_H)
+CFLAGS		=	-Wall -Wextra -g -I includes/ -I libs/libft/includes/ -I libs/libvec/includes/ $(LIBXML_H) # add werror
 MLXF		=	-framework OpenGL -framework AppKit -lxml2
 WHITE		=	\033[7;49;39m
 BLUE		=	\033[7;49;34m
@@ -96,5 +97,7 @@ fclean:
 	@printf "\r$(GREEN)[$(PROJECT)] $(NAME) removed.                                               \n$(NO_COLOR)"
 
 re: fclean all
+
+norme: norminette srcs libs includes
 
 .PHONY: all clean fclean re

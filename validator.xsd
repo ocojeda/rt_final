@@ -93,7 +93,9 @@
 				<xsd:element ref="color" minOccurs="1" maxOccurs="1"/>
 			</xsd:choice>
 			<xsd:attribute type="xsd:float" name="shine" use="required"/>
-			<xsd:attribute type="xsd:boolean" name="negative" use="required"/>
+			<xsd:attribute type="xsd:boolean" name="negative"/>
+			<xsd:attribute type="unitVec" name="reflex"/>
+			<xsd:attribute type="unitVec" name="refract"/>
 		</xsd:complexType>
 	</xsd:element>
 
@@ -105,7 +107,9 @@
 			</xsd:choice>
 			<xsd:attribute type="xsd:float" name="radius" use="required"/>
 			<xsd:attribute type="xsd:float" name="shine" use="required"/>
-			<xsd:attribute type="xsd:boolean" name="negative" use="required"/>
+			<xsd:attribute type="xsd:boolean" name="negative"/>
+			<xsd:attribute type="unitVec" name="reflex"/>
+			<xsd:attribute type="unitVec" name="refract"/>
 		</xsd:complexType>
 	</xsd:element>
 
@@ -118,7 +122,9 @@
 			</xsd:choice>
 			<xsd:attribute type="xsd:float" name="radius" use="required"/>
 			<xsd:attribute type="xsd:float" name="shine" use="required"/>
-			<xsd:attribute type="xsd:boolean" name="negative" use="required"/>
+			<xsd:attribute type="xsd:boolean" name="negative"/>
+			<xsd:attribute type="unitVec" name="reflex"/>
+			<xsd:attribute type="unitVec" name="refract"/>
 		</xsd:complexType>
 	</xsd:element>
 
@@ -131,7 +137,9 @@
 			</xsd:choice>
 			<xsd:attribute type="xsd:float" name="angle" use="required"/>
 			<xsd:attribute type="xsd:float" name="shine" use="required"/>
-			<xsd:attribute type="xsd:boolean" name="negative" use="required"/>
+			<xsd:attribute type="xsd:boolean" name="negative"/>
+			<xsd:attribute type="unitVec" name="reflex"/>
+			<xsd:attribute type="unitVec" name="refract"/>
 		</xsd:complexType>
 	</xsd:element>
 

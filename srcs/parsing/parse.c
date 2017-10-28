@@ -6,14 +6,14 @@ static int			calcul_res(t_rt *e, int limit)
 	int air;
 
 	air = e->file.larg * e->file.haut;
-    res = 1;
+	res = 1;
 	limit /= 2;
 	while ((air / res) > limit)
 		res++;
 	return (res);
 }
 
-static void		parse_scene(t_rt *e, xmlNodePtr node)
+static void			parse_scene(t_rt *e, xmlNodePtr node)
 {
 	xmlChar	*val;
 
@@ -35,7 +35,7 @@ static void		parse_scene(t_rt *e, xmlNodePtr node)
 	xmlFree(val);
 }
 
-void			parse(t_rt *e, int ac, char **av)
+void				parse(t_rt *e, int ac, char **av)
 {
 	xmlDocPtr	doc;
 	xmlNodePtr	root;
