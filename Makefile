@@ -30,6 +30,7 @@ SRC			=	main.c \
 				parsing/parse_camera.c \
 				parsing/parse_attributes.c \
 				parsing/parse_limits.c \
+				parsing/parse_skybox.c \
 				parsing/parse_lights.c
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a

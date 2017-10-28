@@ -422,5 +422,6 @@ void				parse_lights(t_rt *e, t_list *lst);
 void				set_attrs(t_obj *obj, xmlNodePtr node);
 void				parse_limits(xmlNodePtr node_obj, t_obj *obj);
 void				set_attrs_limits(t_limit *limit, xmlNodePtr node);
+void				parse_skybox(t_rt *e, t_list *lst);
 
 #endif

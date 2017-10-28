@@ -41,11 +41,9 @@ void				parse(t_rt *e, int ac, char **av)
 	xmlNodePtr	root;
 	t_list		*lst;
 
-	lst = NULL;
 	if (ac != 2 || ft_strncmp(ft_strrev(av[1]), "lmx.", 4) != 0)
 		err_found("usage: rt input_map.xml");
-	doc = xmlParseFile(ft_strrev(av[1]));
-	if (doc == NULL)
+	if (!(doc = xmlParseFile(ft_strrev(av[1]))))
 		err_found("Wrong xml file");
 	check_doc(doc);
 	root = xmlDocGetRootElement(doc);
@@ -58,6 +56,9 @@ void				parse(t_rt *e, int ac, char **av)
 	ft_lstfree(&lst);
 	get_nodes_by_name(root, "light", &lst);
 	parse_lights(e, lst);
+	ft_lstfree(&lst);
+	get_nodes_by_name(root, "skybox", &lst);
+	parse_skybox(e, lst);
 	ft_lstfree(&lst);
 	xmlFreeDoc(doc);
 	xmlCleanupParser();

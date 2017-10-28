@@ -33,8 +33,8 @@ t_color			skybox(t_rt *e, t_ray ray)
 	//	intensity += dazzling_light(e, e->CLIGHT, vec_norme3(ray.dir));
 	//while (++i < e->scene.nbr_light)
 	//	intensity = 1;
-	//if (!(e->scene.skybox.is_init))
-	//	return (color_mult((t_color){0, 0, 0, 0}, intensity, 0));
+	if (!(e->scene.skybox.is_init))
+		return (color_mult((t_color){0, 0, 0, 0}, intensity, 0));
 	norm = vec_norme3(ray.dir);
 	uv.x = atan2(norm.x, norm.z) / (2 * M_PI) + 0.5;
 	uv.y = norm.y * 0.5 + 0.5;

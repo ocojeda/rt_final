@@ -55,7 +55,6 @@ void			parse_limits(xmlNodePtr node_limits, t_obj *obj)
 		if (!ft_strequ((char *)temp->name, "text") &&
 			!ft_strequ((char *)temp->name, "comment"))
 		{
-			ft_putendl((char *)temp->name);
 			newlst = ft_lstnew((void *)temp, sizeof(*temp));
 			ft_lstpush(&lst, newlst);
 		}

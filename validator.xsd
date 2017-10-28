@@ -58,6 +58,12 @@
 		</xsd:complexType>
 	</xsd:element>
 
+	<xsd:element name="skybox">
+		<xsd:complexType>
+			<xsd:attribute type="xsd:string" name="path" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+
 	<xsd:element name="camera">
 		<xsd:complexType>
 			<xsd:choice maxOccurs="unbounded">
@@ -209,6 +215,7 @@
 				<xsd:element ref="camera" minOccurs="1" maxOccurs="1"/>
 				<xsd:element ref="lights" minOccurs="1" maxOccurs="1"/>
 				<xsd:element ref="objects" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="skybox" minOccurs="0" maxOccurs="1"/>
 			</xsd:choice>
 			<xsd:attribute type="unitVec" name="ambient" use="required" />
 			<xsd:attribute type="int4000" name="width" use="required" />
