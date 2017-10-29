@@ -30,9 +30,14 @@ void			set_attrs(t_obj *obj, xmlNodePtr node)
 		obj->r = ft_atof((char *)val);
 		xmlFree(val);
 	}
-	if ((val = xmlGetProp(node, (xmlChar *)"shine")))
+	if ((val = xmlGetProp(node, (xmlChar *)"diff")))
 	{
 		obj->mat.diff = ft_atof((char *)val);
+		xmlFree(val);
+	}
+	if ((val = xmlGetProp(node, (xmlChar *)"spec")))
+	{
+		obj->mat.spec = ft_atof((char *)val);
 		xmlFree(val);
 	}
 	if ((val = xmlGetProp(node, (xmlChar *)"angle")))

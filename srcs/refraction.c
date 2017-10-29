@@ -40,7 +40,7 @@ void			prepare_refraction(t_rt *e, t_color *base_color,
 {
 	n->newpoi = vec_add3(ref->new_ray.pos, vec_scale3(ref->new_ray.dir,
 	ref->min_dist));
-	n->final_color = get_color(e, e->scene.obj[n->a], n->newpoi);
+	n->final_color = get_color(e, e->scene.obj[n->a], n->newpoi, ref->new_ray);
 	*base_color = ft_map_color(*base_color, n->final_color, n->taux_temp);
 	e->scene.id = n->a;
 }

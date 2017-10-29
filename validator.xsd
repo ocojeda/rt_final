@@ -127,7 +127,8 @@
 				<xsd:element ref="color" minOccurs="1" maxOccurs="1"/>
 				<xsd:element ref="limits" minOccurs="0" maxOccurs="1"/>
 			</xsd:choice>
-			<xsd:attribute type="xsd:float" name="shine" use="required"/>
+			<xsd:attribute type="xsd:float" name="diff" use="required"/>
+			<xsd:attribute type="xsd:float" name="spec" use="required"/>
 			<xsd:attribute type="xsd:boolean" name="negative"/>
 			<xsd:attribute type="unitVec" name="reflex"/>
 			<xsd:attribute type="unitVec" name="refract"/>
@@ -142,7 +143,8 @@
 				<xsd:element ref="limits" minOccurs="0" maxOccurs="1"/>
 			</xsd:choice>
 			<xsd:attribute type="xsd:float" name="radius" use="required"/>
-			<xsd:attribute type="xsd:float" name="shine" use="required"/>
+			<xsd:attribute type="xsd:float" name="diff" use="required"/>
+			<xsd:attribute type="xsd:float" name="spec" use="required"/>
 			<xsd:attribute type="xsd:boolean" name="negative"/>
 			<xsd:attribute type="unitVec" name="reflex"/>
 			<xsd:attribute type="unitVec" name="refract"/>
@@ -158,7 +160,8 @@
 				<xsd:element ref="limits" minOccurs="0" maxOccurs="1"/>
 			</xsd:choice>
 			<xsd:attribute type="xsd:float" name="radius" use="required"/>
-			<xsd:attribute type="xsd:float" name="shine" use="required"/>
+			<xsd:attribute type="xsd:float" name="diff" use="required"/>
+			<xsd:attribute type="xsd:float" name="spec" use="required"/>
 			<xsd:attribute type="xsd:boolean" name="negative"/>
 			<xsd:attribute type="unitVec" name="reflex"/>
 			<xsd:attribute type="unitVec" name="refract"/>
@@ -190,7 +193,8 @@
 				<xsd:element ref="limits" minOccurs="0" maxOccurs="1"/>
 			</xsd:choice>
 			<xsd:attribute type="xsd:float" name="angle" use="required"/>
-			<xsd:attribute type="xsd:float" name="shine" use="required"/>
+			<xsd:attribute type="xsd:float" name="diff" use="required"/>
+			<xsd:attribute type="xsd:float" name="spec" use="required"/>
 			<xsd:attribute type="xsd:boolean" name="negative"/>
 			<xsd:attribute type="unitVec" name="reflex"/>
 			<xsd:attribute type="unitVec" name="refract"/>
