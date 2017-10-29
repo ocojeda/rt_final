@@ -68,19 +68,22 @@ float		dazzling_light(t_rt *e, t_light light, t_vec3 cam_dir)
 	return ((intensity < 0) ? 0 : pow(intensity, 500) * 2 * transp);
 }
 
-float		spec_intensity(t_obj obj, t_ray light, t_vec3 norm, float dot)
+float		spec_intensity(t_rt *e, t_ray light, t_vec3 poi, t_ray ray)
 {
 	float	intensity;
-	t_vec3	refl;
-
+	t_ray	refl;
+	t_obj 	obj;
+	
+	obj = e->scene.obj[e->scene.id];
 	if (obj.mat.spec == 0)
 		return (0);
-	refl = vec_sub3(light.dir, vec_scale3(norm, 2 * dot));
-	intensity = vec_dot3(vec_scale3(light.dir, -1), refl);
-	return ((intensity < 0) ? 0 : pow(intensity, SIZE_LP) * obj.mat.spec);
+	refl = get_reflected_ray(e, light, poi);
+	intensity = vec_dot3(refl.dir, vec_inv3(ray.dir));
+	intensity = pow(intensity, 8);
+	return (intensity);
 }
 
-float		intensity_obj(t_rt *e, t_vec3 poi, t_obj obj, t_light light)
+float		intensity_obj(t_rt *e, t_vec3 poi, t_ray ray, t_light light)
 {
 	float	intensity;
 	t_vec3	norm;
@@ -90,12 +93,12 @@ float		intensity_obj(t_rt *e, t_vec3 poi, t_obj obj, t_light light)
 	intensity = 0;
 	transp = 0;
 	light.ray.dir = vec_norme3(vec_sub3(light.ray.pos, poi));
-	norm = color_norm(obj, poi, vec_sub3(CCAM.pos, poi));
+	norm = color_norm(e->scene.obj[e->scene.id], poi, vec_sub3(CCAM.pos, poi));
 	if ((dot = vec_dot3(light.ray.dir, norm)) > 0
 		&& (transp = obj_isnt_in_shadow(e, poi, &light)))
 	{
-		intensity += diff_intensity(obj, dot);
-		intensity += spec_intensity(obj, light.ray, norm, dot);
+		intensity += spec_intensity(e, light.ray, poi, ray);
+		intensity += diff_intensity(e->scene.obj[e->scene.id], dot);
 	}
 	return (intensity * transp + AMBIENT_LIGHT);
 }
@@ -106,6 +109,6 @@ float		diff_intensity(t_obj obj, float dot)
 
 	if (obj.mat.diff == 0)
 		return (0);
-	intensity = dot * obj.mat.diff;
+	intensity = dot* 1.5 * obj.mat.diff ;
 	return ((intensity < 0) ? 0 : intensity);
 }

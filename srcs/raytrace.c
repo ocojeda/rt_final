@@ -40,7 +40,7 @@ float			get_length(t_vec3 v)
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
 
-t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi)
+t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi, t_ray ray)
 {
 	float		intensity;
 	int			i;
@@ -48,7 +48,7 @@ t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi)
 	i = -1;
 	intensity = (!e->scene.nbr_light) ? AMBIENT_LIGHT : 0;
 	while (++i < e->scene.nbr_light)
-		intensity += intensity_obj(e, poi, obj, e->CLIGHT) ;
+		intensity += intensity_obj(e, poi, ray, e->CLIGHT);
 	if (intensity != 0)
 		return (color_mult(obj.color, intensity, 1));
 	return ((t_color){0, 0, 0, 0});
@@ -91,17 +91,17 @@ t_color	get_pxl_color(t_rt *e, t_ray ray)
 	ref.total_distance = ref.min_dist;
 	if (e->scene.obj[e->scene.id].mat.reflex)
 	{
-		ref.color = get_color(e, e->scene.obj[e->scene.id], ref.poi);
+		ref.color = get_color(e, e->scene.obj[e->scene.id], ref.poi, ray);
 		e->scene.id = ref.tmp_id;
 		return (get_refracted_color(e, ref.poi, ref.color, ref));
 	}
 	if (e->scene.obj[e->scene.id].mat.refract)
 	{
-		ref.color = get_color(e, e->scene.obj[e->scene.id], ref.poi);
+		ref.color = get_color(e, e->scene.obj[e->scene.id], ref.poi, ray);
 		e->scene.id = ref.tmp_id;
 		return (get_refracted_color(e, ref.poi, ref.color, ref));
 	}
-	ref.color = get_color(e, e->scene.obj[e->scene.id], ref.poi);
+	ref.color = get_color(e, e->scene.obj[e->scene.id], ref.poi, ray);
 
 	return (ref.color);
 }

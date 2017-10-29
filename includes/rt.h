@@ -302,7 +302,7 @@ t_color			raytrace(int x, int y, t_rt *e);
 t_ray			ray_init(t_rt *e, int x, int y);
 
 t_ray			c_ray(t_vec3 i, t_vec3 j);
-t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi);
+t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi, t_ray ray);
 
 /*
 *mlx relative fonctions
@@ -345,7 +345,7 @@ t_vec3				paraboloid_norm(t_obj cone, t_vec3 poi);
 *	que le lumiere soit
 */
 
-float		intensity_obj(t_rt *e, t_vec3 poi, t_obj obj, t_light light);
+float		intensity_obj(t_rt *e, t_vec3 poi, t_ray ray, t_light light);
 float		diff_intensity(t_obj obj, float dot);
 
 /*

@@ -127,10 +127,10 @@ void			init_rt(t_rt *e)
 
 	e->scene.obj[0].type = SPHERE;
     e->scene.obj[0].r = 100;
-	e->scene.obj[0].color = c_color(250, 0, 0);
+	e->scene.obj[0].color = c_color(100, 0, 0);
     e->scene.obj[0].pos = vec_new3(0,0,0);
 	e->scene.obj[0].mat.diff = 1;
-	e->scene.obj[0].mat.spec = 0.5;
+	e->scene.obj[0].mat.spec = 1;
 	e->scene.obj[0].mat.reflex = 0;
 	e->scene.obj[0].mat.refract = 0;
 	e->scene.obj[0].neg = 0;
