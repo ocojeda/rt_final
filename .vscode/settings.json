@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "rt.h": "c"
-    }
+        "rt.h": "c",
+        "typeinfo": "cpp"
+    },
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false
 }
