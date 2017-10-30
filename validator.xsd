@@ -97,6 +97,9 @@
 			<xsd:attribute type="xsd:boolean" name="negative"/>
 			<xsd:attribute type="unitVec" name="reflex"/>
 			<xsd:attribute type="unitVec" name="refract"/>
+			<xsd:attribute type="unitVec" name="refract_rate"/>
+			<xsd:attribute type="unitVec" name="reflex_filter"/>
+			<xsd:attribute type="unitVec" name="refract_filter"/>
 		</xsd:complexType>
 	</xsd:element>
 
@@ -112,6 +115,9 @@
 			<xsd:attribute type="xsd:boolean" name="negative"/>
 			<xsd:attribute type="unitVec" name="reflex"/>
 			<xsd:attribute type="unitVec" name="refract"/>
+			<xsd:attribute type="unitVec" name="refract_rate"/>
+			<xsd:attribute type="unitVec" name="reflex_filter"/>
+			<xsd:attribute type="unitVec" name="refract_filter"/>
 		</xsd:complexType>
 	</xsd:element>
 
@@ -128,6 +134,9 @@
 			<xsd:attribute type="xsd:boolean" name="negative"/>
 			<xsd:attribute type="unitVec" name="reflex"/>
 			<xsd:attribute type="unitVec" name="refract"/>
+			<xsd:attribute type="unitVec" name="refract_rate"/>
+			<xsd:attribute type="unitVec" name="reflex_filter"/>
+			<xsd:attribute type="unitVec" name="refract_filter"/>
 		</xsd:complexType>
 	</xsd:element>
 
@@ -144,6 +153,9 @@
 			<xsd:attribute type="xsd:boolean" name="negative"/>
 			<xsd:attribute type="unitVec" name="reflex"/>
 			<xsd:attribute type="unitVec" name="refract"/>
+			<xsd:attribute type="unitVec" name="refract_rate"/>
+			<xsd:attribute type="unitVec" name="reflex_filter"/>
+			<xsd:attribute type="unitVec" name="refract_filter"/>
 		</xsd:complexType>
 	</xsd:element>
 

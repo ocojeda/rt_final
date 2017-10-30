@@ -92,7 +92,12 @@ t_obj				copy_objs(t_obj obj)
 	copy.vector = obj.vector;
 	copy.mat = obj.mat;
 	copy.mat.reflex = obj.mat.reflex;
+	copy.mat.reflex_filter = obj.mat.reflex_filter;
+
 	copy.mat.refract = obj.mat.refract;
+	copy.mat.refract_rate = obj.mat.refract_rate;
+	copy.mat.refract_filter = obj.mat.refract_filter;
+
 	copy.plimit_valid = obj.plimit_valid;
 	copy.neg = obj.neg;
 	return (copy);

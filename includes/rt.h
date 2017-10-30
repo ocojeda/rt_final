@@ -142,18 +142,18 @@ typedef struct		s_camera
 
 typedef struct		s_matiere
 {
-	//t_checker		checker;
 	float			diff;
 	float			spec;
 	float			refract;
+	float			refract_rate;
+	float			refract_filter;
 	float			reflex;
-	//t_texture		tex;
+	float			reflex_filter;
 	float			absorbtion;
 	char			*coeff;
 	char			opacite;
-	int				sin;
+	int				sinus;
 	int				perlin;
-	//t_texture		texture;
 }					t_matiere;
 
 typedef struct		s_obj
