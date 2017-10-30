@@ -1,6 +1,6 @@
 #include "../includes/rt.h"
 
-float			check_negative_objects(float dist_obj, t_rt *e, t_ray ray)
+float			check_negative_objects(float dist_obj, t_rt *e, t_ray ray, float max_dist)
 {
 	int i;
 
@@ -9,13 +9,13 @@ float			check_negative_objects(float dist_obj, t_rt *e, t_ray ray)
 	if (e->scene.obj[i].neg == 1)
 	{
 		if (e->scene.obj[i].type == CYLINDER)
-			return(intersect_cylinder_neg(ray, &e->scene.obj[i] , dist_obj));
+			return(intersect_cylinder_neg(ray, &e->scene.obj[i] , dist_obj, max_dist));
 		else if (e->scene.obj[i].type == SPHERE)
-			return (intersect_sphere_neg(ray, &e->scene.obj[i], dist_obj));
+			return (intersect_sphere_neg(ray, &e->scene.obj[i], dist_obj, max_dist));
 		else if (e->scene.obj[i].type == CONE)
-			return (intersect_cone_neg(ray, &e->scene.obj[i],dist_obj));
+			return (intersect_cone_neg(ray, &e->scene.obj[i],dist_obj, max_dist));
 		else if (e->scene.obj[i].type == PARABOLOID)
-			return (intersect_paraboloid_neg(ray, &e->scene.obj[i],dist_obj));
+			return (intersect_paraboloid_neg(ray, &e->scene.obj[i],dist_obj, max_dist));
 	}
 	return (dist_obj);
 }
@@ -23,15 +23,15 @@ float			check_negative_objects(float dist_obj, t_rt *e, t_ray ray)
 float			intersect_obj(t_ray ray, t_obj *obj, t_rt *e)
 {
 	if (obj->type == CYLINDER)
-		return (check_negative_objects(intersect_cylinder(ray, obj), e, ray));
+		return (check_negative_objects(intersect_cylinder(ray, obj), e, ray, obj->max_dist));
 	else if (obj->type == SPHERE)
-		return (check_negative_objects(intersect_sphere(ray, obj), e, ray));
+		return (check_negative_objects(intersect_sphere(ray, obj), e, ray, obj->max_dist));
 	else if (obj->type == PLANE)
-		return (check_negative_objects(intersect_plane(ray, obj), e, ray));
+		return (check_negative_objects(intersect_plane(ray, obj), e, ray, obj->max_dist));
 	else if (obj->type == CONE)
-		return (check_negative_objects(intersect_cone(ray, obj), e, ray));
+		return (check_negative_objects(intersect_cone(ray, obj), e, ray, obj->max_dist));
 	else if (obj->type == PARABOLOID)
-		return (check_negative_objects(intersect_paraboloid(ray, obj), e, ray));
+		return (check_negative_objects(intersect_paraboloid(ray, obj), e, ray, obj->max_dist));
 	return (DIST_MAX);
 }
 

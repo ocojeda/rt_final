@@ -32,7 +32,7 @@ float			intersect_paraboloid(t_ray ray, t_obj *parab)
     return (op.eq);
 }
 
-float			intersect_paraboloid_neg(t_ray ray, t_obj *parab, float dist_obj)
+float			intersect_paraboloid_neg(t_ray ray, t_obj *parab, float dist_obj, float max_dist)
 {
 	t_calc		op;
 	t_vec3		x;
@@ -45,6 +45,6 @@ float			intersect_paraboloid_neg(t_ray ray, t_obj *parab, float dist_obj)
 	op.a = vec_dot3(ray.dir, ray.dir) - p(dotdv);
 	op.b = 2 * (vec_dot3(ray.dir, x) - (dotdv * (vec_dot3(x, parab->vector) + 2 * parab->k)));
 	op.c = vec_dot3(x, x) - dotxv * ( vec_dot3(x, parab->vector) + 4 * parab->k);
-	op.eq = get_res_of_quadratic_neg(&op, parab, dist_obj);
+	op.eq = get_res_of_quadratic_neg(&op, parab, dist_obj, max_dist);
     return (op.eq);
 }

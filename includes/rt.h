@@ -400,11 +400,11 @@ void		matrix_init(t_rt *e);
 void		filter_black_and_white(t_rt *e);
 void		filters(t_rt *e);
 
-float			get_res_of_quadratic_neg(t_calc *op, t_obj *obj, float dist_obj);
-float			intersect_cone_neg(t_ray ray, t_obj *cone, float dist_obj);
-float			intersect_cylinder_neg(t_ray ray, t_obj *cyl, float dist_obj);
-float			intersect_sphere_neg(t_ray ray, t_obj *sphere, float dist_obj);
-float			intersect_paraboloid_neg(t_ray ray, t_obj *parab, float dist_obj);
+float			get_res_of_quadratic_neg(t_calc *op, t_obj *obj, float dist_obj, float max_dist);
+float			intersect_cone_neg(t_ray ray, t_obj *cone, float dist_obj, float max_dist);
+float			intersect_cylinder_neg(t_ray ray, t_obj *cyl, float dist_obj, float max_dist);
+float			intersect_sphere_neg(t_ray ray, t_obj *sphere, float dist_obj, float max_dist);
+float			intersect_paraboloid_neg(t_ray ray, t_obj *parab, float dist_obj, float max_dist);
 
 /*
 ** Parse

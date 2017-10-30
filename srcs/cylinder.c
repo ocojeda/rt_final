@@ -36,7 +36,7 @@ float		intersect_cylinder(t_ray ray, t_obj *cyl)
     return (op.eq);
 }
 
-float		intersect_cylinder_neg(t_ray ray, t_obj *cyl, float dist_obj)
+float		intersect_cylinder_neg(t_ray ray, t_obj *cyl, float dist_obj, float max_dist)
 {
 	t_calc	op;
 	float	dotdv;
@@ -49,6 +49,6 @@ float		intersect_cylinder_neg(t_ray ray, t_obj *cyl, float dist_obj)
 	op.a = vec_dot3(ray.dir, ray.dir) - p(dotdv);
 	op.b = 2 * (vec_dot3(ray.dir, x) - dotdv * dotxv);
 	op.c = vec_dot3(x, x) - p(dotxv) - p(cyl->r);
-	op.eq = get_res_of_quadratic_neg(&op, cyl, dist_obj);
+	op.eq = get_res_of_quadratic_neg(&op, cyl, dist_obj, max_dist);
     return (op.eq);
 }

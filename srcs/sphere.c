@@ -80,7 +80,7 @@ float			intersect_sphere(t_ray ray, t_obj *sphere)
 	return (op.eq);	
 }
 
-float			intersect_sphere_neg(t_ray ray, t_obj *sphere, float dist_obj)
+float			intersect_sphere_neg(t_ray ray, t_obj *sphere, float dist_obj, float max_dist)
 {
 	t_vec3		x;
 	t_calc		op;
@@ -90,6 +90,6 @@ float			intersect_sphere_neg(t_ray ray, t_obj *sphere, float dist_obj)
 	op.a = vec_dot3(ray.dir, ray.dir);
 	op.b = 2 * vec_dot3(ray.dir, x);
 	op.c = vec_dot3(x, x) - (sphere->r * sphere->r);
-	op.eq = get_res_of_quadratic_neg(&op, sphere, dist_obj);
+	op.eq = get_res_of_quadratic_neg(&op, sphere, dist_obj, max_dist);
 	return (op.eq);
 }
