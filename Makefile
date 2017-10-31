@@ -21,6 +21,7 @@ SRC			=	main.c \
 				filters.c \
 				refraction.c \
 				paraboloid.c \
+				bruit.c \
 				parsing/parse.c \
 				parsing/checks.c \
 				parsing/parser_utils.c \

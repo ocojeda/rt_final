@@ -129,7 +129,6 @@ typedef struct		s_camera
 {
 	int				fov;
 	t_vec3			pos;
-//	t_vec3			focus_point;
 	t_vec3			rot;
 	t_mtrx4			ctw;
 	float			reso;
@@ -253,6 +252,8 @@ typedef struct		s_reflect
 	int				tmp_id;
 	float			dist_rate;
 	int				a;
+	int				x;
+	int				y;
 }					t_reflect;
 
 typedef struct		s_calc

@@ -76,7 +76,7 @@ float			get_min_dist(t_rt *e, t_ray ray)
 	return ((min_dist < DIST_MAX) ? min_dist : -1);
 }
 
-t_color	get_pxl_color(t_rt *e, t_ray ray)
+t_color	get_pxl_color(t_rt *e, t_ray ray, int x, int y)
 {
 	t_reflect	ref;
 	float		tmp;
@@ -84,6 +84,8 @@ t_color	get_pxl_color(t_rt *e, t_ray ray)
 	e->scene.id = -1;
 	if ((ref.min_dist = get_min_dist(e, ray)) == -1)
 		return (c_color(0,0,0)); // a ajouter ici la skybox
+	ref.x = x;
+	ref.y = y;
 	ref.type = e->scene.obj[e->scene.id].type;
 	ref.tmp_id = e->scene.id;
 	ref.poi = vec_add3(ray.pos, vec_scale3(ray.dir, ref.min_dist));
@@ -115,6 +117,6 @@ t_color			raytrace(int x, int y, t_rt *e)
 	t_ray		ray;
 
 	ray = ray_init(e, x * RES / ALIASING, y * RES / ALIASING);
-	color = get_pxl_color(e, ray);
+	color = get_pxl_color(e, ray, x, y);
 	return (color);
 }
