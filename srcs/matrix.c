@@ -9,8 +9,5 @@ void		matrix_init(t_rt *e)
 	CCAM.ctw = prod_matrx4(CCAM.ctw, rotz_matrx4(CCAM.rot.z));
 	CCAM.ctw = prod_matrx4(CCAM.ctw, roty_matrx4(CCAM.rot.y));
 	CCAM.ctw = prod_matrx4(CCAM.ctw, rotx_matrx4(CCAM.rot.x));
-    if (CCAM.is_circular == 1)
-        CCAM.ctw = prod_matrx4(transl, CCAM.ctw);
-    else
-        CCAM.ctw = prod_matrx4(CCAM.ctw, transl);
+    CCAM.ctw = prod_matrx4(transl, CCAM.ctw);
 }

@@ -94,10 +94,13 @@ float			get_min_dist(t_rt *e, t_ray ray)
 				else if (e->scene.obj[i].limit[u].type == PLANE)
 					e->scene.obj[i].limit[u].pos = vec_sub3(e->scene.obj[i].limit[u].pos, e->scene.obj[i].limit[u].vector);
 				dist4 = intersect_obj_limit(ray, &e->scene.obj[i].limit[u], e);
-				if (dist3 < dist2 && dist4 <= e->scene.obj[i].max_dist && dist4 < DIST_MAX && dist <= dist4)
-					dist = dist4;
-				else if (dist3 < dist2)
-					dist = DIST_MAX;
+				if (dist3 <= dist2)
+				{
+					if ((dist4 < e->scene.obj[i].max_dist && dist4 < DIST_MAX && dist < dist4) || dist3 == DIST_MAX || dist2 == DIST_MAX)
+						dist = dist4;
+					else
+						dist = DIST_MAX;
+				}
 				u++;
 			}
 		}

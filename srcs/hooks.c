@@ -43,17 +43,6 @@ int				keypress(int keycode, void *param)
 			RES = 1;
 		frame(e);
 	}
-	if (keycode == KEY_X)
-	{
-		t_mtrx4		transl;
-		transl = transl_matrx4(CCAM.pos.x, CCAM.pos.y, CCAM.pos.z);
-		CCAM.is_circular = (CCAM.is_circular == 1) ? 0 : 1;
-		if (CCAM.is_circular == 1)
-        	CCAM.ctw = transl ;//prod_matrx4(transl, CCAM.ctw);
-    	else
-			CCAM.ctw = prod_matrx4(CCAM.ctw, transl);
-		frame(e);
-	}
 	if (keycode == KEY_HOME)
 		e->scene.selected_obj = -1;
 	if (keycode == KEY_UP)
@@ -172,7 +161,7 @@ int				keypress(int keycode, void *param)
 		}
 		else
 		{
-			CCAM.pos.y += (dir.dir.y < 0) ? dir.dir.y * -(20 / dir.dir.y) : dir.dir.y * (20 / dir.dir.y);
+			CCAM.pos.y += 20;
 		  frame(e);
 		}
 	}
@@ -185,28 +174,28 @@ int				keypress(int keycode, void *param)
 		}
 		else
 		{
-			CCAM.pos.y += (dir.dir.y < 0) ? dir.dir.y * (20 / dir.dir.y) : dir.dir.y * -(20 / dir.dir.y);
+			CCAM.pos.y +=  -20;
 			frame(e);
 		}
 	}
 	if (keycode == KEY_W)
 	{
-		CCAM.pos.z += (dir.dir.z < 0) ? dir.dir.z * -(20 / dir.dir.z) : dir.dir.z * (20 / dir.dir.z);
+		CCAM.pos.z += 20;
 		frame(e);
 	}
 	if (keycode == KEY_S)
 	{
-		CCAM.pos.z += (dir.dir.z < 0) ? dir.dir.z * (20 / dir.dir.z) : dir.dir.z * -(20 / dir.dir.z);
+		CCAM.pos.z -= 20;
 		frame(e);
 	}
 	if (keycode == KEY_A)
 	{
-		CCAM.pos.x -= dir.dir.x * (15 / dir.dir.x);
+		CCAM.pos.x -= 15;
 		frame(e);
 	}
 	if (keycode == KEY_D)
 	{
-		CCAM.pos.x += dir.dir.x * (15 / dir.dir.x);
+		CCAM.pos.x += 15;
 		frame(e);
 	}
 	return (keycode);
