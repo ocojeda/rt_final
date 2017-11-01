@@ -310,7 +310,7 @@ t_color			raytrace(int x, int y, t_rt *e);
 t_ray			ray_init(t_rt *e, int x, int y);
 
 t_ray			c_ray(t_vec3 i, t_vec3 j);
-t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi, t_ray ray);
+t_color			get_color(t_rt *e, t_obj obj, t_reflect ref, t_ray ray);
 
 /*
 *mlx relative fonctions
@@ -371,9 +371,9 @@ t_color			get_refracted_color(t_rt *e, t_vec3 poi, t_color base_color,
 t_ray			get_reflected_ray(t_rt *e, t_ray rayon, t_vec3 poi);
 
 
-void		matrix_init(t_rt *e);
-void		filter_black_and_white(t_rt *e);
-void		filters(t_rt *e);
+void			matrix_init(t_rt *e);
+void			filter_black_and_white(t_rt *e);
+void			filters(t_rt *e);
 
 float			get_res_of_quadratic_neg(t_calc *op, t_obj *obj, float dist_obj);
 float			intersect_cone_neg(t_ray ray, t_obj *cone, float dist_obj);
@@ -381,6 +381,12 @@ float			intersect_cylinder_neg(t_ray ray, t_obj *cyl, float dist_obj);
 float			intersect_sphere_neg(t_ray ray, t_obj *sphere, float dist_obj);
 float			intersect_paraboloid_neg(t_ray ray, t_obj *parab, float dist_obj);
 
+/*
+*	BRUIT
+*/
+t_color				bruit(float valeur, t_color c1, t_color c2, float seuil);
+t_color				bruit2(float valeur, t_color c1, t_color c2, float x);
+t_color				bruit3(float valeur, int x, int y, t_rt *e);
 /*
 ** Parse
 */

@@ -40,17 +40,39 @@ float			get_length(t_vec3 v)
 	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
 }
 
-t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi, t_ray ray)
+float rand_noise(int t)
+{
+    t = (t<<13) ^ t;
+    t = (t * (t * t * 15731 + 789221) + 1376312589);
+    return 1.0 - (t & 0x7fffffff) / 1073741824.0;
+}
+
+t_color			get_color(t_rt *e, t_obj obj, t_reflect ref, t_ray ray)
 {
 	float		intensity;
 	int			i;
+	t_color		color1;
+	t_ray		ray_tmp;
 
 	i = -1;
 	intensity = (!e->scene.nbr_light) ? AMBIENT_LIGHT : 0;
 	while (++i < e->scene.nbr_light)
-		intensity += intensity_obj(e, poi, ray, e->CLIGHT);
+		intensity += intensity_obj(e, ref.poi, ray, e->CLIGHT);
+	
 	if (intensity != 0)
-		return (color_mult(obj.color, intensity, 1));
+	{
+		float	dot = vec_dot3(ray.dir, ref.poi);
+		
+		ray_tmp = get_reflected_ray(e, ray, ref.poi);
+		dot = vec_dot3(ray.dir, ref.poi);
+	
+		color1 = color_mult(obj.color, intensity, 1);
+		if(e->scene.obj[e->scene.id].mat.sinus)
+			return (bruit(dot, color1, e->scene.obj[e->scene.id].color, rand_noise(ref.x))); 
+			//return(bruit2(rand_noise(ref.x), ref.color, e->scene.obj[e->scene.id].color, dot));
+			//return(bruit3(dot*0.9, ref.x, ref.y, e));
+		return	color1;
+	}
 	return ((t_color){0, 0, 0, 0});
 }
 
@@ -95,19 +117,19 @@ t_color	get_pxl_color(t_rt *e, t_ray ray, int x, int y)
 	if (e->scene.obj[e->scene.id].mat.reflex == 1)
 	{
 		tmp = e->scene.obj[e->scene.id].mat.reflex_filter;
-		ref.color = get_color(e, e->scene.obj[e->scene.id], ref.poi, ray);
+		ref.color = get_color(e, e->scene.obj[e->scene.id], ref, ray);
 		e->scene.id = ref.tmp_id;
 		return (ft_map_color(get_refracted_color(e, ref.poi, ref.color, ref), ref.color, tmp));
 	}
 	else if (e->scene.obj[e->scene.id].mat.refract == 1)
 	{
 		tmp = e->scene.obj[e->scene.id].mat.refract_filter;
-		ref.color = get_color(e, e->scene.obj[e->scene.id], ref.poi, ray);
+		ref.color = get_color(e, e->scene.obj[e->scene.id], ref, ray);
 		e->scene.id = ref.tmp_id;
 		return (ft_map_color(get_refracted_color(e, ref.poi, ref.color, ref), ref.color, tmp));
 	}
 	else
-		ref.color = get_color(e, e->scene.obj[e->scene.id], ref.poi, ray);
+		ref.color = get_color(e, e->scene.obj[e->scene.id], ref, ray);
 	return (ref.color);
 }
 

@@ -35,8 +35,8 @@ void			prepare_refraction(t_rt *e, t_color *base_color,
 {
 	n->newpoi = vec_add3(ref->new_ray.pos, vec_scale3(ref->new_ray.dir,
 	ref->min_dist));
-	//ref->poi = n->newpoi;
-	n->final_color = get_color(e, e->scene.obj[n->a], n->newpoi, ref->new_ray);
+	ref->poi = n->newpoi;
+	n->final_color = get_color(e, e->scene.obj[n->a], *ref, ref->new_ray);
 	*base_color = ft_map_color(*base_color, n->final_color, n->taux_temp);
 	e->scene.id = n->a;
 }
@@ -63,9 +63,8 @@ t_color			get_refracted_color(t_rt *e, t_vec3 poi, t_color base_color,
             {
                 n.temp_color1 = get_refracted_color(e, n.newpoi, base_color, ref);
                 return (ft_map_color(base_color, n.temp_color1, 1 - n.distance_rate));
-            }
+			}
 			return (ft_map_color(base_color, n.final_color, n.distance_rate));
 		}
-		//return (base_color);
 		return (ft_map_color(base_color, c_color(0,0,0), n.taux_temp));
 }
