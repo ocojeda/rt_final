@@ -47,6 +47,34 @@ float rand_noise(int t)
     return 1.0 - (t & 0x7fffffff) / 1073741824.0;
 }
 
+int			damier(t_vec3 *pos, t_rt *e)
+{
+  int x;
+  int y;
+  int z;
+
+
+  x = (int)((pos->x+ 1000) / LARGEUR);
+  y = (int)((pos->y+ 1000) / LARGEUR);
+  z = (int)((pos->z + 1000) / LARGEUR);
+  if (x % 2 == 0)
+    {
+      if (((y % 2 == 0) && (z % 2 == 0)) ||
+	  (((y % 2 != 0) && (z % 2 != 0))))
+	return (0);
+      else
+	return (1);
+    }
+  else
+    {
+      if ((((y % 2 == 0) && (z % 2 == 0))) ||
+	  (((y % 2 != 0) && (z % 2 != 0))))
+	return (1);
+      else
+	return (0);
+	  }
+}
+
 t_color			get_color(t_rt *e, t_obj obj, t_reflect ref, t_ray ray)
 {
 	float		intensity;
@@ -68,7 +96,10 @@ t_color			get_color(t_rt *e, t_obj obj, t_reflect ref, t_ray ray)
 	
 		color1 = color_mult(obj.color, intensity, 1);
 		if(e->scene.obj[e->scene.id].mat.sinus)
-			return (bruit(dot, color1, e->scene.obj[e->scene.id].color, rand_noise(ref.x))); 
+			if(damier(&ref.poi, e))
+				return c_color(0,0,0);	
+		//return (bruit(dot, color1, e->scene.obj[e->scene.id].color, rand_noise(ref.x))); 
+			//return (bruit(dot, color1, e->scene.obj[e->scene.id].color, get_perlin(ref.x, ref.y, 1))); 
 			//return(bruit2(rand_noise(ref.x), ref.color, e->scene.obj[e->scene.id].color, dot));
 			//return(bruit3(dot*0.9, ref.x, ref.y, e));
 		return	color1;

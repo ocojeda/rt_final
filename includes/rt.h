@@ -403,4 +403,5 @@ void				parse_camera(t_rt *e, xmlNodePtr node);
 void				parse_lights(t_rt *e, t_list *lst);
 void				set_attrs(t_obj *obj, xmlNodePtr node);
 
+double				get_perlin(double x, double y, double z);
 #endif
