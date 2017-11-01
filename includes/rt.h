@@ -10,6 +10,15 @@
 # include <fcntl.h>
 # include <unistd.h>
 
+# include <libxml/parser.h>
+# include <libxml/tree.h>
+# include <libxml/xmlIO.h>
+# include <libxml/xinclude.h>
+# include <libxml/valid.h>
+# include <libxml/xmlschemas.h>
+# include <libxml/xmlstring.h>
+# include <libxml/xmlreader.h>
+
 # include <gtk/gtk.h>
 
 # define END 0
@@ -17,6 +26,7 @@
 # define PLANE 2
 # define SPHERE 3
 # define CYLINDER 4
+# define PARABOLOID 5
 
 # define KEY_A 0
 # define KEY_S 1
@@ -69,7 +79,6 @@
 # define KEY_ESC 53
 # define KEY_HOME 115
 # define KEY_DEL 117
-# define KEY_END 119
 # define CCAM e->scene.cam
 # define CLIGHT scene.lights[i]
 # define AMBIENT_LIGHT e->scene.ambient
@@ -83,18 +92,23 @@
 # define LARGEUR e->file.larg
 # define RES e->file.reso
 # define RES_BUFF e->file.reso_buff
-# define SFILE e->file.path
 # define RES_H (HAUTEUR / RES)
 # define RES_W (LARGEUR / RES)
+# define SFILE e->file.path
 # define FILT e->scene.filters
 
 # define MAXOBJ 50
-# define NR_ITER 6
+# define NR_ITER 10
 # define MAXLIGHT 21
 # define NB_THREADS 8
 # define DIST_MAX 20000
 # define DIST_MIN -80000
 # define EPSILON 1e-7
+# define SIZE_LP 50
+
+# define VALIDATOR_XSD "validator.xsd"
+# define VALIDATOR_DTD "validator.dtd"
+# define STD_ERR 2
 
 typedef struct		s_ray
 {
@@ -166,7 +180,7 @@ typedef struct		s_obj
 	int				nbr_t;
 	t_vec3			normal;
 	t_matiere		mat;
-	char			neg;
+	int				neg;
 	int				plimit_active;
 	int				plimit_type;
 	int				plimit_valid;
@@ -223,13 +237,13 @@ typedef struct		s_mlx
 	int				endian;
 }					t_mlx;
 
-
 typedef struct		s_reflect
 {
 	t_ray			ray;
 	t_ray			new_ray;
 	t_vec3			poi;
 	t_color			color;
+	int				type;
 	float			total_distance;
 	int				counter;
 	float			min_dist;
@@ -251,6 +265,24 @@ typedef struct		s_calc
 	t_vec3			len;
 	float			sqrtdisc;
 }					t_calc;
+
+typedef struct		s_norme
+{
+	int				x;
+	int				y;
+	int				a;
+	float			min_dist;
+	t_ray			ray;
+	float			taux_temp;
+	t_color			temp_color1;
+	float			distance_rate;
+	int				counter;
+	t_color			base_color;
+	t_color			final_color;
+	t_vec3			newpoi;
+	t_vec3			point_of_impact;
+	t_color			color;
+}					t_norme;
 
 typedef struct		s_gtk_input
 {
@@ -293,11 +325,8 @@ typedef struct		s_rt
 	t_mthread		thread;
 	int				frame;
 }					t_rt;
-/*
-* parsing fonctions
-*/
+
 void			ft_start_rt(t_rt *e);
-void			init_rt(t_rt *e);
 
 /*
 * multhread fonctions
@@ -319,7 +348,7 @@ t_color			raytrace(int x, int y, t_rt *e);
 t_ray			ray_init(t_rt *e, int x, int y);
 
 t_ray			c_ray(t_vec3 i, t_vec3 j);
-t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi);
+t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi, t_ray ray);
 
 /*
 *mlx relative fonctions
@@ -328,10 +357,10 @@ void			pixel_to_image(int x, int y, t_rt *e, int color);
 int				keypress(int keycode, void *param);
 int				mousse_hook(int button, int x, int y, void *param);
 int				mouse_hook_escape(t_rt *e);
-
 /*
 * intersect fonctions
 */
+
 float			intersect_obj(t_ray ray, t_obj *obj, t_rt *e);
 float			intersect_sphere(t_ray ray, t_obj *sphere);
 float			intersect_plane(t_ray ray, t_obj *plane);
@@ -340,6 +369,7 @@ float			intersect_cone(t_ray ray, t_obj *cone);
 t_vec3			plane_norm(t_obj plane);
 float			get_res_of_quadratic(t_calc *op, t_obj *obj);
 float			get_min_dist(t_rt *e, t_ray ray);
+float			intersect_paraboloid(t_ray ray, t_obj *parab);
 
 /*
 * math aux fonctions
@@ -350,27 +380,35 @@ float			get_length(t_vec3 v);
 /*
 * fonction pour les normales
 */
-t_vec3				color_norm(t_obj obj, t_vec3 poi, t_vec3 light);
-t_vec3				object_norm(t_obj obj, t_vec3 poi);
+t_vec3				color_norm(t_obj obj, t_vec3 poi, t_vec3 cam);
+t_vec3				object_norm(t_obj obj, t_vec3 poi, t_vec3 cam);
 t_vec3				cone_norm(t_obj obj, t_vec3 poi);
 t_vec3				plane_norm(t_obj obj);
 t_vec3				sphere_norm(t_obj obj, t_vec3 poi);
 t_vec3				cylinder_norm(t_obj obj, t_vec3 poi);
+t_vec3				paraboloid_norm(t_obj cone, t_vec3 poi);
 
 /*
 *	que le lumiere soit
 */
 
-float		intensity_obj(t_rt *e, t_vec3 poi, t_obj obj, t_light light);
+float		intensity_obj(t_rt *e, t_vec3 poi, t_ray ray, t_light light);
 float		diff_intensity(t_obj obj, float dot);
 
 /*
 *	reflexion fonctions
 */
-t_color		get_reflected_color(t_rt *e, t_vec3 poi,
-t_color base_color, t_reflect ref);
-t_color		ret_reflected_pixel(t_rt *e, t_reflect ref, t_ray ray,
-		float min_dist);
+t_color			get_reflected_color(t_rt *e, t_vec3 poi, t_color base_color,
+	t_reflect ref);
+
+/*
+*	REFRACTION
+*/
+float			find_min_dist_for_refref(t_rt *e, int *a, t_ray ray);
+t_color			get_refracted_color(t_rt *e, t_vec3 poi, t_color base_color,
+	t_reflect ref);
+t_ray			get_reflected_ray(t_rt *e, t_ray rayon, t_vec3 poi);
+
 
 void		matrix_init(t_rt *e);
 void		filter_black_and_white(t_rt *e);
@@ -378,8 +416,26 @@ void		filters(t_rt *e);
 
 float			get_res_of_quadratic_neg(t_calc *op, t_obj *obj, float dist_obj);
 float			intersect_cone_neg(t_ray ray, t_obj *cone, float dist_obj);
-float		intersect_cylinder_neg(t_ray ray, t_obj *cyl, float dist_obj);
+float			intersect_cylinder_neg(t_ray ray, t_obj *cyl, float dist_obj);
 float			intersect_sphere_neg(t_ray ray, t_obj *sphere, float dist_obj);
+float			intersect_paraboloid_neg(t_ray ray, t_obj *parab, float dist_obj);
+
+/*
+** Parse
+*/
+
+void				parse(t_rt *e, int argc, char **argv);
+void				parse2(t_rt *e, xmlDocPtr doc);
+void				check_doc(xmlDocPtr	doc);
+void				get_nodes_by_name(xmlNodePtr cur,
+						char *node_name, t_list **lst);
+void				parse_objects(t_rt *e, t_list *lst);
+t_vec3				get_vec_from_node(xmlNodePtr node);
+t_color				parse_color(xmlNodePtr node);
+xmlNodePtr			has_child(xmlNodePtr a_node, char *attr);
+void				parse_camera(t_rt *e, xmlNodePtr node);
+void				parse_lights(t_rt *e, t_list *lst);
+void				set_attrs(t_obj *obj, xmlNodePtr node);
 
 /*
 *	GTK fonctions

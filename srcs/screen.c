@@ -8,7 +8,7 @@ void			screenshot_ppm(t_rt *e)
 	char		*nbr;
 	char		*name;
 
-	ft_putendl("Exporting image in ppm...");
+	ft_putendl("Exporting image...");
 	nbr = ft_itoa(nb++);
 	name = ft_strjoin( nbr ,"screenshot.ppm");
 	if (!(export.fd_exp = open(name, O_WRONLY | O_CREAT, 00755)))

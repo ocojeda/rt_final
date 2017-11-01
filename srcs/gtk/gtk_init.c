@@ -2,6 +2,7 @@
 
 void		ft_init_values(t_rt *e)
 {
+	printf("%s\n", "Init Values");
 	e->gtk.values.width = LARGEUR;
 	e->gtk.values.height = HAUTEUR;
 	e->gtk.values.res = RES;
@@ -38,6 +39,7 @@ void		ft_gtk_start_settings(t_rt *e)
 
 void		ft_gtk_start_launcher(t_rt *e)
 {
+	printf("%s\n", "Start launcher");
 	gtk_init(NULL, NULL);
 	e->gtk.menu.window = new_window(300, 200, "RT");
 	e->gtk.menu.layout = gtk_layout_new(NULL, NULL);

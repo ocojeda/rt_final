@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstfree.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agfernan <agfernan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/30 17:12:35 by agfernan          #+#    #+#             */
-/*   Updated: 2017/10/01 16:12:54 by agfernan         ###   ########.fr       */
+/*   Updated: 2017/10/28 17:58:58 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void			ft_lstfree(t_list **lst)
 	{
 		ft_lstfree(&((*lst)->next));
 		free(*lst);
+		free((*lst)->content);
 		*lst = NULL;
 	}
 }

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:simpleType name="int255">
+		<xsd:restriction base="xsd:int">
+			<xsd:minInclusive value="0" />
+			<xsd:maxInclusive value="255" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="unitVec">
+		<xsd:restriction base="xsd:float">
+			<xsd:minInclusive value="-1" />
+			<xsd:maxInclusive value="1" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="int4000">
+		<xsd:restriction base="xsd:int">
+			<xsd:minInclusive value="300" />
+			<xsd:maxInclusive value="4000" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:element name="color">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string">
+					<xsd:attribute type="int255" name="r" use="required"/>
+					<xsd:attribute type="int255" name="g" use="required"/>
+					<xsd:attribute type="int255" name="b" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="pos">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string">
+					<xsd:attribute type="xsd:float" name="x"  use="required"/>
+					<xsd:attribute type="xsd:float" name="y"  use="required"/>
+					<xsd:attribute type="xsd:float" name="z"  use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="normal">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string">
+					<xsd:attribute name="x" type="unitVec" use="required"/>
+					<xsd:attribute name="y" type="unitVec" use="required"/>
+					<xsd:attribute name="z" type="unitVec" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="camera">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element ref="pos" minOccurs="0" maxOccurs="1"/>
+			</xsd:choice>
+			<xsd:attribute type="xsd:int" name="fov" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="light">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element ref="pos" maxOccurs="1"/>
+				<xsd:element ref="color" maxOccurs="1"/>
+			</xsd:choice>
+			<xsd:attribute type="xsd:float" name="intensity"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="lights">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element ref="light" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="plane">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element ref="pos" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="normal" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="color" minOccurs="1" maxOccurs="1"/>
+			</xsd:choice>
+			<xsd:attribute type="xsd:float" name="diff" use="required"/>
+			<xsd:attribute type="xsd:float" name="spec" use="required"/>
+			<xsd:attribute type="xsd:boolean" name="negative"/>
+			<xsd:attribute type="unitVec" name="reflex"/>
+			<xsd:attribute type="unitVec" name="refract"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="sphere">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element ref="pos" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="color" minOccurs="1" maxOccurs="1"/>
+			</xsd:choice>
+			<xsd:attribute type="xsd:float" name="radius" use="required"/>
+			<xsd:attribute type="xsd:float" name="diff" use="required"/>
+			<xsd:attribute type="xsd:float" name="spec" use="required"/>
+			<xsd:attribute type="xsd:boolean" name="negative"/>
+			<xsd:attribute type="unitVec" name="reflex"/>
+			<xsd:attribute type="unitVec" name="refract"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="cylinder">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element ref="pos" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="color" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="normal" minOccurs="1" maxOccurs="1"/>
+			</xsd:choice>
+			<xsd:attribute type="xsd:float" name="radius" use="required"/>
+			<xsd:attribute type="xsd:float" name="diff" use="required"/>
+			<xsd:attribute type="xsd:float" name="spec" use="required"/>
+			<xsd:attribute type="xsd:boolean" name="negative"/>
+			<xsd:attribute type="unitVec" name="reflex"/>
+			<xsd:attribute type="unitVec" name="refract"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="cone">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element ref="pos" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="color" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="normal" minOccurs="1" maxOccurs="1"/>
+			</xsd:choice>
+			<xsd:attribute type="xsd:float" name="angle" use="required"/>
+			<xsd:attribute type="xsd:float" name="diff" use="required"/>
+			<xsd:attribute type="xsd:float" name="spec" use="required"/>
+			<xsd:attribute type="xsd:boolean" name="negative"/>
+			<xsd:attribute type="unitVec" name="reflex"/>
+			<xsd:attribute type="unitVec" name="refract"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="objects">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded" minOccurs="1">
+				<xsd:element ref="sphere" minOccurs="0"/>
+				<xsd:element ref="plane" minOccurs="0"/>
+				<xsd:element ref="cylinder" minOccurs="0"/>
+				<xsd:element ref="cone" minOccurs="0"/>
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="scene">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded" minOccurs="1">
+				<xsd:element ref="camera" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="lights" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="objects" minOccurs="1" maxOccurs="1"/>
+			</xsd:choice>
+			<xsd:attribute type="unitVec" name="ambient" use="required" />
+			<xsd:attribute type="int4000" name="width" use="required" />
+			<xsd:attribute type="int4000" name="height" use="required" />
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,101 @@
+<!--SCENE DESCRIPTION-->
+
+<!ELEMENT scene (camera | lights | objects | skybox)*>
+<!ATTLIST scene
+        ambient CDATA #IMPLIED>
+<!ELEMENT skybox EMPTY>
+<!ATTLIST skybox
+        src CDATA #REQUIRED>
+
+<!--VECTORS-->
+
+<!ELEMENT dir EMPTY>
+<!ATTLIST dir
+        x CDATA #REQUIRED
+        y CDATA #REQUIRED
+        z CDATA #REQUIRED>
+<!ELEMENT vector EMPTY>
+<!ATTLIST vector
+        x CDATA #REQUIRED
+        y CDATA #REQUIRED
+        z CDATA #REQUIRED>
+<!ELEMENT normal EMPTY>
+<!ATTLIST normal
+        x CDATA #REQUIRED
+        y CDATA #REQUIRED
+        z CDATA #REQUIRED>
+<!ATTLIST normale
+        x CDATA #REQUIRED
+        y CDATA #REQUIRED
+        z CDATA #REQUIRED>
+<!ELEMENT pos EMPTY>
+<!ATTLIST pos
+        x CDATA #REQUIRED
+        y CDATA #REQUIRED
+        z CDATA #REQUIRED>
+
+<!--CAMERA-->
+
+<!ELEMENT camera (pos?, dir?)>
+<!ATTLIST camera fov CDATA #IMPLIED>
+
+<!--LIGHTS-->
+
+<!ELEMENT lights (light+)>
+<!ELEMENT light (color | pos)+>
+<!ATTLIST light intensity CDATA #IMPLIED>
+
+<!--OBJECTS-->
+
+<!--NEGATIF-->
+<!ELEMENT negatif (dir, pos?)>
+<!ATTLIST negatif type CDATA #IMPLIED>
+
+<!--COLOR/TEXTURES-->
+<!ELEMENT color EMPTY>
+<!ATTLIST color
+        r CDATA #REQUIRED
+        g CDATA #REQUIRED
+        b CDATA #REQUIRED>
+
+<!ELEMENT checker (color, color)>
+<!ATTLIST checker
+        length CDATA #REQUIRED>
+<!ELEMENT texture EMPTY>
+<!ATTLIST texture
+        src CDATA #REQUIRED
+        zoom CDATA #IMPLIED>
+<!ELEMENT objects (plane | cone | cylindre | sphere | mickey | dick)+>
+<!ELEMENT plane ((pos|vector|normal|(color | texture | checker)+| negatif?)+)>
+<!ATTLIST plane
+        reflection CDATA #IMPLIED
+        refraction CDATA #IMPLIED
+        sin CDATA #IMPLIED
+        texture CDATA #IMPLIED>
+<!ELEMENT cone ((pos | vector | (color | texture | checker) | negatif?)+)>
+<!ATTLIST cone
+        angle CDATA #REQUIRED
+        reflection CDATA #IMPLIED
+        refraction CDATA #IMPLIED
+        texture CDATA #IMPLIED
+        sin CDATA #IMPLIED>
+<!ELEMENT cylindre ((pos | vector | (color | texture | checker) | negatif?)+)>
+<!ATTLIST cylindre
+        radius CDATA #REQUIRED
+        reflection CDATA #IMPLIED
+        refraction CDATA #IMPLIED
+        texture CDATA #IMPLIED
+        sin CDATA #IMPLIED>
+<!ELEMENT sphere ((pos | (color | texture | checker)+ |  negatif?)+)>
+<!ATTLIST sphere
+        radius CDATA #REQUIRED
+        reflection CDATA #IMPLIED
+        refraction CDATA #IMPLIED
+        texture CDATA #IMPLIED>
+
+<!ELEMENT dick (pos | color )+>
+<!ATTLIST dick
+        radius CDATA #REQUIRED>
+<!ELEMENT mickey (pos | color )+>
+<!ATTLIST mickey
+        radius CDATA #REQUIRED>

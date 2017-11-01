@@ -19,6 +19,8 @@ SRC			=	main.c \
 				matrix.c \
 				hooks_mousse.c \
 				filters.c \
+				refraction.c \
+				paraboloid.c \
 				screen.c \
 				gtk/gtk_add.c \
 				gtk/gtk_add2.c \
@@ -27,16 +29,29 @@ SRC			=	main.c \
 				gtk/gtk_settings.c \
 				gtk/gtk_new.c \
 				gtk/gtk_hook.c \
+				parsing/parse.c \
+				parsing/checks.c \
+				parsing/parser_utils.c \
+				parsing/parse_objects.c \
+				parsing/parse_camera.c \
+				parsing/parse_attributes.c \
+				parsing/parse_lights.c \
 
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a
 LIBVEC		=	libs/libvec/libvec.a
+LIBXML		=	`xml2-config --libs`
+LIBXML_H	=	`xml2-config --cflags`
 LIB_GTK		=	`pkg-config --libs gtk+-3.0`
 LIB_GTK_H	=	`pkg-config --cflags gtk+-3.0`
-OBJ			=	$(addprefix $(OBJDIR),$(SRC:.c=.o))
+VPATH		=	$(SRCDIR):$(SRCDIR)gtk $(SRCDIR):$(SRCDIR)parsing
+
+OBJ			=	$(SRC:.c=.o)
+OBJ			:=	$(notdir $(OBJ))
+OBJ			:=	$(addprefix $(OBJDIR), $(OBJ))
 CC			=	gcc
 INC 		=	includes
-CFLAGS		=	-Wall -Werror -Wextra -g -I includes/ -I libs/libft/includes/ -I libs/libvec/includes/ $(LIB_GTK_H)
+CFLAGS		=	-Wall -Wextra -g -I includes/ -I libs/libft/includes/ -I libs/libvec/includes/ $(LIB_GTK_H) $(LIBXML_H) # add werror
 MLXF		=	-framework OpenGL -framework AppKit -lxml2
 WHITE		=	\033[7;49;39m
 BLUE		=	\033[7;49;34m
@@ -52,10 +67,10 @@ all: mlx lib vec $(NAME)
 $(NAME): $(MINILIBX) $(LIBFT) $(OBJDIR) $(OBJ)
 	@printf "\r$(GREEN)[$(PROJECT)] Obj compilation done.                                                        \n"
 	@printf "$(YELLOW)[$(PROJECT)] Compiling $(NAME)..."
-	@$(CC) $(CFLAGS) $(MLXF) -o $(NAME) $(OBJ) $(MINILIBX) $(LIBFT) $(LIBVEC) $(LIB_GTK)
+	@$(CC) $(CFLAGS) $(MLXF) -o $(NAME) $(OBJ) $(MINILIBX) $(LIBFT) $(LIBVEC) $(LIB_GTK) $(LIBXML)
 	@printf "\r$(GREEN)[$(PROJECT)] Compilation done.                          \n$(NO_COLOR)"
 
-$(OBJDIR)%.o: $(SRCDIR)%.c
+$(OBJDIR)%.o: %.c
 	@printf "$(YELLOW)\r[$(PROJECT)] Compiling $< to $@                                                          \r"
 	@$(CC) $(CFLAGS) -o $@ -c $<
 
@@ -71,7 +86,6 @@ vec:
 
 $(OBJDIR):
 	@mkdir $(OBJDIR)
-	@mkdir $(OBJDIR)gtk
 
 clean:
 	@make -s -C libs/libft clean
@@ -94,5 +108,7 @@ fclean:
 	@printf "\r$(GREEN)[$(PROJECT)] $(NAME) removed.                                               \n$(NO_COLOR)"
 
 re: fclean all
+
+norme: norminette srcs libs includes
 
 .PHONY: all clean fclean re
