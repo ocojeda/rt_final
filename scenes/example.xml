@@ -17,13 +17,13 @@
 	</camera>
 
 	<objects>
-		<plane diff="0.4" spec="1" refract='0' damier='1'>
+		<plane diff="0.4" spec="0.5">
 			<pos x="400" y="400" z="900" />
 			<normal x="0" y="0" z="-1"/>
 			<color r="200" g="200" b="100"/>
 		</plane>
 
-		<plane diff="0.4" spec="1" refract='0'>
+		<plane diff="0.4" spec="0.5" refract='0.9' refract_filter='0.5'>
 			<pos x="900" y="-300" z="0" />
 			<normal x="0" y="1" z="0"/>
 			<color r="255" g="200" b="0"/>

@@ -148,7 +148,6 @@ typedef struct		s_matiere
 	float			refract_filter;
 	float			reflex;
 	float			reflex_filter;
-	float			absorbtion;
 	char			*coeff;
 	char			opacite;
 	int				sinus;
@@ -323,6 +322,7 @@ int				mousse_hook(int button, int x, int y, void *param);
 * intersect fonctions
 */
 
+float			check_negative_objects(float dist_obj, t_rt *e, t_ray ray);
 float			intersect_obj(t_ray ray, t_obj *obj, t_rt *e);
 float			intersect_sphere(t_ray ray, t_obj *sphere);
 float			intersect_plane(t_ray ray, t_obj *plane);
@@ -332,7 +332,7 @@ t_vec3			plane_norm(t_obj plane);
 float			get_res_of_quadratic(t_calc *op, t_obj *obj);
 float			get_min_dist(t_rt *e, t_ray ray);
 float			intersect_paraboloid(t_ray ray, t_obj *parab);
-
+int				damier(t_vec3 *pos, t_rt *e);
 /*
 * math aux fonctions
 */

@@ -22,6 +22,9 @@ SRC			=	main.c \
 				refraction.c \
 				paraboloid.c \
 				bruit.c \
+				intersect.c \
+				negative_intersect.c \
+				damier.c \
 				parsing/parse.c \
 				parsing/checks.c \
 				parsing/parser_utils.c \

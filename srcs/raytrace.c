@@ -1,78 +1,10 @@
 #include "../includes/rt.h"
 
-float			check_negative_objects(float dist_obj, t_rt *e, t_ray ray)
-{
-	int i;
-
-	i = 0;
-	while (i++ <= e->scene.nbr_obj -1)
-	if (e->scene.obj[i].neg == 1)
-	{
-		if (e->scene.obj[i].type == CYLINDER)
-			return(intersect_cylinder_neg(ray, &e->scene.obj[i] , dist_obj));
-		else if (e->scene.obj[i].type == SPHERE)
-			return (intersect_sphere_neg(ray, &e->scene.obj[i], dist_obj));
-		else if (e->scene.obj[i].type == CONE)
-			return (intersect_cone_neg(ray, &e->scene.obj[i],dist_obj));
-		else if (e->scene.obj[i].type == PARABOLOID)
-			return (intersect_paraboloid_neg(ray, &e->scene.obj[i],dist_obj));
-	}
-	return (dist_obj);
-}
-
-float			intersect_obj(t_ray ray, t_obj *obj, t_rt *e)
-{
-	if (obj->type == CYLINDER)
-		return (check_negative_objects(intersect_cylinder(ray, obj), e, ray));
-	else if (obj->type == SPHERE)
-		return (check_negative_objects(intersect_sphere(ray, obj), e, ray));
-	else if (obj->type == PLANE)
-		return (check_negative_objects(intersect_plane(ray, obj), e, ray));
-	else if (obj->type == CONE)
-		return (check_negative_objects(intersect_cone(ray, obj), e, ray));
-	else if (obj->type == PARABOLOID)
-		return (check_negative_objects(intersect_paraboloid(ray, obj), e, ray));
-	return (DIST_MAX);
-}
-
-float			get_length(t_vec3 v)
-{
-	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
-}
-
 float rand_noise(int t)
 {
     t = (t<<13) ^ t;
     t = (t * (t * t * 15731 + 789221) + 1376312589);
     return 1.0 - (t & 0x7fffffff) / 1073741824.0;
-}
-
-int			damier(t_vec3 *pos, t_rt *e)
-{
-  int x;
-  int y;
-  int z;
-
-
-  x = (int)((pos->x + 1100) / 500);
-  y = (int)((pos->y + 700) / 500);
-  z = (int)((pos->z + 1100) / 500);
-  if (x % 2 == 0)
-    {
-      if (((y % 2 == 0) && (z % 2 == 0)) ||
-	  (((y % 2 != 0) && (z % 2 != 0))))
-	return (0);
-      else
-	return (1);
-    }
-  else
-    {
-      if ((((y % 2 == 0) && (z % 2 == 0))) ||
-	  (((y % 2 != 0) && (z % 2 != 0))))
-	return (1);
-      else
-	return (0);
-	  }
 }
 
 t_color			get_color(t_rt *e, t_obj obj, t_reflect ref, t_ray ray)
@@ -97,9 +29,9 @@ t_color			get_color(t_rt *e, t_obj obj, t_reflect ref, t_ray ray)
 		color1 = color_mult(obj.color, intensity, 1);
 		ray_tmp.pos = color_norm(e->scene.obj[e->scene.id], ref.poi, e->scene.cam.pos);
 		ray_tmp.pos = vec_sub3(ref.poi, e->scene.obj[e->scene.id].pos);
-		if(e->scene.obj[e->scene.id].mat.damier)
-			if(damier(&ray_tmp.pos, e))
-				return c_color(0,0,0);	
+		//if(e->scene.obj[e->scene.id].mat.damier == 1)
+		//	if(damier(&ray_tmp.pos, e))
+		//		return c_color(0,0,0);
 		//return (bruit(dot, color1, e->scene.obj[e->scene.id].color, rand_noise(ref.x))); 
 			//return (bruit(dot, color1, e->scene.obj[e->scene.id].color, get_perlin(ref.x, ref.y, 1))); 
 			//return(bruit2(rand_noise(ref.x), ref.color, e->scene.obj[e->scene.id].color, dot));
@@ -109,32 +41,11 @@ t_color			get_color(t_rt *e, t_obj obj, t_reflect ref, t_ray ray)
 	return ((t_color){0, 0, 0, 0});
 }
 
-float			get_min_dist(t_rt *e, t_ray ray)
-{
-	float		min_dist;
-	float		dist;
-	int			i;
-
-	i = 0;
-	dist = DIST_MAX;
-	min_dist = DIST_MAX;
-	while (i < e->scene.nbr_obj)
-	{
-		dist = intersect_obj(ray, &e->scene.obj[i], e);
-		if (dist < min_dist && e->scene.obj[i].neg != 1)
-		{
-			min_dist = (dist < 0) ? min_dist : dist;
-			e->scene.id = i;
-		}
-		i++;
-	}
-	return ((min_dist < DIST_MAX) ? min_dist : -1);
-}
-
 t_color	get_pxl_color(t_rt *e, t_ray ray, int x, int y)
 {
 	t_reflect	ref;
 	float		tmp;
+	t_vec3		pos_tmp;
 
 	e->scene.id = -1;
 	if ((ref.min_dist = get_min_dist(e, ray)) == -1)
@@ -156,6 +67,12 @@ t_color	get_pxl_color(t_rt *e, t_ray ray, int x, int y)
 	}
 	else if (e->scene.obj[e->scene.id].mat.refract == 1)
 	{
+		//if (e->scene.obj[e->scene.id].mat.damier == 1)
+		//{
+		//	pos_tmp = vec_sub3(ref.poi, e->scene.obj[e->scene.id].pos);
+		//		if(damier(&pos_tmp, e))
+		//			return (get_color(e, e->scene.obj[e->scene.id], ref, ray));
+		//}
 		tmp = e->scene.obj[e->scene.id].mat.refract_filter;
 		ref.color = get_color(e, e->scene.obj[e->scene.id], ref, ray);
 		e->scene.id = ref.tmp_id;

@@ -164,7 +164,7 @@
 			<xsd:attribute type="unitVec" name="reflex_filter"/>
 			<xsd:attribute type="unitVec" name="refract_filter"/>
 			<xsd:attribute type="unitVec" name="sin"/>
-			<xsd:attribute type="xsd:boolean" name="damier"/>
+			<xsd:attribute type="unitVec" name="damier"/>
 		</xsd:complexType>
 	</xsd:element>
 
