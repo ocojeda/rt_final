@@ -54,9 +54,9 @@ int			damier(t_vec3 *pos, t_rt *e)
   int z;
 
 
-  x = (int)((pos->x+ 1000) / LARGEUR);
-  y = (int)((pos->y+ 1000) / LARGEUR);
-  z = (int)((pos->z + 1000) / LARGEUR);
+  x = (int)((pos->x + 1100) / 500);
+  y = (int)((pos->y + 700) / 500);
+  z = (int)((pos->z + 1100) / 500);
   if (x % 2 == 0)
     {
       if (((y % 2 == 0) && (z % 2 == 0)) ||
@@ -95,8 +95,10 @@ t_color			get_color(t_rt *e, t_obj obj, t_reflect ref, t_ray ray)
 		dot = vec_dot3(ray.dir, ref.poi);
 	
 		color1 = color_mult(obj.color, intensity, 1);
-		if(e->scene.obj[e->scene.id].mat.sinus)
-			if(damier(&ref.poi, e))
+		ray_tmp.pos = color_norm(e->scene.obj[e->scene.id], ref.poi, e->scene.cam.pos);
+		ray_tmp.pos = vec_sub3(ref.poi, e->scene.obj[e->scene.id].pos);
+		if(e->scene.obj[e->scene.id].mat.damier)
+			if(damier(&ray_tmp.pos, e))
 				return c_color(0,0,0);	
 		//return (bruit(dot, color1, e->scene.obj[e->scene.id].color, rand_noise(ref.x))); 
 			//return (bruit(dot, color1, e->scene.obj[e->scene.id].color, get_perlin(ref.x, ref.y, 1))); 

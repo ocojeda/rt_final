@@ -152,6 +152,7 @@ typedef struct		s_matiere
 	char			*coeff;
 	char			opacite;
 	int				sinus;
+	int				damier;
 	int				perlin;
 }					t_matiere;
 

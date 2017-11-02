@@ -89,6 +89,7 @@ t_obj				copy_objs(t_obj obj)
 	copy.t = obj.t;
 	copy.vector = obj.vector;
 	copy.mat = obj.mat;
+	copy.mat.damier = obj.mat.damier;
 	copy.mat.sinus = obj.mat.sinus;
 	copy.mat.reflex = obj.mat.reflex;
 	copy.mat.reflex_filter = obj.mat.reflex_filter;

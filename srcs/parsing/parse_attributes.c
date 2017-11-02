@@ -1,6 +1,20 @@
 #include "rt.h"
 
-#include "rt.h"
+static void		set_attrs4(t_obj *obj, xmlNodePtr node)
+{
+	xmlChar		*val;
+
+	if ((val = xmlGetProp(node, (xmlChar *)"sin")))
+	{
+		obj->mat.sinus = ft_atof((char *)val);
+		xmlFree(val);
+	}
+	if ((val = xmlGetProp(node, (xmlChar *)"damier")))
+	{
+		obj->mat.damier= ft_atof((char *)val);
+		xmlFree(val);
+	}
+}
 
 static void		set_attrs3(t_obj *obj, xmlNodePtr node)
 {
@@ -21,11 +35,7 @@ static void		set_attrs3(t_obj *obj, xmlNodePtr node)
 		obj->mat.reflex_filter = ft_atof((char *)val);
 		xmlFree(val);
 	}
-	if ((val = xmlGetProp(node, (xmlChar *)"sin")))
-	{
-		obj->mat.sinus = ft_atof((char *)val);
-		xmlFree(val);
-	}
+	set_attrs4(obj, node);
 }
 
 static void		set_attrs2(t_obj *obj, xmlNodePtr node)
@@ -47,7 +57,6 @@ static void		set_attrs2(t_obj *obj, xmlNodePtr node)
 		obj->mat.reflex = ft_atof((char *)val);
 		xmlFree(val);
 	}
-
 	set_attrs3(obj, node);
 }
 
