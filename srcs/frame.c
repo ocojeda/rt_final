@@ -103,7 +103,7 @@ t_obj				copy_objs(t_obj obj)
 	if(copy.mat.damier == 1)
 	{
 		copy.mat.refract = 1;
-		copy.mat.refract_rate = 1;
+		copy.mat.refract_rate = 0;
 		copy.mat.refract_filter = 0;
 	
 		copy.mat.sinus = 0;

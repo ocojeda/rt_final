@@ -7,7 +7,7 @@ float rand_noise(int t)
     return 1.0 - (t & 0x7fffffff) / 1073741824.0;
 }
 
-t_color			get_color(t_rt *e, t_obj obj, t_reflect ref, t_ray ray)
+t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi, t_ray ray)
 {
 	float		intensity;
 	int			i;
@@ -17,18 +17,18 @@ t_color			get_color(t_rt *e, t_obj obj, t_reflect ref, t_ray ray)
 	i = -1;
 	intensity = (!e->scene.nbr_light) ? AMBIENT_LIGHT : 0;
 	while (++i < e->scene.nbr_light)
-		intensity += intensity_obj(e, ref.poi, ray, e->CLIGHT);
+		intensity += intensity_obj(e, poi, ray, e->CLIGHT);
 	
 	if (intensity != 0)
 	{
-		float	dot = vec_dot3(ray.dir, ref.poi);
+		float	dot = vec_dot3(ray.dir, poi);
 		
-		ray_tmp = get_reflected_ray(e, ray, ref.poi);
-		dot = vec_dot3(ray.dir, ref.poi);
+		ray_tmp = get_reflected_ray(e, ray, poi);
+		dot = vec_dot3(ray.dir, poi);
 	
 		color1 = color_mult(obj.color, intensity, 1);
-		ray_tmp.pos = color_norm(e->scene.obj[e->scene.id], ref.poi, e->scene.cam.pos);
-		ray_tmp.pos = vec_sub3(ref.poi, e->scene.obj[e->scene.id].pos);
+		ray_tmp.pos = color_norm(e->scene.obj[e->scene.id], poi, e->scene.cam.pos);
+		ray_tmp.pos = vec_sub3(poi, e->scene.obj[e->scene.id].pos);
 		//if(e->scene.obj[e->scene.id].mat.damier == 1)
 		//	if(damier(&ray_tmp.pos, e))
 		//		return c_color(0,0,0);
@@ -61,25 +61,25 @@ t_color	get_pxl_color(t_rt *e, t_ray ray, int x, int y)
 	if (e->scene.obj[e->scene.id].mat.reflex == 1)
 	{
 		tmp = e->scene.obj[e->scene.id].mat.reflex_filter;
-		ref.color = get_color(e, e->scene.obj[e->scene.id], ref, ray);
+		ref.color = get_color(e, e->scene.obj[e->scene.id], ref.poi, ray);
 		e->scene.id = ref.tmp_id;
 		return (ft_map_color(get_refracted_color(e, ref.poi, ref.color, ref), ref.color, tmp));
 	}
 	else if (e->scene.obj[e->scene.id].mat.refract == 1)
 	{
-		//if (e->scene.obj[e->scene.id].mat.damier == 1)
-		//{
-		//	pos_tmp = vec_sub3(ref.poi, e->scene.obj[e->scene.id].pos);
-		//		if(damier(&pos_tmp, e))
-		//			return (get_color(e, e->scene.obj[e->scene.id], ref, ray));
-		//}
+		if (e->scene.obj[e->scene.id].mat.damier == 1)
+		{
+			pos_tmp = vec_sub3(ref.poi, e->scene.obj[e->scene.id].pos);
+				if(damier(&pos_tmp, e))
+					return (get_color(e, e->scene.obj[e->scene.id], ref.poi, ray));
+		}
 		tmp = e->scene.obj[e->scene.id].mat.refract_filter;
-		ref.color = get_color(e, e->scene.obj[e->scene.id], ref, ray);
+		ref.color = get_color(e, e->scene.obj[e->scene.id], ref.poi, ray);
 		e->scene.id = ref.tmp_id;
 		return (ft_map_color(get_refracted_color(e, ref.poi, ref.color, ref), ref.color, tmp));
 	}
 	else
-		ref.color = get_color(e, e->scene.obj[e->scene.id], ref, ray);
+		ref.color = get_color(e, e->scene.obj[e->scene.id], ref.poi, ray);
 	return (ref.color);
 }
 

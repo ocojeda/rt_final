@@ -17,19 +17,19 @@
 	</camera>
 
 	<objects>
-		<plane diff="0.4" spec="0.5">
+		<plane diff="0.4" spec="0.5" damier='1'>
 			<pos x="400" y="400" z="900" />
 			<normal x="0" y="0" z="-1"/>
 			<color r="200" g="200" b="100"/>
 		</plane>
 
-		<plane diff="0.4" spec="0.5" refract='0.9' refract_filter='0.5'>
+		<plane diff="0.4" spec="0.5">
 			<pos x="900" y="-300" z="0" />
 			<normal x="0" y="1" z="0"/>
 			<color r="255" g="200" b="0"/>
 		</plane>
 
-		<cylinder radius="10" diff="0.4" spec="1">
+		<cylinder radius="10" diff="0.4" spec="0.5">
 			<pos x="0" y="0" z="800" />
 			<normal x="0.5" y="1" z="0"/>
 			<color r="0" g="255" b="0"/>
@@ -41,7 +41,7 @@
 			<color r="200" g="244" b="150"/>
 		</cone>
 
-		<sphere radius="1000" diff="0.5" spec="1">
+		<sphere radius="1000" diff="0.5" spec="0.5" damier='1'>
 			<pos x="0" y="0" z="-1500"/>
 			<color r="140" g="140" b="140"/>
 		</sphere>

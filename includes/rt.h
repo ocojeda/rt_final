@@ -310,7 +310,7 @@ t_color			raytrace(int x, int y, t_rt *e);
 t_ray			ray_init(t_rt *e, int x, int y);
 
 t_ray			c_ray(t_vec3 i, t_vec3 j);
-t_color			get_color(t_rt *e, t_obj obj, t_reflect ref, t_ray ray);
+t_color			get_color(t_rt *e, t_obj obj, t_vec3 ref, t_ray ray);
 
 /*
 *mlx relative fonctions
