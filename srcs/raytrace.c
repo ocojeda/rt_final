@@ -69,7 +69,8 @@ t_color	get_pxl_color(t_rt *e, t_ray ray, int x, int y)
 	{
 		if (e->scene.obj[e->scene.id].mat.damier == 1)
 		{
-			pos_tmp = vec_sub3(ref.poi, e->scene.obj[e->scene.id].pos);
+			//pos_tmp = vec_add3(ref.poi, e->scene.obj[e->scene.id].pos);
+			pos_tmp = vec_add3(ref.poi, e->scene.obj[e->scene.id].pos);
 				if(damier(&pos_tmp, e))
 					return (get_color(e, e->scene.obj[e->scene.id], ref.poi, ray));
 		}
