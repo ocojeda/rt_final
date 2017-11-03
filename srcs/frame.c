@@ -56,8 +56,6 @@ void			*drawline(void *arg)
 		while (x < e->thread.w)
 		{
 			e->thread.colors[i] = raytrace(x, y, e);
-//			if (e->scene.filters == 5)
-//				e->thread.colors[i] = fl_cartoon(e->thread.colors[i]);
 			++x;
 			++i;
 		}
@@ -91,12 +89,30 @@ t_obj				copy_objs(t_obj obj)
 	copy.t = obj.t;
 	copy.vector = obj.vector;
 	copy.mat = obj.mat;
-	copy.mat.reflex = obj.mat.reflex;
-	copy.mat.reflex_filter = obj.mat.reflex_filter;
 
 	copy.mat.refract = obj.mat.refract;
 	copy.mat.refract_rate = obj.mat.refract_rate;
 	copy.mat.refract_filter = obj.mat.refract_filter;
+
+	copy.mat.sinus = obj.mat.sinus;
+	copy.mat.reflex = obj.mat.reflex;
+	copy.mat.reflex_filter = obj.mat.reflex_filter;
+
+	copy.mat.damier = obj.mat.damier;
+	
+	if(copy.mat.damier == 1)
+	{
+		copy.mat.refract = 1;
+		copy.mat.refract_rate = 0;
+		copy.mat.refract_filter = 0;
+	
+		copy.mat.sinus = 0;
+		copy.mat.reflex = 0;
+		copy.mat.reflex_filter = 0;
+	}
+	
+
+	
 
 	copy.plimit_valid = obj.plimit_valid;
 	copy.neg = obj.neg;

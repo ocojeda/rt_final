@@ -100,6 +100,9 @@
 			<xsd:attribute type="unitVec" name="refract_rate"/>
 			<xsd:attribute type="unitVec" name="reflex_filter"/>
 			<xsd:attribute type="unitVec" name="refract_filter"/>
+			<xsd:attribute type="unitVec" name="sin"/>
+			<xsd:attribute type="unitVec" name="damier"/>
+
 		</xsd:complexType>
 	</xsd:element>
 
@@ -118,6 +121,8 @@
 			<xsd:attribute type="unitVec" name="refract_rate"/>
 			<xsd:attribute type="unitVec" name="reflex_filter"/>
 			<xsd:attribute type="unitVec" name="refract_filter"/>
+			<xsd:attribute type="unitVec" name="sin"/>
+			<xsd:attribute type="unitVec" name="damier"/>
 		</xsd:complexType>
 	</xsd:element>
 
@@ -137,6 +142,8 @@
 			<xsd:attribute type="unitVec" name="refract_rate"/>
 			<xsd:attribute type="unitVec" name="reflex_filter"/>
 			<xsd:attribute type="unitVec" name="refract_filter"/>
+			<xsd:attribute type="unitVec" name="sin"/>
+			<xsd:attribute type="unitVec" name="damier"/>
 		</xsd:complexType>
 	</xsd:element>
 
@@ -156,6 +163,8 @@
 			<xsd:attribute type="unitVec" name="refract_rate"/>
 			<xsd:attribute type="unitVec" name="reflex_filter"/>
 			<xsd:attribute type="unitVec" name="refract_filter"/>
+			<xsd:attribute type="unitVec" name="sin"/>
+			<xsd:attribute type="unitVec" name="damier"/>
 		</xsd:complexType>
 	</xsd:element>
 

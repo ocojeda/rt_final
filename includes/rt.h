@@ -129,7 +129,6 @@ typedef struct		s_camera
 {
 	int				fov;
 	t_vec3			pos;
-//	t_vec3			focus_point;
 	t_vec3			rot;
 	t_mtrx4			ctw;
 	float			reso;
@@ -149,10 +148,10 @@ typedef struct		s_matiere
 	float			refract_filter;
 	float			reflex;
 	float			reflex_filter;
-	float			absorbtion;
 	char			*coeff;
 	char			opacite;
 	int				sinus;
+	int				damier;
 	int				perlin;
 }					t_matiere;
 
@@ -253,6 +252,8 @@ typedef struct		s_reflect
 	int				tmp_id;
 	float			dist_rate;
 	int				a;
+	int				x;
+	int				y;
 }					t_reflect;
 
 typedef struct		s_calc
@@ -309,7 +310,7 @@ t_color			raytrace(int x, int y, t_rt *e);
 t_ray			ray_init(t_rt *e, int x, int y);
 
 t_ray			c_ray(t_vec3 i, t_vec3 j);
-t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi, t_ray ray);
+t_color			get_color(t_rt *e, t_obj obj, t_vec3 ref, t_ray ray);
 
 /*
 *mlx relative fonctions
@@ -321,6 +322,7 @@ int				mousse_hook(int button, int x, int y, void *param);
 * intersect fonctions
 */
 
+float			check_negative_objects(float dist_obj, t_rt *e, t_ray ray);
 float			intersect_obj(t_ray ray, t_obj *obj, t_rt *e);
 float			intersect_sphere(t_ray ray, t_obj *sphere);
 float			intersect_plane(t_ray ray, t_obj *plane);
@@ -330,7 +332,7 @@ t_vec3			plane_norm(t_obj plane);
 float			get_res_of_quadratic(t_calc *op, t_obj *obj);
 float			get_min_dist(t_rt *e, t_ray ray);
 float			intersect_paraboloid(t_ray ray, t_obj *parab);
-
+int				damier(t_vec3 *pos, t_rt *e);
 /*
 * math aux fonctions
 */
@@ -370,9 +372,9 @@ t_color			get_refracted_color(t_rt *e, t_vec3 poi, t_color base_color,
 t_ray			get_reflected_ray(t_rt *e, t_ray rayon, t_vec3 poi);
 
 
-void		matrix_init(t_rt *e);
-void		filter_black_and_white(t_rt *e);
-void		filters(t_rt *e);
+void			matrix_init(t_rt *e);
+void			filter_black_and_white(t_rt *e);
+void			filters(t_rt *e);
 
 float			get_res_of_quadratic_neg(t_calc *op, t_obj *obj, float dist_obj);
 float			intersect_cone_neg(t_ray ray, t_obj *cone, float dist_obj);
@@ -380,6 +382,12 @@ float			intersect_cylinder_neg(t_ray ray, t_obj *cyl, float dist_obj);
 float			intersect_sphere_neg(t_ray ray, t_obj *sphere, float dist_obj);
 float			intersect_paraboloid_neg(t_ray ray, t_obj *parab, float dist_obj);
 
+/*
+*	BRUIT
+*/
+t_color				bruit(float valeur, t_color c1, t_color c2, float seuil);
+t_color				bruit2(float valeur, t_color c1, t_color c2, float x);
+t_color				bruit3(float valeur, int x, int y, t_rt *e);
 /*
 ** Parse
 */
@@ -396,4 +404,5 @@ void				parse_camera(t_rt *e, xmlNodePtr node);
 void				parse_lights(t_rt *e, t_list *lst);
 void				set_attrs(t_obj *obj, xmlNodePtr node);
 
+double				get_perlin(double x, double y, double z);
 #endif
