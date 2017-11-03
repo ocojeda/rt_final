@@ -328,7 +328,6 @@ float			intersect_sphere(t_ray ray, t_obj *sphere);
 float			intersect_plane(t_ray ray, t_obj *plane);
 float			intersect_cylinder(t_ray ray, t_obj *cyl);
 float			intersect_cone(t_ray ray, t_obj *cone);
-t_vec3			plane_norm(t_obj plane);
 float			get_res_of_quadratic(t_calc *op, t_obj *obj);
 float			get_min_dist(t_rt *e, t_ray ray);
 float			intersect_paraboloid(t_ray ray, t_obj *parab);
@@ -342,10 +341,9 @@ float			get_length(t_vec3 v);
 /*
 * fonction pour les normales
 */
-t_vec3				color_norm(t_obj obj, t_vec3 poi, t_vec3 cam);
-t_vec3				object_norm(t_obj obj, t_vec3 poi, t_vec3 cam);
+t_vec3				object_norm(t_obj obj, t_vec3 poi, t_vec3 cam, t_ray ray);
 t_vec3				cone_norm(t_obj obj, t_vec3 poi);
-t_vec3				plane_norm(t_obj obj);
+t_vec3				plane_norm(t_obj plane, t_ray ray);
 t_vec3				sphere_norm(t_obj obj, t_vec3 poi);
 t_vec3				cylinder_norm(t_obj obj, t_vec3 poi);
 t_vec3				paraboloid_norm(t_obj cone, t_vec3 poi);

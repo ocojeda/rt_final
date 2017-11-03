@@ -27,7 +27,7 @@ t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi, t_ray ray)
 		dot = vec_dot3(ray.dir, poi);
 	
 		color1 = color_mult(obj.color, intensity, 1);
-		ray_tmp.pos = color_norm(e->scene.obj[e->scene.id], poi, e->scene.cam.pos);
+		ray_tmp.pos = object_norm(e->scene.obj[e->scene.id], poi, e->scene.cam.pos, ray);
 		ray_tmp.pos = vec_sub3(poi, e->scene.obj[e->scene.id].pos);
 		//if(e->scene.obj[e->scene.id].mat.damier == 1)
 		//	if(damier(&ray_tmp.pos, e))

@@ -48,7 +48,7 @@ t_ray			get_reflected_ray(t_rt *e, t_ray rayon, t_vec3 poi)
 	t_ray		ray;
 
 	ray.pos = poi;
-	normale = color_norm(e->scene.obj[e->scene.id], poi, e->scene.cam.pos);
+	normale = object_norm(e->scene.obj[e->scene.id], poi, e->scene.cam.pos, rayon);
 	ray.dir = vec_add3(vec_scale3(normale, (-2 * vec_dot3(rayon.dir, normale))), rayon.dir);
 	return (ray);
 }
