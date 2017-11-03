@@ -26,13 +26,17 @@ SRC			=	main.c \
 				gtk/gtk_launcher.c \
 				gtk/gtk_new.c \
 				gtk/gtk_check.c \
+				bruit.c \
+				intersect.c \
+				negative_intersect.c \
+				damier.c \
 				parsing/parse.c \
 				parsing/checks.c \
 				parsing/parser_utils.c \
 				parsing/parse_objects.c \
 				parsing/parse_camera.c \
 				parsing/parse_attributes.c \
-				parsing/parse_lights.c \
+				parsing/parse_lights.c
 
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a

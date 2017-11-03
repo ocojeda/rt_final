@@ -1,6 +1,6 @@
 #include "rt.h"
 
-int					calcul_res(t_rt *e, int limit)
+int			calcul_res(t_rt *e, int limit)
 {
 	int res;
 	int air;
