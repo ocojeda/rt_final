@@ -29,13 +29,10 @@ t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi, t_ray ray)
 		color1 = color_mult(obj.color, intensity, 1);
 		ray_tmp.pos = color_norm(e->scene.obj[e->scene.id], poi, e->scene.cam.pos);
 		ray_tmp.pos = vec_sub3(poi, e->scene.obj[e->scene.id].pos);
-		//if(e->scene.obj[e->scene.id].mat.damier == 1)
-		//	if(damier(&ray_tmp.pos, e))
-		//		return c_color(0,0,0);
 		//return (bruit(dot, color1, e->scene.obj[e->scene.id].color, rand_noise(ref.x))); 
-			//return (bruit(dot, color1, e->scene.obj[e->scene.id].color, get_perlin(ref.x, ref.y, 1))); 
-			//return(bruit2(rand_noise(ref.x), ref.color, e->scene.obj[e->scene.id].color, dot));
-			//return(bruit3(dot*0.9, ref.x, ref.y, e));
+		//return (bruit(dot, color1, e->scene.obj[e->scene.id].color, get_perlin(ref.x, ref.y, 1))); 
+		//return(bruit2(rand_noise(ref.x), ref.color, e->scene.obj[e->scene.id].color, dot));
+		//return(bruit3(dot*0.9, ref.x, ref.y, e));
 		return	color1;
 	}
 	return ((t_color){0, 0, 0, 0});
@@ -45,7 +42,9 @@ t_color	get_pxl_color(t_rt *e, t_ray ray, int x, int y)
 {
 	t_reflect	ref;
 	float		tmp;
-	t_vec3		pos_tmp;
+	t_ray		ray2;
+	t_vec3		poi2;
+	float		min_dist2;
 
 	e->scene.id = -1;
 	if ((ref.min_dist = get_min_dist(e, ray)) == -1)
@@ -69,10 +68,21 @@ t_color	get_pxl_color(t_rt *e, t_ray ray, int x, int y)
 	{
 		if (e->scene.obj[e->scene.id].mat.damier == 1)
 		{
-			//pos_tmp = vec_add3(ref.poi, e->scene.obj[e->scene.id].pos);
-			pos_tmp = vec_add3(ref.poi, e->scene.obj[e->scene.id].pos);
-				if(damier(&pos_tmp, e))
-					return (get_color(e, e->scene.obj[e->scene.id], ref.poi, ray));
+			if(damier(&ref.poi, e))
+				return (get_color(e, e->scene.obj[e->scene.id], ref.poi, ray));
+			if (e->scene.obj[e->scene.id].type != PLANE)
+			{
+				ray2.pos = vec_add3(ref.poi, ray.dir);
+				ray2.dir = vec_cpy3(ray.dir);
+				min_dist2 = intersect_obj(ray2, &e->scene.obj[e->scene.id], e);
+				if(min_dist2)
+				{
+					poi2 = vec_add3(ray2.pos, vec_scale3(ray2.dir, min_dist2));
+					if(damier(&poi2, e))
+						return (get_color(e, e->scene.obj[e->scene.id], poi2, ray2));
+				}
+				min_dist2 = 0;
+			}
 		}
 		tmp = e->scene.obj[e->scene.id].mat.refract_filter;
 		ref.color = get_color(e, e->scene.obj[e->scene.id], ref.poi, ray);

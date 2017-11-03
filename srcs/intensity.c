@@ -4,9 +4,12 @@ float			obj_isnt_in_shadow(t_rt *e, t_vec3 poi, t_light *light)
 {
 	t_ray	ray;
 	float	dist;
+	float	min_dist2;
+	t_ray	ray2;
 	float	dist_to_light;
 	float	opac;
 	int		i;
+	t_vec3	poi2;
 
 	i = -1;
 	opac = 1;
@@ -18,11 +21,34 @@ float			obj_isnt_in_shadow(t_rt *e, t_vec3 poi, t_light *light)
 	{
 		dist = intersect_obj(ray, &e->scene.obj[i], e);
 		if (dist > 0 && dist < dist_to_light && e->scene.obj[i].neg != 1)
-		{	
-			t_vec3 pos_tmp = vec_add3(poi, e->scene.obj[i].pos);
-			opac = e->scene.obj[i].mat.refract;
-				if (e->scene.obj[i].mat.refract == 1 && (damier(&pos_tmp, e)))
-					opac = e->scene.obj[i].mat.refract_rate;
+		{
+			if (e->scene.obj[i].mat.refract && e->scene.obj[i].mat.damier)
+			{
+				poi2 = vec_add3(light->ray.pos, vec_scale3(light->ray.dir, dist));
+				if (damier(&poi2, e))
+					return 0;
+				else
+					opac = e->scene.obj[i].mat.refract;
+				if (e->scene.obj[i].type != PLANE)
+				{
+						ray2.pos = vec_add3(poi2, light->ray.dir);
+						ray2.dir = vec_cpy3(light->ray.dir);
+						min_dist2 = intersect_obj(ray2, &e->scene.obj[i], e);
+						if(min_dist2)
+						{
+							poi2 = vec_add3(ray2.pos, vec_scale3(ray2.dir, min_dist2));
+							if(damier(&poi2, e))
+								return 0;
+							else
+								opac = e->scene.obj[i].mat.refract;
+						}
+						min_dist2 = 0;
+				}
+				else
+					opac = e->scene.obj[i].mat.refract;	
+			}
+			else if(e->scene.obj[i].mat.refract && e->scene.obj[i].mat.damier == 0)
+				opac = e->scene.obj[i].mat.refract;
 		}
 	}
 	return (opac);

@@ -95,13 +95,13 @@
 			<xsd:attribute type="xsd:float" name="diff" use="required"/>
 			<xsd:attribute type="xsd:float" name="spec" use="required"/>
 			<xsd:attribute type="xsd:boolean" name="negative"/>
-			<xsd:attribute type="unitVec" name="reflex"/>
-			<xsd:attribute type="unitVec" name="refract"/>
-			<xsd:attribute type="unitVec" name="refract_rate"/>
-			<xsd:attribute type="unitVec" name="reflex_filter"/>
-			<xsd:attribute type="unitVec" name="refract_filter"/>
-			<xsd:attribute type="unitVec" name="sin"/>
-			<xsd:attribute type="unitVec" name="damier"/>
+			<xsd:attribute type="xsd:float" name="reflex"/>
+			<xsd:attribute type="xsd:float" name="refract"/>
+			<xsd:attribute type="xsd:float" name="refract_rate"/>
+			<xsd:attribute type="xsd:float" name="reflex_filter"/>
+			<xsd:attribute type="xsd:float" name="refract_filter"/>
+			<xsd:attribute type="xsd:float" name="sin"/>
+			<xsd:attribute type="xsd:boolean" name="damier"/>
 
 		</xsd:complexType>
 	</xsd:element>
@@ -116,13 +116,13 @@
 			<xsd:attribute type="xsd:float" name="diff" use="required"/>
 			<xsd:attribute type="xsd:float" name="spec" use="required"/>
 			<xsd:attribute type="xsd:boolean" name="negative"/>
-			<xsd:attribute type="unitVec" name="reflex"/>
-			<xsd:attribute type="unitVec" name="refract"/>
-			<xsd:attribute type="unitVec" name="refract_rate"/>
-			<xsd:attribute type="unitVec" name="reflex_filter"/>
-			<xsd:attribute type="unitVec" name="refract_filter"/>
-			<xsd:attribute type="unitVec" name="sin"/>
-			<xsd:attribute type="unitVec" name="damier"/>
+			<xsd:attribute type="xsd:float" name="reflex"/>
+			<xsd:attribute type="xsd:float" name="refract"/>
+			<xsd:attribute type="xsd:float" name="refract_rate"/>
+			<xsd:attribute type="xsd:float" name="reflex_filter"/>
+			<xsd:attribute type="xsd:float" name="refract_filter"/>
+			<xsd:attribute type="xsd:float" name="sin"/>
+			<xsd:attribute type="xsd:boolean" name="damier"/>
 		</xsd:complexType>
 	</xsd:element>
 
@@ -137,13 +137,13 @@
 			<xsd:attribute type="xsd:float" name="diff" use="required"/>
 			<xsd:attribute type="xsd:float" name="spec" use="required"/>
 			<xsd:attribute type="xsd:boolean" name="negative"/>
-			<xsd:attribute type="unitVec" name="reflex"/>
-			<xsd:attribute type="unitVec" name="refract"/>
-			<xsd:attribute type="unitVec" name="refract_rate"/>
-			<xsd:attribute type="unitVec" name="reflex_filter"/>
-			<xsd:attribute type="unitVec" name="refract_filter"/>
-			<xsd:attribute type="unitVec" name="sin"/>
-			<xsd:attribute type="unitVec" name="damier"/>
+			<xsd:attribute type="xsd:float" name="reflex"/>
+			<xsd:attribute type="xsd:float" name="refract"/>
+			<xsd:attribute type="xsd:float" name="refract_rate"/>
+			<xsd:attribute type="xsd:float" name="reflex_filter"/>
+			<xsd:attribute type="xsd:float" name="refract_filter"/>
+			<xsd:attribute type="xsd:float" name="sin"/>
+			<xsd:attribute type="xsd:boolean" name="damier"/>
 		</xsd:complexType>
 	</xsd:element>
 
@@ -158,13 +158,13 @@
 			<xsd:attribute type="xsd:float" name="diff" use="required"/>
 			<xsd:attribute type="xsd:float" name="spec" use="required"/>
 			<xsd:attribute type="xsd:boolean" name="negative"/>
-			<xsd:attribute type="unitVec" name="reflex"/>
-			<xsd:attribute type="unitVec" name="refract"/>
-			<xsd:attribute type="unitVec" name="refract_rate"/>
-			<xsd:attribute type="unitVec" name="reflex_filter"/>
-			<xsd:attribute type="unitVec" name="refract_filter"/>
-			<xsd:attribute type="unitVec" name="sin"/>
-			<xsd:attribute type="unitVec" name="damier"/>
+			<xsd:attribute type="xsd:float" name="reflex"/>
+			<xsd:attribute type="xsd:float" name="refract"/>
+			<xsd:attribute type="xsd:float" name="refract_rate"/>
+			<xsd:attribute type="xsd:float" name="reflex_filter"/>
+			<xsd:attribute type="xsd:float" name="refract_filter"/>
+			<xsd:attribute type="xsd:float" name="sin"/>
+			<xsd:attribute type="xsd:boolean" name="damier"/>
 		</xsd:complexType>
 	</xsd:element>
 
