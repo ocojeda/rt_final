@@ -107,7 +107,6 @@
 # define SIZE_LP 50
 
 # define VALIDATOR_XSD "validator.xsd"
-# define VALIDATOR_DTD "validator.dtd"
 # define STD_ERR 2
 
 typedef struct		s_ray
@@ -440,33 +439,14 @@ void				set_attrs(t_obj *obj, xmlNodePtr node);
 /*
 *	GTK fonctions
 */
-void				ft_init_values(t_rt *e);
 gboolean			hook(GtkWidget *widget, GdkEventKey *event,
 		gpointer user_data);
 void				ft_gtk_start_launcher(t_rt *e);
-void				ft_gtk_start_settings(t_rt *e);
-void				ft_settings(t_rt *e);
 void				ft_gtk_launcher(t_rt *e);
 GtkWidget			*new_window(gint w, gint h, gchar *name);
-GtkWidget			*new_input(t_gtk_input *data);
-GtkWidget			*new_txt(gchar *str);
 GtkWidget			*new_btn(int x, int y, char *name);
 void				ft_gtk_link_css(GtkWidget *window, gchar *css);
-void				ft_add_w(GtkEntry *entry, t_rt *e);
-void				ft_add_h(GtkEntry *entry, t_rt *e);
-void				ft_add_res(GtkEntry *entry, t_rt *e);
-void				ft_add_anti(GObject *sw, GParamSpec *ps, t_rt *e);
-void				ft_add_antialiasing(t_rt *e);
-void				ft_add_resolution(t_rt *e);
-void				ft_add_win_size(t_rt *e);
-void				ft_add_filter(t_rt *e);
-void				ft_add_filt(GtkEntry *entry, t_rt *e);
-GtkWidget			*new_window(gint w, gint h, gchar *name);
-GtkWidget			*new_input(t_gtk_input *data);
-GtkWidget			*new_txt(gchar *str);
-GtkWidget			*new_btn(int x, int y, char *name);
-void				ft_gtk_link_css(GtkWidget *window, gchar *css);
-void				gtk_hook(int keycode, t_rt *e);
+int					xsd_validate(char *xsd_path, xmlDocPtr doc);
 int					calcul_res(t_rt *e, int limit);
 
 /*

@@ -167,8 +167,6 @@ int				keypress(int keycode, void *param)
 		CCAM.pos.x += dir.dir.x * (15 / dir.dir.x);
 		frame(e);
 	}
-	if (keycode == KEY_G || keycode == KEY_H)
-		gtk_hook(keycode, e);
 	if (keycode == KEY_DEL)
 		screenshot_ppm(e);
 	return (keycode);

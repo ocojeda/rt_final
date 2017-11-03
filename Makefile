@@ -22,13 +22,10 @@ SRC			=	main.c \
 				refraction.c \
 				paraboloid.c \
 				screen.c \
-				gtk/gtk_add.c \
-				gtk/gtk_add2.c \
 				gtk/gtk_init.c \
 				gtk/gtk_launcher.c \
-				gtk/gtk_settings.c \
 				gtk/gtk_new.c \
-				gtk/gtk_hook.c \
+				gtk/gtk_check.c \
 				parsing/parse.c \
 				parsing/checks.c \
 				parsing/parser_utils.c \
