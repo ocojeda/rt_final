@@ -6,56 +6,47 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 20:23:02 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/11/04 21:39:24 by ocojeda-         ###   ########.fr       */
+/*   Updated: 2017/11/04 23:26:15 by ocojeda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/rt.h"
 
-int				norme_shadow(t_reflect *ref, float *opac, t_rt *e)
+int				shadow_init(t_vec3 poi, t_light *light, t_reflect *ref)
 {
-	t_vec3		poi2;
-
-	if (e->scene.obj[ref->a].mat.refract &&
-		e->scene.obj[ref->a].mat.damier && ref->min_dist > 0
-		&& ref->min_dist < ref->total_distance)
-	{
-		poi2 = vec_add3(ref->light->ray.pos, vec_scale3(ref->light->ray.dir,
-				ref->min_dist));
-		if (damier(&poi2))
-			return (1);
-		*opac = e->scene.obj[ref->a].mat.refract_rate;
-	}
-	return (0);
+	ref->opac = 1;
+	light->ray.dir = vec_sub3(light->ray.pos, poi);
+	ref->d2 = get_length(light->ray.dir);
+	light->ray.dir = vec_norme3(light->ray.dir);
+	ref->ray = c_ray(vec_add3(poi, light->ray.dir), light->ray.dir);
+	return (-1);
 }
 
-float			obj_isnt_in_shadow(t_rt *e, t_vec3 poi, t_light *light)
+float			obj_isnt_in_shadow(t_rt *e, t_vec3 poi, t_light *l)
 {
-	float		opac;
-	t_reflect	ref;
+	int			i;
+	t_reflect	r;
 
-	ref.light = light;
-	opac = set_isnt_in_shadow(ref.light, &ref, poi);
-	while (++ref.a < e->scene.nbr_obj)
+	i = shadow_init(poi, l, &r);
+	while (++i < e->scene.nbr_obj)
 	{
-		ref.min_dist = intersect_obj(ref.ray, &e->scene.obj[ref.a], e);
-		if (ref.min_dist > 0 && ref.min_dist < ref.total_distance
-				&& e->scene.obj[ref.a].neg != 1)
+		r.d1 = intersect_obj(r.ray, &COBJ[i], e);
+		if (r.d1 > 0 && r.d1 < r.d2 && COBJ[i].neg != 1)
 		{
-			if (ref.min_dist > 0 && ref.min_dist < ref.total_distance &&
-		e->scene.obj[ref.a].neg != 1 && e->scene.obj[ref.a].mat.damier == 0)
+			if (r.d1 > 0 && r.d1 < r.d2 && COBJ[i].neg != 1
+					&& COBJ[i].mat.damier == 0)
+				r.opac = COBJ[i].mat.refract_rate + COBJ[i].mat.reflex;
+			if (COBJ[i].mat.refract && COBJ[i].mat.damier
+				&& r.d1 > 0 && r.d1 < r.d2)
 			{
-				if (e->scene.obj[ref.a].mat.refract)
-					opac = 1 - e->scene.obj[ref.a].mat.refract_rate;
-				else
-					opac = e->scene.obj[ref.a].mat.refract_rate
-					+ e->scene.obj[ref.a].mat.reflex;
+				r.p2 = vec_add3(l->ray.pos, vec_scale3(l->ray.dir, r.d1));
+				if (damier(&r.p2))
+					return (0);
+				r.opac = COBJ[i].mat.refract_rate;
 			}
-			if (norme_shadow(&ref, &opac, e))
-				return (0);
 		}
 	}
-	return (opac);
+	return (r.opac);
 }
 
 float			spec_intensity(t_rt *e, t_ray light, t_vec3 poi, t_ray ray)

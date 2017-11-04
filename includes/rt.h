@@ -261,8 +261,8 @@ typedef struct		s_reflect
 {
 	t_ray			ray;
 	t_ray			new_ray;
-	t_light			*light;
 	t_vec3			poi;
+	t_vec3			p2;
 	t_color			color;
 	int				type;
 	float			total_distance;
@@ -273,6 +273,9 @@ typedef struct		s_reflect
 	int				a;
 	int				x;
 	int				y;
+	float			opac;
+	float			d1;
+	float			d2;
 }					t_reflect;
 
 typedef struct		s_calc
@@ -518,5 +521,4 @@ float				intersect_limit_sphere(t_ray ray, t_limit *sphere);
 t_rt				*copy_rt(t_rt *e);
 t_light				copy_light(t_light light);
 void				finish_it(t_rt **th_e, t_rt *e);
-int					set_isnt_in_shadow(t_light *light, t_reflect *ref, t_vec3 poi);
 #endif
