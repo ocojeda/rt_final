@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: agfernan <agfernan@student.42.fr>          +#+  +:+       +#+         #
+#    By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/02/21 03:19:16 by pbernier          #+#    #+#              #
-#    Updated: 2017/10/01 16:17:34 by agfernan         ###   ########.fr        #
+#    Created: 2017/02/21 03:19:16 by bbeldame          #+#    #+#              #
+#    Updated: 2017/11/04 21:25:20 by bbeldame         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
