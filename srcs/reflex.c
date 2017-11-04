@@ -17,6 +17,7 @@ float			find_min_dist_for_refref(t_rt *e, int *a, t_ray ray)
 		if (i != e->scene.id)
 		{
 			dist = intersect_obj(ray, &e->scene.obj[i], e);
+	//		dist *= 1.000001;
 			if (dist < min_dist && e->scene.obj[i].neg != 1)
 			{
 				min_dist = dist;
