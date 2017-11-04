@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gtk_check.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/04 19:08:50 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/11/04 19:08:50 by bbeldame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/rt.h"
 
-int		xsd_read_error(void)
+int					xsd_read_error(void)
 {
 	ft_putendl_fd("Could not open XML Schema", STD_ERR);
 	xmlCleanupParser();
@@ -8,13 +20,13 @@ int		xsd_read_error(void)
 	exit(-1);
 }
 
-void	xml_alloc_error(void)
+void				xml_alloc_error(void)
 {
 	ft_putendl_fd("An error occured", STD_ERR);
 	exit(-1);
 }
 
-void	xml_read_error(void)
+void				xml_read_error(void)
 {
 	ft_putendl_fd("Wrong xml file\n", STD_ERR);
 	exit(-1);
@@ -34,7 +46,7 @@ static xmlSchemaPtr	get_xsd(char *xsd_path)
 	return (ptr_schema);
 }
 
-int			xsd_validate(char *xsd_path, xmlDocPtr doc)
+int					xsd_validate(char *xsd_path, xmlDocPtr doc)
 {
 	xmlSchemaPtr			ptr_schema;
 	xmlSchemaValidCtxtPtr	ptr_validctxt;

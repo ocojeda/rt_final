@@ -1,10 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_limits.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/04 19:07:34 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/11/04 19:07:35 by bbeldame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
 static void		parse_limit_node(t_limit *limit, xmlNodePtr node)
 {
 	xmlNodePtr	child;
+	xmlChar		*val;
 
-	set_attrs_limits(limit, node);
+	if ((val = xmlGetProp(node, (xmlChar *)"radius")))
+	{
+		limit->r = ft_atof((char *)val);
+		xmlFree(val);
+	}
 	if ((child = has_child(node, "pos")))
 		limit->pos = get_vec_from_node(child);
 	if ((child = has_child(node, "normal")))

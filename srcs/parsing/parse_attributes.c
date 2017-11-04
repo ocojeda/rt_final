@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_attributes.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/04 19:07:39 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/11/04 19:07:40 by bbeldame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
 static void		set_attrs4(t_obj *obj, xmlNodePtr node)
@@ -13,19 +25,19 @@ static void		set_attrs4(t_obj *obj, xmlNodePtr node)
 		obj->mat.sinus = 0;
 	if ((val = xmlGetProp(node, (xmlChar *)"damier")))
 	{
-		obj->mat.damier= ft_atof((char *)val);
+		obj->mat.damier = ft_atof((char *)val);
 		xmlFree(val);
 	}
 	else
-		obj->mat.damier= 0;
+		obj->mat.damier = 0;
 	if ((val = xmlGetProp(node, (xmlChar *)"refract_rate")))
 	{
 		obj->mat.refract_rate = ft_atof((char *)val);
 		xmlFree(val);
 	}
 	else
-		obj->mat.refract_rate = 0;	
-}	
+		obj->mat.refract_rate = 0;
+}
 
 static void		set_attrs3(t_obj *obj, xmlNodePtr node)
 {
@@ -45,6 +57,13 @@ static void		set_attrs3(t_obj *obj, xmlNodePtr node)
 	}
 	else
 		obj->mat.reflex_filter = 0;
+	if ((val = xmlGetProp(node, (xmlChar *)"angle")))
+	{
+		obj->k = ft_atof((char *)val);
+		xmlFree(val);
+	}
+	else
+		obj->k = 0;
 	set_attrs4(obj, node);
 }
 
@@ -64,8 +83,7 @@ static void		set_attrs2(t_obj *obj, xmlNodePtr node)
 		obj->mat.refract = ft_atof((char *)val);
 		xmlFree(val);
 	}
-	else
-	if ((val = xmlGetProp(node, (xmlChar *)"reflex")))
+	else if ((val = xmlGetProp(node, (xmlChar *)"reflex")))
 	{
 		obj->mat.reflex = ft_atof((char *)val);
 		xmlFree(val);
@@ -100,23 +118,5 @@ void			set_attrs(t_obj *obj, xmlNodePtr node)
 	}
 	else
 		obj->mat.spec = 0;
-	if ((val = xmlGetProp(node, (xmlChar *)"angle")))
-	{
-		obj->k = ft_atof((char *)val);
-		xmlFree(val);
-	}
-	else
-		obj->k = 0;
 	set_attrs2(obj, node);
-}
-
-void			set_attrs_limits(t_limit *limit, xmlNodePtr node)
-{
-	xmlChar		*val;
-
-	if ((val = xmlGetProp(node, (xmlChar *)"radius")))
-	{
-		limit->r = ft_atof((char *)val);
-		xmlFree(val);
-	}
 }

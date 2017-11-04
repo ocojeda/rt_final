@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gtk_launcher.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/04 19:08:43 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/11/04 19:08:44 by bbeldame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/rt.h"
 
-int					do_checks(xmlDocPtr doc)
+int				do_checks(xmlDocPtr doc)
 {
 	xmlValidCtxtPtr	vctxt;
 	int				xsd;
@@ -24,7 +36,7 @@ xmlDocPtr		getdoc(char *docname)
 	return (doc);
 }
 
-void		open_scene_clicked(GtkWidget *btn, t_rt *e)
+void			open_scene_clicked(GtkWidget *btn, t_rt *e)
 {
 	GtkWidget	*dialog;
 	GtkWidget	*win;
@@ -40,7 +52,7 @@ void		open_scene_clicked(GtkWidget *btn, t_rt *e)
 	res = gtk_dialog_run(GTK_DIALOG(dialog));
 	if (res == GTK_RESPONSE_ACCEPT)
 	{
-		SFILE = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));;
+		SFILE = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
 		gtk_widget_destroy(dialog);
 		if (!(doc = getdoc(SFILE)) || !do_checks(doc))
 			return ;
@@ -53,7 +65,7 @@ void		open_scene_clicked(GtkWidget *btn, t_rt *e)
 		gtk_widget_destroy(dialog);
 }
 
-void		open_scene(t_rt *e)
+void			open_scene(t_rt *e)
 {
 	GtkWidget	*btn;
 
@@ -62,7 +74,7 @@ void		open_scene(t_rt *e)
 	g_signal_connect(btn, "clicked", G_CALLBACK(open_scene_clicked), e);
 }
 
-void		ft_gtk_launcher(t_rt *e)
+void			ft_gtk_launcher(t_rt *e)
 {
 	open_scene(e);
 }
