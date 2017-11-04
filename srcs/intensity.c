@@ -6,51 +6,59 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 20:23:02 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/11/04 20:25:20 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/11/04 21:39:24 by ocojeda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/rt.h"
 
-float		obj_isnt_in_shadow(t_rt *e, t_vec3 poi, t_light *light)
+int				norme_shadow(t_reflect *ref, float *opac, t_rt *e)
 {
-	t_ray	ray;
-	float	dist;
-	float	dist_to_light;
-	float	opac;
-	int		i;
-	t_vec3	poi2;
+	t_vec3		poi2;
 
-	i = -1;
-	opac = 1;
-	light->ray.dir = vec_sub3(light->ray.pos, poi);
-	dist_to_light = get_length(light->ray.dir);
-	light->ray.dir = vec_norme3(light->ray.dir);
-	ray = c_ray(vec_add3(poi, light->ray.dir), light->ray.dir);
-	while (++i < e->scene.nbr_obj)
+	if (e->scene.obj[ref->a].mat.refract &&
+		e->scene.obj[ref->a].mat.damier && ref->min_dist > 0
+		&& ref->min_dist < ref->total_distance)
 	{
-		dist = intersect_obj(ray, &e->scene.obj[i], e);
-		if (dist > 0 && dist < dist_to_light && e->scene.obj[i].neg != 1)
+		poi2 = vec_add3(ref->light->ray.pos, vec_scale3(ref->light->ray.dir,
+				ref->min_dist));
+		if (damier(&poi2))
+			return (1);
+		*opac = e->scene.obj[ref->a].mat.refract_rate;
+	}
+	return (0);
+}
+
+float			obj_isnt_in_shadow(t_rt *e, t_vec3 poi, t_light *light)
+{
+	float		opac;
+	t_reflect	ref;
+
+	ref.light = light;
+	opac = set_isnt_in_shadow(ref.light, &ref, poi);
+	while (++ref.a < e->scene.nbr_obj)
+	{
+		ref.min_dist = intersect_obj(ref.ray, &e->scene.obj[ref.a], e);
+		if (ref.min_dist > 0 && ref.min_dist < ref.total_distance
+				&& e->scene.obj[ref.a].neg != 1)
 		{
-			if (dist > 0 && dist < dist_to_light && e->scene.obj[i].neg != 1
-				&& e->scene.obj[i].mat.damier == 0)
-				opac = e->scene.obj[i].mat.refract +
-					e->scene.obj[i].mat.reflex;
-			if (e->scene.obj[i].mat.refract && e->scene.obj[i].mat.damier
-				&& dist > 0 && dist < dist_to_light)
+			if (ref.min_dist > 0 && ref.min_dist < ref.total_distance &&
+		e->scene.obj[ref.a].neg != 1 && e->scene.obj[ref.a].mat.damier == 0)
 			{
-				poi2 = vec_add3(light->ray.pos,
-					vec_scale3(light->ray.dir, dist));
-				if (damier(&poi2))
-					return (0);
-				opac = e->scene.obj[i].mat.refract_rate;
+				if (e->scene.obj[ref.a].mat.refract)
+					opac = 1 - e->scene.obj[ref.a].mat.refract_rate;
+				else
+					opac = e->scene.obj[ref.a].mat.refract_rate
+					+ e->scene.obj[ref.a].mat.reflex;
 			}
+			if (norme_shadow(&ref, &opac, e))
+				return (0);
 		}
 	}
 	return (opac);
 }
 
-float		spec_intensity(t_rt *e, t_ray light, t_vec3 poi, t_ray ray)
+float			spec_intensity(t_rt *e, t_ray light, t_vec3 poi, t_ray ray)
 {
 	float	intensity;
 	t_ray	refl;
@@ -68,7 +76,7 @@ float		spec_intensity(t_rt *e, t_ray light, t_vec3 poi, t_ray ray)
 	return (intensity);
 }
 
-float		intensity_obj(t_rt *e, t_vec3 poi, t_ray ray, t_light light)
+float			intensity_obj(t_rt *e, t_vec3 poi, t_ray ray, t_light light)
 {
 	float	intensity;
 	t_vec3	norm;
@@ -89,7 +97,7 @@ float		intensity_obj(t_rt *e, t_vec3 poi, t_ray ray, t_light light)
 	return (intensity * transp + AMBIENT_LIGHT);
 }
 
-float		diff_intensity(t_obj obj, float dot)
+float			diff_intensity(t_obj obj, float dot)
 {
 	float	intensity;
 

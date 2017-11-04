@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<scene width="800" height="800" ambient="0.2">
+	<lights>
+		<light intensity="0.1">
+		    <pos x="800" y="1200" z="0"/>
+			<color r="255" g="0" b="0"/>
+		</light>
+		<light intensity="0.1">
+		    <pos x="800" y="0" z="-5000"/>
+			<color r="255" g="0" b="0"/>
+		</light>
+	</lights>
+
+	<camera fov="60">
+		<pos x="0" y="0" z="-4000"/>
+	</camera>
+
+	<objects>
+		<plane diff="0.4" spec="0.5" damier='1'>
+			<pos x="400" y="400" z="900" />
+			<normal x="0" y="0" z="-1"/>
+			<color r="200" g="200" b="100"/>
+		</plane>
+
+		<plane diff="0.4" spec="0.5">
+			<pos x="900" y="-3000" z="0" />
+			<normal x="0" y="1" z="0"/>
+			<color r="255" g="200" b="0"/>
+		</plane>
+
+		<cylinder radius="40" diff="0.4" spec="0.5">
+			<pos x="0" y="0" z="1200" />
+			<normal x="0.5" y="1" z="0"/>
+			<color r="0" g="255" b="0"/>
+		</cylinder>
+		<sphere radius="1000" diff="0.5" spec="0.5" damier='1'>
+			<pos x="0" y="0" z="-1500"/>
+			<color r="140" g="140" b="140"/>
+		</sphere>
+
+		<sphere radius="100" diff="0.6" spec="1">
+			<pos x="0" y="100" z="300"/>
+			<color r="255" g="0" b="0"/>
+		</sphere>
+	</objects>
+</scene>

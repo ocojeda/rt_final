@@ -84,5 +84,5 @@ t_color			get_refracted_color(t_rt *e, t_vec3 poi, t_color bc,
 		}
 		return (ft_map_color(bc, n.final_color, n.distance_rate));
 	}
-	return (bc);
+	return (ft_map_color(bc, n.temp_color1, 2 - n.distance_rate));
 }

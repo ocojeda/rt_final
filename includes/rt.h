@@ -261,6 +261,7 @@ typedef struct		s_reflect
 {
 	t_ray			ray;
 	t_ray			new_ray;
+	t_light			*light;
 	t_vec3			poi;
 	t_color			color;
 	int				type;
@@ -517,4 +518,5 @@ float				intersect_limit_sphere(t_ray ray, t_limit *sphere);
 t_rt				*copy_rt(t_rt *e);
 t_light				copy_light(t_light light);
 void				finish_it(t_rt **th_e, t_rt *e);
+int					set_isnt_in_shadow(t_light *light, t_reflect *ref, t_vec3 poi);
 #endif
