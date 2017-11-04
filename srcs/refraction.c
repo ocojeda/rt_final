@@ -67,11 +67,11 @@ t_color			get_refracted_color(t_rt *e, t_vec3 poi, t_color base_color,
 					if((damier(&n.newpoi, e)))
 						return (n.final_color);
 				n.temp_color1 = get_refracted_color(e, n.newpoi, base_color, ref);
-                return (ft_map_color(base_color, n.temp_color1, 2 - n.distance_rate));
+                return (ft_map_color(base_color, n.temp_color1, 1 - n.distance_rate));
 			}
 			return (ft_map_color(base_color, n.final_color, n.distance_rate));
 		}
-		//return (ft_map_color(base_color, n.temp_color1, 2 - n.distance_rate));
-		return (base_color);
+		return (ft_map_color(base_color, n.temp_color1, 2 - n.distance_rate));
+		//return (base_color);
 		//return (ft_map_color(base_color, c_color(0,0,0), n.taux_temp));
 }
