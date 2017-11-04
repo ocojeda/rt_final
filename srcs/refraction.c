@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 20:03:32 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/11/04 20:10:01 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/11/04 21:17:58 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,12 @@ static void		g_norme(t_rt *e, t_reflect *ref, t_norme *n, t_vec3 poi)
 		* n->taux_temp;
 }
 
-void			prepare_refraction(t_rt *e, t_color *base_color,
+void			prepare_refraction(t_rt *e,
 	t_norme *n, t_reflect *ref, t_vec3 poi)
 {
 	n->newpoi = vec_add3(ref->new_ray.pos, vec_scale3(ref->new_ray.dir,
 				ref->min_dist));
 	n->final_color = get_color(e, e->scene.obj[n->a], poi, ref->new_ray);
-	*base_color = ft_map_color(*base_color, n->final_color, n->taux_temp);
 	e->scene.id = n->a;
 }
 
@@ -67,12 +66,12 @@ t_color			get_refracted_color(t_rt *e, t_vec3 poi, t_color bc,
 	g_norme(e, &ref, &n, poi);
 	if (ref.min_dist < DIST_MAX && ref.total_distance < DIST_MAX)
 	{
-		prepare_refraction(e, &bc, &n, &ref, poi);
+		prepare_refraction(e, &n, &ref, poi);
+		bc = ft_map_color(bc, n.final_color, n.taux_temp);
 		ref.ray = c_ray(poi, ref.new_ray.dir);
 		if (e->scene.obj[n.a].mat.reflex)
 		{
-			n.temp_color1 = get_refracted_color(e, n.newpoi, bc, ref);
-			return (ft_map_color(bc, n.temp_color1,
+			return (ft_map_color(bc, get_refracted_color(e, n.newpoi, bc, ref),
 				e->scene.obj[n.a].mat.reflex - n.distance_rate));
 		}
 		if (e->scene.obj[n.a].mat.refract)
