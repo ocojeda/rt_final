@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   skybox.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/04 19:57:36 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/11/04 19:57:53 by bbeldame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/rt.h"
 
 t_color			get_text_color(int x, int y, t_texture tex)
@@ -29,10 +41,6 @@ t_color			skybox(t_rt *e, t_ray ray)
 	i = -1;
 	intensity = 0;
 	color_sky = (t_color){0, 0, 0, 0};
-	//while (++i < e->scene.nbr_light)
-	//	intensity += dazzling_light(e, e->CLIGHT, vec_norme3(ray.dir));
-	//while (++i < e->scene.nbr_light)
-	//	intensity = 1;
 	if (!(e->scene.skybox.is_init))
 		return (color_mult((t_color){0, 0, 0, 0}, intensity, 0));
 	norm = vec_norme3(ray.dir);
@@ -40,7 +48,5 @@ t_color			skybox(t_rt *e, t_ray ray)
 	uv.y = norm.y * 0.5 + 0.5;
 	uv.x = e->scene.skybox.width * (1 - uv.x);
 	uv.y = e->scene.skybox.height * (1 - uv.y);
-	return(color_sky = get_text_color((int)uv.x, (int)uv.y, e->scene.skybox));
-	//intensity *= (color_is_black(&color_sky)) ? 100 : 5;
-	return (color_mult(color_sky, 1 + intensity, 0));
+	return (color_sky = get_text_color((int)uv.x, (int)uv.y, e->scene.skybox));
 }
