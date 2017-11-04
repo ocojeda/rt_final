@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 20:03:32 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/11/04 20:10:01 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/11/04 21:41:23 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_ray			get_refracted_ray(t_rt *e, t_ray rayon, t_vec3 poi)
 
 	ray.pos = poi;
 	normale = object_norm(e->scene.obj[e->scene.id],
-		poi, e->scene.cam.pos, rayon);
+		poi, e->scene.cam.pos);
 	ray.dir = vec_add3(vec_scale3(normale,
 		e->scene.obj[e->scene.id].mat.refract_rate *
 			(vec_dot3(rayon.dir, normale))), rayon.dir);

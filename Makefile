@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/11/04 21:48:04 by bbeldame          #+#    #+#              #
+#    Updated: 2017/11/04 21:48:16 by bbeldame         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 PROJECT		=	RT
 NAME		=	rt
 OBJDIR		=	objs/
@@ -60,7 +72,7 @@ OBJ			:=	$(notdir $(OBJ))
 OBJ			:=	$(addprefix $(OBJDIR), $(OBJ))
 CC			=	gcc
 INC 		=	includes
-CFLAGS		=	-Wall -Wextra -g -I includes/ -I libs/libft/includes/ -I libs/libvec/includes/ $(LIB_GTK_H) $(LIBXML_H) # add werror
+CFLAGS		=	-Wall -Wextra -Werror -g -I includes/ -I libs/libft/includes/ -I libs/libvec/includes/ $(LIB_GTK_H) $(LIBXML_H)
 MLXF		=	-framework OpenGL -framework AppKit -lxml2
 WHITE		=	\033[7;49;39m
 BLUE		=	\033[7;49;34m

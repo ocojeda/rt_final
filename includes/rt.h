@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rt.h                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/04 20:42:52 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/11/04 21:40:56 by bbeldame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RT_H
 # define RT_H
 
@@ -352,71 +364,50 @@ typedef struct		s_rt
 	int				frame;
 }					t_rt;
 
-void			ft_start_rt(t_rt *e);
+void				ft_start_rt(t_rt *e);
 
-/*
-* multhread fonctions
-*/
-void			frame(t_rt *e);
+void				frame(t_rt *e);
 
-/*
-* color managing fonctions
-*/
-unsigned int	ret_colors(t_color colo);
-t_color			c_color(float r, float g, float b);
-t_color			color_mult(t_color color, float taux, float limit);
-t_color			ft_map_color(t_color color1, t_color color2, float taux1);
+unsigned int		ret_colors(t_color colo);
+t_color				c_color(float r, float g, float b);
+t_color				color_mult(t_color color, float taux, float limit);
+t_color				ft_map_color(t_color color1, t_color color2, float taux1);
 
-/*
-*raytracing basic fonctions
-*/
-t_color			raytrace(int x, int y, t_rt *e);
-t_ray			ray_init(t_rt *e, int x, int y);
+t_color				raytrace(int x, int y, t_rt *e);
+t_ray				ray_init(t_rt *e, int x, int y);
 
-t_ray			c_ray(t_vec3 i, t_vec3 j);
-t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi, t_ray ray);
+t_ray				c_ray(t_vec3 i, t_vec3 j);
+t_color				get_color(t_rt *e, t_obj obj, t_vec3 poi, t_ray ray);
 
-/*
-*mlx relative fonctions
-*/
-void			pixel_to_image(int x, int y, t_rt *e, int color);
-int				keypress(int keycode, void *param);
-int				mousse_hook(int button, int x, int y, void *param);
-int				mouse_hook_escape(t_rt *e);
-/*
-* intersect fonctions
-*/
+void				pixel_to_image(int x, int y, t_rt *e, int color);
+int					keypress(int keycode, void *param);
+int					mousse_hook(int button, int x, int y, void *param);
+int					mouse_hook_escape(t_rt *e);
 
-float			check_negative_objects(float dist_obj, t_rt *e, t_ray ray, float max_dist);
-float			intersect_obj(t_ray ray, t_obj *obj, t_rt *e);
-float			intersect_sphere(t_ray ray, t_obj *sphere);
-float			intersect_plane(t_ray ray, t_obj *plane);
-float			intersect_cylinder(t_ray ray, t_obj *cyl);
-float			intersect_cone(t_ray ray, t_obj *cone);
-float			get_res_of_quadratic(t_calc *op, t_obj *obj);
-float			get_min_dist(t_rt *e, t_ray ray);
-float			intersect_paraboloid(t_ray ray, t_obj *parab);
+float				check_negative_objects(float dist_obj,
+	t_rt *e, t_ray ray, float max_dist);
+float				intersect_obj(t_ray ray, t_obj *obj, t_rt *e);
+float				intersect_sphere(t_ray ray, t_obj *sphere);
+float				intersect_plane(t_ray ray, t_obj *plane);
+float				intersect_cylinder(t_ray ray, t_obj *cyl);
+float				intersect_cone(t_ray ray, t_obj *cone);
+float				get_res_of_quadratic(t_calc *op, t_obj *obj);
+float				get_min_dist(t_rt *e, t_ray ray);
+float				intersect_paraboloid(t_ray ray, t_obj *parab);
 
-float			intersect_obj_limit(t_ray ray, t_limit *obj, t_rt *e);
-// float			intersect_limit_sphere(t_ray ray, t_limit *sphere);
+float				intersect_obj_limit(t_ray ray, t_limit *obj, t_rt *e);
 
-int				damier(t_vec3 *pos);
-/*
-* math aux fonctions
-*/
-float			p(float x);
-float			get_length(t_vec3 v);
+int					damier(t_vec3 *pos);
+float				p(float x);
+float				get_length(t_vec3 v);
 
-/*
-* fonction pour les normales
-*/
-t_vec3				object_norm(t_obj obj, t_vec3 poi, t_vec3 cam, t_ray ray);
+t_vec3				object_norm(t_obj obj, t_vec3 poi, t_vec3 cam);
 t_vec3				cone_norm(t_obj obj, t_vec3 poi);
-t_vec3				plane_norm(t_obj plane, t_ray ray);
+float				intersect_plane(t_ray ray, t_obj *plane);
 t_vec3				sphere_norm(t_obj obj, t_vec3 poi);
 t_vec3				cylinder_norm(t_obj obj, t_vec3 poi);
 t_vec3				paraboloid_norm(t_obj cone, t_vec3 poi);
-
+t_vec3				plane_norm(t_obj plane);
 /*
 *	que le lumiere soit
 */
@@ -453,7 +444,6 @@ float			intersect_cone_neg(t_ray ray, t_obj *cone, float dist_obj, float max_dis
 float			intersect_cylinder_neg(t_ray ray, t_obj *cyl, float dist_obj, float max_dist);
 float			intersect_sphere_neg(t_ray ray, t_obj *sphere, float dist_obj, float max_dist);
 float			intersect_paraboloid_neg(t_ray ray, t_obj *parab, float dist_obj, float max_dist);
-
 /*
 ** Parse
 */
