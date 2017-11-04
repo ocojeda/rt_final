@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytrace.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfaure <tfaure@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 20:19:40 by tfaure            #+#    #+#             */
-/*   Updated: 2017/11/04 20:40:32 by tfaure           ###   ########.fr       */
+/*   Updated: 2017/11/04 21:43:17 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ float		rand_noise(int t)
 	return (1.0 - (t & 0x7fffffff) / 1073741824.0);
 }
 
-int			begin_raytracer(t_rt *e, t_ray *ray, t_reflect *ref, t_norme *a)
+int			begin_raytracer(t_rt *e, t_ray *ray, t_reflect *ref)
 {
 	float		tmp;
 
@@ -78,9 +78,8 @@ t_color		refract_or_damier(t_rt *e, t_ray *ray, t_reflect *ref)
 t_color		get_pxl_color(t_rt *e, t_ray ray)
 {
 	t_reflect	ref;
-	t_norme		a;
 
-	if (begin_raytracer(e, &ray, &ref, &a))
+	if (begin_raytracer(e, &ray, &ref))
 		return (ref.color);
 	else if (COBJ[e->scene.id].mat.refract == 1)
 		return (refract_or_damier(e, &ray, &ref));

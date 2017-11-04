@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 20:42:52 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/11/04 21:08:27 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/11/04 21:40:56 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -390,7 +390,7 @@ int					damier(t_vec3 *pos);
 float				p(float x);
 float				get_length(t_vec3 v);
 
-t_vec3				object_norm(t_obj obj, t_vec3 poi, t_vec3 cam, t_ray ray);
+t_vec3				object_norm(t_obj obj, t_vec3 poi, t_vec3 cam);
 t_vec3				cone_norm(t_obj obj, t_vec3 poi);
 t_vec3				plane_norm(t_obj plane);
 t_vec3				sphere_norm(t_obj obj, t_vec3 poi);
