@@ -48,6 +48,7 @@ SRC			=	main.c \
 				copy_scene.c \
 				copy_scene2.c \
 				finish_it.c \
+				hooks2.c \
 				parsing/parse.c \
 				parsing/checks.c \
 				parsing/parser_utils.c \

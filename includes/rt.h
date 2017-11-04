@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 20:42:52 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/11/04 21:40:56 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/11/05 00:06:50 by ocojeda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,7 @@ typedef	struct		s_limit
 
 typedef struct		s_obj
 {
-	float				max_dist;
+	float			max_dist;
 	int				type;
 	t_color			color;
 	t_vec3			pos;
@@ -208,7 +208,6 @@ typedef struct		s_obj
 	t_vec3			vector;
 	int				r;
 	int				nbr_t;
-	//t_vec3			normal;
 	t_matiere		mat;
 	int				neg;
 	int				limit_active;
@@ -233,18 +232,13 @@ typedef struct		s_scene
 	t_texture		skybox;
 	int				x;
 	int				y;
-//	int				last;
 	float			ambient;
 	int				nbr_light;
 	int				nbr_obj;
-//	int				nbr_complex;
-//	char			nbr_tot;
 	int				id;
-//	int				supersampling;
 	int				selected_obj;
 	int				selected;
 	int				filters;
-//	int				max_iter;
 }					t_scene;
 
 typedef struct		s_file
@@ -341,7 +335,7 @@ typedef struct		s_gtk_settings
 	int				width;
 	int				height;
 	int				res;
-	int 			filt;
+	int				filt;
 	GtkWidget		*anti_aliasing;
 }					t_gtk_settings;
 
@@ -356,7 +350,6 @@ typedef struct		s_gtk
 typedef struct		s_rt
 {
 	t_mlx			mlx;
-//	t_keys			keys;
 	t_gtk			gtk;
 	t_scene			scene;
 	t_file			file;
@@ -403,50 +396,40 @@ float				get_length(t_vec3 v);
 
 t_vec3				object_norm(t_obj obj, t_vec3 poi, t_vec3 cam);
 t_vec3				cone_norm(t_obj obj, t_vec3 poi);
-float				intersect_plane(t_ray ray, t_obj *plane);
+t_vec3				plane_norm(t_obj plane);
 t_vec3				sphere_norm(t_obj obj, t_vec3 poi);
 t_vec3				cylinder_norm(t_obj obj, t_vec3 poi);
 t_vec3				paraboloid_norm(t_obj cone, t_vec3 poi);
-t_vec3				plane_norm(t_obj plane);
-/*
-*	que le lumiere soit
-*/
 
-float		intensity_obj(t_rt *e, t_vec3 poi, t_ray ray, t_light light);
-float		diff_intensity(t_obj obj, float dot);
+float				intensity_obj(t_rt *e, t_vec3 poi,
+	t_ray ray, t_light light);
+float				diff_intensity(t_obj obj, float dot);
 
-/*
-*	reflexion fonctions
-*/
-t_color			get_reflected_color(t_rt *e, t_vec3 poi, t_color base_color,
+t_color				get_reflected_color(t_rt *e, t_vec3 poi, t_color base_color,
 	t_reflect ref);
 
-/*
-*	REFRACTION
-*/
-float			find_min_dist_for_refref(t_rt *e, int *a, t_ray ray);
-t_color			get_refracted_color(t_rt *e, t_vec3 poi, t_color base_color,
+float				find_min_dist_for_refref(t_rt *e, int *a, t_ray ray);
+t_color				get_refracted_color(t_rt *e, t_vec3 poi, t_color base_color,
 	t_reflect ref);
-t_ray			get_reflected_ray(t_rt *e, t_ray rayon, t_vec3 poi);
+t_ray				get_reflected_ray(t_rt *e, t_ray rayon, t_vec3 poi);
 
- /*
- *	skybox
- */
-t_color			skybox(t_rt *e, t_ray ray);
-t_color			get_text_color(int x, int y, t_texture tex);
+t_color				skybox(t_rt *e, t_ray ray);
+t_color				get_text_color(int x, int y, t_texture tex);
 
-void			matrix_init(t_rt *e);
-void			filter_black_and_white(t_rt *e);
-void			filters(t_rt *e);
+void				matrix_init(t_rt *e);
+void				filter_black_and_white(t_rt *e);
+void				filters(t_rt *e);
 
-float			get_res_of_quadratic_neg(t_calc *op, t_obj *obj, float dist_obj, float max_dist);
-float			intersect_cone_neg(t_ray ray, t_obj *cone, float dist_obj, float max_dist);
-float			intersect_cylinder_neg(t_ray ray, t_obj *cyl, float dist_obj, float max_dist);
-float			intersect_sphere_neg(t_ray ray, t_obj *sphere, float dist_obj, float max_dist);
-float			intersect_paraboloid_neg(t_ray ray, t_obj *parab, float dist_obj, float max_dist);
-/*
-** Parse
-*/
+float				get_res_of_quadratic_neg(t_calc *op, t_obj *obj,
+	float dist_obj, float max_dist);
+float				intersect_cone_neg(t_ray ray, t_obj *cone,
+	float dist_obj, float max_dist);
+float				intersect_cylinder_neg(t_ray ray, t_obj *cyl,
+	float dist_obj, float max_dist);
+float				intersect_sphere_neg(t_ray ray, t_obj *sphere,
+	float dist_obj, float max_dist);
+float				intersect_paraboloid_neg(t_ray ray, t_obj *parab,
+	float dist_obj, float max_dist);
 
 void				parse(t_rt *e, int argc, char **argv);
 void				parse2(t_rt *e, xmlDocPtr doc);
@@ -461,9 +444,6 @@ void				parse_camera(t_rt *e, xmlNodePtr node);
 void				parse_lights(t_rt *e, t_list *lst);
 void				set_attrs(t_obj *obj, xmlNodePtr node);
 
-/*
-*	GTK fonctions
-*/
 gboolean			hook(GtkWidget *widget, GdkEventKey *event,
 		gpointer user_data);
 void				ft_gtk_start_launcher(t_rt *e);
@@ -474,22 +454,11 @@ void				ft_gtk_link_css(GtkWidget *window, gchar *css);
 int					xsd_validate(char *xsd_path, xmlDocPtr doc);
 int					calcul_res(t_rt *e, int limit);
 
-/*
-*	Screenshot
-*/
 void				screenshot_ppm(t_rt *e);
-/*
-*	BRUIT
-*/
 t_color				bruit(float valeur, t_color c1, t_color c2, float seuil);
 t_color				bruit2(float valeur, t_color c1, t_color c2, float x);
 t_color				bruit3(float valeur, int x, int y);
-
-float 				bruit_coherent(float x, float y, float persistance);
-/*
-** Parse
-*/
-
+float				bruit_coherent(float x, float y, float persistance);
 void				parse(t_rt *e, int argc, char **argv);
 void				check_doc(xmlDocPtr	doc);
 void				get_nodes_by_name(xmlNodePtr cur,
@@ -511,4 +480,5 @@ float				intersect_limit_sphere(t_ray ray, t_limit *sphere);
 t_rt				*copy_rt(t_rt *e);
 t_light				copy_light(t_light light);
 void				finish_it(t_rt **th_e, t_rt *e);
+void				keypress4(int keycode, t_rt *e, int i);
 #endif
