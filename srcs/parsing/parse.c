@@ -1,6 +1,6 @@
 #include "rt.h"
 
-static int			calcul_res(t_rt *e, int limit)
+int			calcul_res(t_rt *e, int limit)
 {
 	int res;
 	int air;
@@ -35,15 +35,13 @@ static void			parse_scene(t_rt *e, xmlNodePtr node)
 	xmlFree(val);
 }
 
-void				parse(t_rt *e, int ac, char **av)
+void				parse2(t_rt *e, xmlDocPtr doc)
 {
-	xmlDocPtr	doc;
 	xmlNodePtr	root;
 	t_list		*lst;
 
-	if (ac != 2 || ft_strncmp(ft_strrev(av[1]), "lmx.", 4) != 0)
-		err_found("usage: rt input_map.xml");
-	if (!(doc = xmlParseFile(ft_strrev(av[1]))))
+	lst = NULL;
+	if (doc == NULL)
 		err_found("Wrong xml file");
 	check_doc(doc);
 	root = xmlDocGetRootElement(doc);
@@ -62,4 +60,14 @@ void				parse(t_rt *e, int ac, char **av)
 	ft_lstfree(&lst);
 	xmlFreeDoc(doc);
 	xmlCleanupParser();
+}
+
+void				parse(t_rt *e, int ac, char **av)
+{
+	xmlDocPtr	doc;
+
+	if (ac != 2 || ft_strncmp(ft_strrev(av[1]), "lmx.", 4) != 0)
+		err_found("usage: rt input_map.xml");
+	doc = xmlParseFile(ft_strrev(av[1]));
+	parse2(e, doc);
 }

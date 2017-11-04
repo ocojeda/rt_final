@@ -23,10 +23,16 @@ SRC			=	main.c \
 				paraboloid.c \
 				skybox.c \
 				limit_intersect.c \
+				screen.c \
+				gtk/gtk_init.c \
+				gtk/gtk_launcher.c \
+				gtk/gtk_new.c \
+				gtk/gtk_check.c \
 				bruit.c \
 				intersect.c \
 				negative_intersect.c \
 				damier.c \
+				get_color.c \
 				parsing/parse.c \
 				parsing/checks.c \
 				parsing/parser_utils.c \
@@ -36,19 +42,22 @@ SRC			=	main.c \
 				parsing/parse_limits.c \
 				parsing/parse_skybox.c \
 				parsing/parse_lights.c
+
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a
 LIBVEC		=	libs/libvec/libvec.a
 LIBXML		=	`xml2-config --libs`
 LIBXML_H	=	`xml2-config --cflags`
-VPATH		=	$(SRCDIR):$(SRCDIR)parsing
+LIB_GTK		=	`pkg-config --libs gtk+-3.0`
+LIB_GTK_H	=	`pkg-config --cflags gtk+-3.0`
+VPATH		=	$(SRCDIR):$(SRCDIR)gtk $(SRCDIR):$(SRCDIR)parsing
 
 OBJ			=	$(SRC:.c=.o)
 OBJ			:=	$(notdir $(OBJ))
 OBJ			:=	$(addprefix $(OBJDIR), $(OBJ))
 CC			=	gcc
 INC 		=	includes
-CFLAGS		=	-Wall -Wextra -g -I includes/ -I libs/libft/includes/ -I libs/libvec/includes/ $(LIBXML_H) # add werror
+CFLAGS		=	-Wall -Wextra -g -I includes/ -I libs/libft/includes/ -I libs/libvec/includes/ $(LIB_GTK_H) $(LIBXML_H) # add werror
 MLXF		=	-framework OpenGL -framework AppKit -lxml2
 WHITE		=	\033[7;49;39m
 BLUE		=	\033[7;49;34m
@@ -64,7 +73,7 @@ all: mlx lib vec $(NAME)
 $(NAME): $(MINILIBX) $(LIBFT) $(OBJDIR) $(OBJ)
 	@printf "\r$(GREEN)[$(PROJECT)] Obj compilation done.                                                        \n"
 	@printf "$(YELLOW)[$(PROJECT)] Compiling $(NAME)..."
-	@$(CC) $(CFLAGS) $(MLXF) -o $(NAME) $(OBJ) $(MINILIBX) $(LIBFT) $(LIBVEC) $(LIBXML)
+	@$(CC) $(CFLAGS) $(MLXF) -o $(NAME) $(OBJ) $(MINILIBX) $(LIBFT) $(LIBVEC) $(LIB_GTK) $(LIBXML)
 	@printf "\r$(GREEN)[$(PROJECT)] Compilation done.                          \n$(NO_COLOR)"
 
 $(OBJDIR)%.o: %.c

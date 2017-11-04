@@ -17,12 +17,14 @@ static void		g_norme(t_rt *e, t_reflect *ref, t_norme *n, t_vec3 poi)
     ref->counter--;
     if(e->scene.obj[e->scene.id].mat.reflex)
     {  
-        ref->new_ray = get_reflected_ray(e, ref->ray, poi);
-        n->taux_temp = e->scene.obj[e->scene.id].mat.reflex;
+		ref->new_ray = get_reflected_ray(e, ref->ray, poi);
+		ref->new_ray.pos = vec_add3(ref->new_ray.pos, ref->new_ray.dir);
+		n->taux_temp = e->scene.obj[e->scene.id].mat.reflex;
     }
     else
     {
-        ref->new_ray = get_refracted_ray(e, ref->ray, poi);
+		ref->new_ray = get_refracted_ray(e, ref->ray, poi);
+		ref->new_ray.pos = vec_add3(ref->new_ray.pos, ref->new_ray.dir);
         n->taux_temp += e->scene.obj[e->scene.id].mat.refract;
     }
 	ref->min_dist = find_min_dist_for_refref(e, &n->a, ref->new_ray);
@@ -32,11 +34,11 @@ static void		g_norme(t_rt *e, t_reflect *ref, t_norme *n, t_vec3 poi)
 }
 
 void			prepare_refraction(t_rt *e, t_color *base_color,
-		t_norme *n, t_reflect *ref)
+		t_norme *n, t_reflect *ref, t_vec3 poi)
 {
 	n->newpoi = vec_add3(ref->new_ray.pos, vec_scale3(ref->new_ray.dir,
 	ref->min_dist));
-	n->final_color = get_color(e, e->scene.obj[n->a], n->newpoi, ref->new_ray);
+	n->final_color = get_color(e, e->scene.obj[n->a], poi, ref->new_ray);
 	*base_color = ft_map_color(*base_color, n->final_color, n->taux_temp);
 	e->scene.id = n->a;
 }
@@ -46,29 +48,30 @@ t_color			get_refracted_color(t_rt *e, t_vec3 poi, t_color base_color,
 	t_reflect ref)
 {
 		t_norme		n;
-		t_vec3 pos_tmp;
 	
 		if (ref.counter == 0)
 			return (base_color);
 		g_norme(e, &ref, &n, poi);
-		if (ref.min_dist < DIST_MAX)
+		if (ref.min_dist < DIST_MAX && ref.total_distance < DIST_MAX)
 		{
-			prepare_refraction(e, &base_color, &n, &ref);
+			prepare_refraction(e, &base_color, &n, &ref, poi);
 			ref.ray = c_ray(poi, ref.new_ray.dir);
-            if (e->scene.obj[n.a].mat.refract)
-			{
-				pos_tmp = vec_sub3(e->scene.obj[n.a].pos, n.newpoi);
-					if((damier(&pos_tmp, e)))
-						return (n.final_color);
-				n.temp_color1 = get_refracted_color(e, n.newpoi, base_color, ref);
-                return (ft_map_color(base_color, n.temp_color1, n.distance_rate));
-			}
-            else if (e->scene.obj[n.a].mat.reflex)
+			if (e->scene.obj[n.a].mat.reflex)
             {
                 n.temp_color1 = get_refracted_color(e, n.newpoi, base_color, ref);
-				return (ft_map_color(base_color, n.temp_color1, 1 - n.distance_rate));
+                return (ft_map_color(base_color, n.temp_color1, e->scene.obj[n.a].mat.reflex - n.distance_rate));
             }
+			if (e->scene.obj[n.a].mat.refract)
+			{
+				if (e->scene.obj[n.a].mat.damier == 1)
+					if((damier(&n.newpoi, e)))
+						return (n.final_color);
+				n.temp_color1 = get_refracted_color(e, n.newpoi, base_color, ref);
+                return (ft_map_color(base_color, n.temp_color1, 2 - n.distance_rate));
+			}
 			return (ft_map_color(base_color, n.final_color, n.distance_rate));
 		}
-		return (ft_map_color(base_color, c_color(0,0,0), n.taux_temp));
+		//return (ft_map_color(base_color, n.temp_color1, 2 - n.distance_rate));
+		return (base_color);
+		//return (ft_map_color(base_color, c_color(0,0,0), n.taux_temp));
 }

@@ -2,14 +2,13 @@
 
 int			damier(t_vec3 *pos, t_rt *e)
 {
-  int x;
-  int y;
-  int z;
-
-
-  x = (int)((pos->x + 1100) / 500);
-  y = (int)((pos->y + 700) / 500);
-  z = (int)((pos->z + 1100) / 500);
+  int x = (int)pos->x;
+  int y = (int)pos->y;
+  int z = (int)pos->z;
+  
+  x = (int)((x + 13000) / 500);
+  y = (int)(y / 500);
+  z = (int)((z + 13000) / 500);
   if (x % 2 == 0)
     {
       if (((y % 2 == 0) && (z % 2 == 0)) ||
@@ -25,5 +24,5 @@ int			damier(t_vec3 *pos, t_rt *e)
 	return (1);
       else
 	return (0);
-	  }
+  }
 }

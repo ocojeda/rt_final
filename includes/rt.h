@@ -19,6 +19,8 @@
 # include <libxml/xmlstring.h>
 # include <libxml/xmlreader.h>
 
+# include <gtk/gtk.h>
+
 # define END 0
 # define CONE 1
 # define PLANE 2
@@ -76,7 +78,7 @@
 # define KEY_UP 126
 # define KEY_ESC 53
 # define KEY_HOME 115
-
+# define KEY_DEL 117
 # define CCAM e->scene.cam
 # define CLIGHT scene.lights[i]
 # define AMBIENT_LIGHT e->scene.ambient
@@ -89,19 +91,23 @@
 # define HAUTEUR e->file.haut
 # define LARGEUR e->file.larg
 # define RES e->file.reso
+# define RES_BUFF e->file.reso_buff
 # define RES_H (HAUTEUR / RES)
 # define RES_W (LARGEUR / RES)
+# define SFILE e->file.path
+# define FILT e->scene.filters
 
 # define MAXOBJ 50
 # define NR_ITER 30
 # define MAXLIGHT 21
 # define NB_THREADS 8
-# define DIST_MAX 8000000
-# define DIST_MIN -800000
+# define DIST_MAX 2000000
+# define DIST_MIN -80000
 # define EPSILON 1e-7
 # define SIZE_LP 50
 
 # define VALIDATOR_XSD "validator.xsd"
+# define STD_ERR 2
 
 typedef struct		s_ray
 {
@@ -212,6 +218,8 @@ typedef struct		s_scene
 	t_light			*lights;
 	t_obj			*obj;
 	t_texture		skybox;
+	int				x;
+	int				y;
 //	int				last;
 	float			ambient;
 	int				nbr_light;
@@ -231,7 +239,7 @@ typedef struct		s_file
 	char			*path;
 	int				haut;
 	int				larg;
-//	int				fdp;
+	int				fd_exp;
 	int				reso;
 	int				reso_buff;
 	int				aliasing;
@@ -247,17 +255,6 @@ typedef struct		s_mlx
 	int				size_l;
 	int				endian;
 }					t_mlx;
-
-typedef struct		s_rt
-{
-	t_mlx			mlx;
-//	t_keys			keys;
-//	t_gtk			gtk;
-	t_scene			scene;
-	t_file			file;
-	t_mthread		thread;
-	int				frame;
-}					t_rt;
 
 typedef struct		s_reflect
 {
@@ -308,6 +305,48 @@ typedef struct		s_norme
 	t_color			color;
 }					t_norme;
 
+typedef struct		s_gtk_input
+{
+	gint			max_size;
+	gint			max_char;
+	gchar			*placeholder;
+	gchar			*deflaut_value;
+}					t_gtk_input;
+
+typedef struct		s_gtk_win
+{
+	GtkWidget		*window;
+	GtkWidget		*layout;
+}					t_gtk_win;
+
+typedef struct		s_gtk_settings
+{
+	int				width;
+	int				height;
+	int				res;
+	int 			filt;
+	GtkWidget		*anti_aliasing;
+}					t_gtk_settings;
+
+typedef struct		s_gtk
+{
+	t_gtk_win		menu;
+	t_gtk_win		settings;
+	t_gtk_settings	values;
+	int				started;
+}					t_gtk;
+
+typedef struct		s_rt
+{
+	t_mlx			mlx;
+//	t_keys			keys;
+	t_gtk			gtk;
+	t_scene			scene;
+	t_file			file;
+	t_mthread		thread;
+	int				frame;
+}					t_rt;
+
 void			ft_start_rt(t_rt *e);
 
 /*
@@ -330,7 +369,7 @@ t_color			raytrace(int x, int y, t_rt *e);
 t_ray			ray_init(t_rt *e, int x, int y);
 
 t_ray			c_ray(t_vec3 i, t_vec3 j);
-t_color			get_color(t_rt *e, t_obj obj, t_vec3 ref, t_ray ray);
+t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi, t_ray ray);
 
 /*
 *mlx relative fonctions
@@ -338,6 +377,7 @@ t_color			get_color(t_rt *e, t_obj obj, t_vec3 ref, t_ray ray);
 void			pixel_to_image(int x, int y, t_rt *e, int color);
 int				keypress(int keycode, void *param);
 int				mousse_hook(int button, int x, int y, void *param);
+int				mouse_hook_escape(t_rt *e);
 /*
 * intersect fonctions
 */
@@ -410,11 +450,47 @@ float			intersect_sphere_neg(t_ray ray, t_obj *sphere, float dist_obj, float max
 float			intersect_paraboloid_neg(t_ray ray, t_obj *parab, float dist_obj, float max_dist);
 
 /*
+** Parse
+*/
+
+void				parse(t_rt *e, int argc, char **argv);
+void				parse2(t_rt *e, xmlDocPtr doc);
+void				check_doc(xmlDocPtr	doc);
+void				get_nodes_by_name(xmlNodePtr cur,
+						char *node_name, t_list **lst);
+void				parse_objects(t_rt *e, t_list *lst);
+t_vec3				get_vec_from_node(xmlNodePtr node);
+t_color				parse_color(xmlNodePtr node);
+xmlNodePtr			has_child(xmlNodePtr a_node, char *attr);
+void				parse_camera(t_rt *e, xmlNodePtr node);
+void				parse_lights(t_rt *e, t_list *lst);
+void				set_attrs(t_obj *obj, xmlNodePtr node);
+
+/*
+*	GTK fonctions
+*/
+gboolean			hook(GtkWidget *widget, GdkEventKey *event,
+		gpointer user_data);
+void				ft_gtk_start_launcher(t_rt *e);
+void				ft_gtk_launcher(t_rt *e);
+GtkWidget			*new_window(gint w, gint h, gchar *name);
+GtkWidget			*new_btn(int x, int y, char *name);
+void				ft_gtk_link_css(GtkWidget *window, gchar *css);
+int					xsd_validate(char *xsd_path, xmlDocPtr doc);
+int					calcul_res(t_rt *e, int limit);
+
+/*
+*	Screenshot
+*/
+void				screenshot_ppm(t_rt *e);
+/*
 *	BRUIT
 */
 t_color				bruit(float valeur, t_color c1, t_color c2, float seuil);
 t_color				bruit2(float valeur, t_color c1, t_color c2, float x);
 t_color				bruit3(float valeur, int x, int y, t_rt *e);
+
+float 				bruit_coherent(float x, float y, float persistance);
 /*
 ** Parse
 */

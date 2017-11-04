@@ -198,5 +198,14 @@ int				keypress(int keycode, void *param)
 		CCAM.pos.x += 15;
 		frame(e);
 	}
+	if (keycode == KEY_DEL)
+		screenshot_ppm(e);
 	return (keycode);
+}
+
+int		mouse_hook_escape(t_rt *e)
+{
+	if (e)
+		exit(0);
+	return (1);
 }

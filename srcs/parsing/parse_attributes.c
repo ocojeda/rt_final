@@ -65,7 +65,6 @@ static void		set_attrs2(t_obj *obj, xmlNodePtr node)
 		xmlFree(val);
 	}
 	else
-	obj->mat.refract = 0;
 	if ((val = xmlGetProp(node, (xmlChar *)"reflex")))
 	{
 		obj->mat.reflex = ft_atof((char *)val);
