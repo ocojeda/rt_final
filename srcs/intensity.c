@@ -4,8 +4,6 @@ float			obj_isnt_in_shadow(t_rt *e, t_vec3 poi, t_light *light)
 {
 	t_ray	ray;
 	float	dist;
-	float	min_dist2;
-	t_ray	ray2;
 	float	dist_to_light;
 	float	opac;
 	int		i;
@@ -23,7 +21,7 @@ float			obj_isnt_in_shadow(t_rt *e, t_vec3 poi, t_light *light)
 		if (dist > 0 && dist < dist_to_light && e->scene.obj[i].neg != 1)
 		{
 			if(dist > 0 && dist < dist_to_light && e->scene.obj[i].neg != 1 && e->scene.obj[i].mat.damier == 0)
-					opac = e->scene.obj[i].mat.refract + e->scene.obj[i].mat.reflex;
+				opac = e->scene.obj[i].mat.refract + e->scene.obj[i].mat.reflex;
 			if (e->scene.obj[i].mat.refract && e->scene.obj[i].mat.damier && dist > 0 && dist < dist_to_light)
 			{
 				poi2 = vec_add3(light->ray.pos, vec_scale3(light->ray.dir, dist));
