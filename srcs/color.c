@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/04 19:21:15 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/11/04 19:21:45 by bbeldame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/rt.h"
-   
+
 t_color			ft_map_color(t_color color1, t_color color2, float taux1)
 {
 	t_color		new_color;
@@ -64,7 +76,6 @@ t_color			color_mult(t_color color, float taux, float limit)
 {
 	t_color		new_color;
 
-	
 	new_color = copy_color(color);
 	new_color.r = (color.r == 0 && taux > limit) ? 1 * taux : color.r * taux;
 	new_color.g = (color.g == 0 && taux > limit) ? 1 * taux : color.g * taux;

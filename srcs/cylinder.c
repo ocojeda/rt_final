@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cylinder.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/04 19:23:55 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/11/04 19:24:08 by bbeldame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/rt.h"
 
 t_vec3		cylinder_norm(t_obj cyl, t_vec3 poi)
@@ -33,5 +45,5 @@ float		intersect_cylinder(t_ray ray, t_obj *cyl)
 	op.b = 2 * (vec_dot3(ray.dir, x) - dotdv * dotxv);
 	op.c = vec_dot3(x, x) - p(dotxv) - p(cyl->r);
 	op.eq = get_res_of_quadratic(&op, cyl);
-    return (op.eq);
+	return (op.eq);
 }

@@ -395,7 +395,7 @@ float			intersect_paraboloid(t_ray ray, t_obj *parab);
 float			intersect_obj_limit(t_ray ray, t_limit *obj, t_rt *e);
 // float			intersect_limit_sphere(t_ray ray, t_limit *sphere);
 
-int				damier(t_vec3 *pos, t_rt *e);
+int				damier(t_vec3 *pos);
 /*
 * math aux fonctions
 */
@@ -488,7 +488,7 @@ void				screenshot_ppm(t_rt *e);
 */
 t_color				bruit(float valeur, t_color c1, t_color c2, float seuil);
 t_color				bruit2(float valeur, t_color c1, t_color c2, float x);
-t_color				bruit3(float valeur, int x, int y, t_rt *e);
+t_color				bruit3(float valeur, int x, int y);
 
 float 				bruit_coherent(float x, float y, float persistance);
 /*

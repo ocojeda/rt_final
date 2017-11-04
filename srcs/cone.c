@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cone.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/04 19:21:55 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/11/04 19:23:24 by bbeldame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/rt.h"
 
 t_vec3			cone_norm(t_obj cone, t_vec3 poi)
@@ -11,12 +23,6 @@ t_vec3			cone_norm(t_obj cone, t_vec3 poi)
 	dot = vec_dot3(tmp, cone.vector);
 	project = vec_scale3(cone.vector, dot);
 	normal = vec_sub3(tmp, project);
-	/*if (cone.mat.sin == 1)
-	{
-		normal.x = normal.x;
-		normal.y = sin(normal.y) * 20;
-		normal.z = normal.z;
-	}*/
 	return (vec_norme3(normal));
 }
 
@@ -33,16 +39,12 @@ float			intersect_cone(t_ray ray, t_obj *cone)
 	op.a = vec_dot3(ray.dir, ray.dir) - (1 + p(cone->k)) * p(dotdv);
 	op.b = 2 * (vec_dot3(ray.dir, x) - (1 + p(cone->k)) * dotdv * dotxv);
 	op.c = vec_dot3(x, x) - (1 + p(cone->k)) * p(dotxv);
-		op.eq = get_res_of_quadratic(&op, cone);
-	//if (op.eq == op.t0)
-	//	return (limit_dist(*cone, ray, op.eq, op.t1));
-	//else
-	//	return (limit_dist(*cone, ray, op.eq, op.t0));
-	
-    return (op.eq);
+	op.eq = get_res_of_quadratic(&op, cone);
+	return (op.eq);
 }
 
-float			get_res_of_quadratic_neg(t_calc *op, t_obj *obj, float dist_obj, float max_dist)
+float			get_res_of_quadratic_neg(t_calc *op, t_obj *obj,
+					float dist_obj, float max_dist)
 {
 	op->disc = op->b * op->b - 4 * op->a * op->c;
 	if (op->disc < 0)
@@ -55,7 +57,8 @@ float			get_res_of_quadratic_neg(t_calc *op, t_obj *obj, float dist_obj, float m
 	op->t1 = (-op->b - op->disc) / (2 * op->a);
 	if (op->t0 <= 0 || op->t1 <= 0)
 		obj->nbr_t = 1;
-	if ((dist_obj > op->t0 && dist_obj < op->t1) || (dist_obj > op->t1 && dist_obj < op->t0))
-		return((op->t0 < max_dist && op->t1 < max_dist) ? max_dist : DIST_MAX);
+	if ((dist_obj > op->t0 && dist_obj < op->t1) ||
+		(dist_obj > op->t1 && dist_obj < op->t0))
+		return ((op->t0 < max_dist && op->t1 < max_dist) ? max_dist : DIST_MAX);
 	return (dist_obj);
 }

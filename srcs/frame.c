@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   frame.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/04 19:32:30 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/11/04 19:37:56 by bbeldame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/rt.h"
 
-void			mlx_pixel(int x, int y, t_rt *e, int color)
+void				mlx_pixel(int x, int y, t_rt *e, int color)
 {
 	int		pos;
 
@@ -13,7 +25,7 @@ void			mlx_pixel(int x, int y, t_rt *e, int color)
 	}
 }
 
-void			pixel_to_image(int x, int y, t_rt *e, int color)
+void				pixel_to_image(int x, int y, t_rt *e, int color)
 {
 	int max_x;
 	int max_y;
@@ -37,7 +49,7 @@ void			pixel_to_image(int x, int y, t_rt *e, int color)
 	}
 }
 
-void			*drawline(void *arg)
+void				*drawline(void *arg)
 {
 	t_rt		*e;
 	int			y;
@@ -46,7 +58,7 @@ void			*drawline(void *arg)
 
 	e = (t_rt *)arg;
 	if (!(e->thread.colors =
-	malloc((e->thread.h * e->thread.w + 1) * sizeof(t_color))))
+		malloc((e->thread.h * e->thread.w + 1) * sizeof(t_color))))
 		exit(42);
 	y = e->thread.y;
 	i = 0;
@@ -63,6 +75,7 @@ void			*drawline(void *arg)
 	}
 	return (NULL);
 }
+
 t_light				copy_light(t_light light)
 {
 	t_light			copy;
@@ -77,8 +90,8 @@ t_light				copy_light(t_light light)
 t_obj				copy_objs(t_obj obj)
 {
 	t_obj			copy;
-	int 			i;
-	
+	int				i;
+
 	i = 0;
 	copy.max_dist = obj.max_dist;
 	copy.type = obj.type;
@@ -87,7 +100,7 @@ t_obj				copy_objs(t_obj obj)
 	copy.limit_active = obj.limit_active;
 	copy.limit_nbr = obj.limit_nbr;
 	if (obj.limit_active == 1)
-		while(i < obj.limit_nbr)
+		while (i < obj.limit_nbr)
 		{
 			copy.limit[i].type = obj.limit[i].type;
 			copy.limit[i].pos = obj.limit[i].pos;
@@ -100,28 +113,22 @@ t_obj				copy_objs(t_obj obj)
 	copy.r = obj.r;
 	copy.vector = obj.vector;
 	copy.mat = obj.mat;
-
 	copy.mat.refract = obj.mat.refract;
 	copy.mat.refract_rate = obj.mat.refract_rate;
 	copy.mat.refract_filter = obj.mat.refract_filter;
-
 	copy.mat.sinus = obj.mat.sinus;
 	copy.mat.reflex = obj.mat.reflex;
 	copy.mat.reflex_filter = obj.mat.reflex_filter;
-
 	copy.mat.damier = obj.mat.damier;
-	
-	if(copy.mat.damier == 1)
+	if (copy.mat.damier == 1)
 	{
 		copy.mat.refract = 1;
 		copy.mat.refract_rate = 0.5;
 		copy.mat.refract_filter = 0;
-	
 		copy.mat.sinus = 0;
 		copy.mat.reflex = 0;
 		copy.mat.reflex_filter = 0;
 	}
-//	copy.plimit_valid = obj.plimit_valid;
 	copy.neg = obj.neg;
 	return (copy);
 }
@@ -133,7 +140,7 @@ t_scene				copy_scene(t_scene scene)
 
 	i = -1;
 	if (!(copy.lights = (t_light *)malloc(scene.nbr_light *
-	sizeof(t_light))))
+		sizeof(t_light))))
 		exit(42);
 	while (++i < scene.nbr_light)
 		copy.lights[i] = copy_light(scene.lights[i]);
@@ -158,14 +165,10 @@ t_rt				*copy_rt(t_rt *e)
 	copy = NULL;
 	if ((copy = (t_rt *)malloc(sizeof(t_rt))) == NULL)
 		exit(42);
-	
 	copy->scene = copy_scene(e->scene);
-	//copy->scene->obj = e->scene->obj;
-	//copy->scene->lights = e->scene->lights;
 	copy->mlx.bpp = e->mlx.bpp;
 	copy->mlx.size_l = e->mlx.size_l;
 	copy->mlx.endian = e->mlx.endian;
-
 	copy->file.larg = e->file.larg;
 	copy->file.haut = e->file.haut;
 	copy->file.reso = e->file.reso;
@@ -174,7 +177,7 @@ t_rt				*copy_rt(t_rt *e)
 	return (copy);
 }
 
-t_rt			**launch_thread(t_rt *e)
+t_rt				**launch_thread(t_rt *e)
 {
 	int			i;
 	pthread_t	th[NB_THREADS];
@@ -192,10 +195,7 @@ t_rt			**launch_thread(t_rt *e)
 		THREAD.w /= RES;
 		THREAD.y = ((THREAD.h) / NB_THREADS) * i;
 		THREAD.max_y = THREAD.y + ((THREAD.h) / NB_THREADS);
-		//if (e->file.aliasing == 1)
 		pthread_create(&th[i], NULL, drawline, (void *)th_e[i]);
-		//else
-		//	pthread_create(&th[i], NULL, drawlinex2, (void *)th_e[i]);
 	}
 	i = -1;
 	while (++i < NB_THREADS)
@@ -203,19 +203,18 @@ t_rt			**launch_thread(t_rt *e)
 	return (th_e);
 }
 
-
-void			frame(t_rt *e)
+void				frame(t_rt *e)
 {
-    t_rt		**th_e;
+	t_rt		**th_e;
 	int			i;
 	int			i2;
-    int         ny;
-    int         nx;
+	int			ny;
+	int			nx;
 
-    e->frame++;
-    th_e = NULL;
+	e->frame++;
+	th_e = NULL;
 	matrix_init(e);
-    th_e = launch_thread(e);
+	th_e = launch_thread(e);
 	i = -1;
 	while (++i < NB_THREADS)
 	{
@@ -225,10 +224,9 @@ void			frame(t_rt *e)
 		{
 			nx = -1;
 			while (++nx < th_e[i]->thread.w / e->file.aliasing)
-                pixel_to_image(nx, ny, e, 
-                    ret_colors(th_e[i]->thread.colors[++i2]));
+				pixel_to_image(nx, ny, e,
+					ret_colors(th_e[i]->thread.colors[++i2]));
 		}
-//		dname(e, th_e, i);
 	}
 	i = 0;
 	while (i < NB_THREADS)
@@ -241,7 +239,5 @@ void			frame(t_rt *e)
 	}
 	filters(e);
 	free(th_e);
-    mlx_put_image_to_window(INIT, WIN, IMG, 0, 0);
-    //ft_putstr("exit succesful\n");
-	//disp_cam(e, 0x00FFFFFF);
+	mlx_put_image_to_window(INIT, WIN, IMG, 0, 0);
 }

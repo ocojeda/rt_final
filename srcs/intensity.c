@@ -25,7 +25,7 @@ float			obj_isnt_in_shadow(t_rt *e, t_vec3 poi, t_light *light)
 			if (e->scene.obj[i].mat.refract && e->scene.obj[i].mat.damier && dist > 0 && dist < dist_to_light)
 			{
 				poi2 = vec_add3(light->ray.pos, vec_scale3(light->ray.dir, dist));
-				if (damier(&poi2, e))
+				if (damier(&poi2))
 					return 0;
 				opac = e->scene.obj[i].mat.refract_rate;
 			}

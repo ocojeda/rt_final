@@ -42,7 +42,7 @@ t_color		refract_or_damier(t_rt *e, t_ray *ray, t_reflect *ref)
 
 	if (e->scene.obj[e->scene.id].mat.damier == 1)
 	{
-		if(damier(&ref->poi, e))
+		if(damier(&ref->poi))
 			return (get_color(e, e->scene.obj[e->scene.id], ref->poi, *ray));
 		if (e->scene.obj[e->scene.id].type != PLANE)
 		{
@@ -52,7 +52,7 @@ t_color		refract_or_damier(t_rt *e, t_ray *ray, t_reflect *ref)
 			if(min_dist2)
 			{
 				poi2 = vec_add3(ray2.pos, vec_scale3(ray2.dir, min_dist2));
-				if(damier(&poi2, e))
+				if(damier(&poi2))
 					return (get_color(e, e->scene.obj[e->scene.id], poi2, ray2));
 			}
 			min_dist2 = 0;
