@@ -4,7 +4,10 @@ float			find_min_dist_for_refref(t_rt *e, int *a, t_ray ray)
 {
 	float		min_dist;
 	float		dist;
+	t_ray		ray2;
 	int			i;
+	t_vec3 		pos_tmp;
+	t_vec3		new_poi;
 
 	i = 0;
 	dist = 0;

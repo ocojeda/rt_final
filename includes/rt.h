@@ -198,6 +198,8 @@ typedef struct		s_scene
 	t_camera		cam;
 	t_light			*lights;
 	t_obj			*obj;
+	int				x;
+	int				y;
 //	t_texture		skybox;
 //	int				last;
 	float			ambient;
@@ -461,6 +463,8 @@ void				screenshot_ppm(t_rt *e);
 t_color				bruit(float valeur, t_color c1, t_color c2, float seuil);
 t_color				bruit2(float valeur, t_color c1, t_color c2, float x);
 t_color				bruit3(float valeur, int x, int y, t_rt *e);
+
+float 				bruit_coherent(float x, float y, float persistance);
 /*
 ** Parse
 */
