@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   limit_intersect.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/04 20:18:58 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/11/04 20:20:20 by bbeldame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/rt.h"
 
 float			get_res_of_limit_quadratic(t_calc *op)
@@ -23,7 +35,7 @@ float			intersect_limit_plane(t_ray ray, t_limit *plane, t_rt *e)
 	float		dist;
 	t_vec3		vector_distance;
 
-    (void)e;
+	(void)e;
 	if ((d = vec_dot3(plane->vector, ray.dir)) == 0)
 		return (DIST_MAX);
 	vector_distance = vec_sub3(plane->pos, ray.pos);
@@ -59,23 +71,17 @@ float			intersect_limit_sphere(t_ray ray, t_limit *sphere)
 	op.b = 2 * vec_dot3(ray.dir, x);
 	op.c = vec_dot3(x, x) - (sphere->r * sphere->r);
 	op.eq = get_res_of_limit_quadratic(&op);
-	return (op.eq);	
+	return (op.eq);
 }
 
 float			intersect_obj_limit(t_ray ray, t_limit *obj, t_rt *e)
 {
-    (void)ray;
-    (void)obj;
-    (void)e;
-/*	if (obj->type == CYLINDER)
-		return (intersect_limit_cylinder(ray, obj), e, ray));
-*/	if (obj->type == SPHERE)
+	(void)ray;
+	(void)obj;
+	(void)e;
+	if (obj->type == SPHERE)
 		return (intersect_limit_sphere(ray, obj));
 	if (obj->type == PLANE)
 		return (intersect_limit_plane(ray, obj, e));
-/*	else if (obj->type == CONE)
-		return (intersect_limit_cone(ray, obj), e, ray));
-	else if (obj->type == PARABOLOID)
-		return (intersect_limit_paraboloid(ray, obj), e, ray));
-*/	return (DIST_MAX);
+	return (DIST_MAX);
 }
