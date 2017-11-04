@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 19:42:58 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/11/04 19:54:28 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/11/04 21:08:54 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void		keypress3(int keycode, t_rt *e)
 	}
 	if (keycode == KEY_HOME)
 		e->scene.selected_obj = -1;
+	keypress4(keycode, e, 0);
 }
 
 void		keypress2(int keycode, t_rt *e)
@@ -94,120 +95,8 @@ void		keypress1(int keycode, t_rt *e)
 int			keypress(int keycode, void *param)
 {
 	t_rt	*e;
-	t_ray	dir;
-	t_vec3	rx;
-	int		i;
 
-	i = 0;
 	e = (t_rt *)param;
-	dir = ray_init(e, LARGEUR / 2 / RES, HAUTEUR / 2 / RES);
-	rx = vec_norme3(prod_vec3_matrx4(
-				vec_new3(dir.dir.x, 0, dir.dir.z), roty_matrx4(-90)));
-	if (keycode == KEY_UP)
-	{
-		if (e->scene.selected_obj >= 0)
-		{
-			e->scene.obj[e->scene.selected_obj].pos.y += 10;
-			if (e->scene.obj[e->scene.selected_obj].limit_active)
-			{
-				while (i < e->scene.obj[e->scene.selected_obj].limit_nbr)
-				{
-					e->scene.obj[e->scene.selected_obj].limit[i].pos.y += 10;
-					i++;
-				}
-				i = 0;
-			}
-			frame(e);
-		}
-		else
-		{
-			CCAM.rot.x += 1;
-			CCAM.rot.x = (CCAM.rot.x > 360) ? 0 : CCAM.rot.x;
-			frame(e);
-		}
-	}
-	if (keycode == KEY_DOWN)
-	{
-		if (e->scene.selected_obj >= 0)
-		{
-			e->scene.obj[e->scene.selected_obj].pos.y -= 10;
-			if (e->scene.obj[e->scene.selected_obj].limit_active)
-			{
-				while (i < e->scene.obj[e->scene.selected_obj].limit_nbr)
-				{
-					e->scene.obj[e->scene.selected_obj].limit[i].pos.y -= 10;
-					i++;
-				}
-				i = 0;
-			}
-			frame(e);
-		}
-		else
-		{
-			CCAM.rot.x -= 1;
-			CCAM.rot.x = (CCAM.rot.x < 0) ? 360 : CCAM.rot.x;
-			frame(e);
-		}
-	}
-	if (keycode == KEY_RIGHT)
-	{
-		if (e->scene.selected_obj >= 0)
-		{
-			e->scene.obj[e->scene.selected_obj].pos.x += 10;
-			if (e->scene.obj[e->scene.selected_obj].limit_active)
-			{
-				while (i < e->scene.obj[e->scene.selected_obj].limit_nbr)
-				{
-					e->scene.obj[e->scene.selected_obj].limit[i].pos.x += 10;
-					i++;
-				}
-				i = 0;
-			}
-			frame(e);
-		}
-		else
-		{
-			CCAM.rot.y += 1;
-			CCAM.rot.y = (CCAM.rot.y > 360) ? 0 : CCAM.rot.y;
-			frame(e);
-		}
-	}
-	if (keycode == KEY_LEFT)
-	{
-		if (e->scene.selected_obj >= 0)
-		{
-			e->scene.obj[e->scene.selected_obj].pos.x -= 10;
-			if (e->scene.obj[e->scene.selected_obj].limit_active)
-			{
-				while (i < e->scene.obj[e->scene.selected_obj].limit_nbr)
-				{
-					e->scene.obj[e->scene.selected_obj].limit[i].pos.x -= 10;
-					i++;
-				}
-				i = 0;
-			}
-			frame(e);
-		}
-		else
-		{
-			CCAM.rot.y -= 1;
-			CCAM.rot.y = (CCAM.rot.y < 0) ? 360 : CCAM.rot.y;
-			frame(e);
-		}
-	}
-	if (keycode == KEY_PLUS)
-	{
-		if (e->scene.selected_obj >= 0)
-		{
-			e->scene.obj[e->scene.selected_obj].pos.z += 10;
-			frame(e);
-		}
-		else
-		{
-			CCAM.pos.y += 20;
-			frame(e);
-		}
-	}
 	if (keycode == KEY_MINUS)
 	{
 		if (e->scene.selected_obj >= 0)

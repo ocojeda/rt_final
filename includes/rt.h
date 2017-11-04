@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfaure <tfaure@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 20:42:52 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/11/04 20:51:43 by tfaure           ###   ########.fr       */
+/*   Updated: 2017/11/04 21:08:27 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -476,4 +476,6 @@ float				intersect_limit_sphere(t_ray ray, t_limit *sphere);
 t_rt				*copy_rt(t_rt *e);
 t_light				copy_light(t_light light);
 void				finish_it(t_rt **th_e, t_rt *e);
+void				keypress4(int keycode, t_rt *e, int i);
+
 #endif

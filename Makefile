@@ -4,6 +4,7 @@ OBJDIR		=	objs/
 SRCDIR		=	srcs/
 SRC			=	main.c \
 				hooks.c \
+				hooks2.c \
 				mlx_begin.c \
 				raytrace.c \
 				color.c \
