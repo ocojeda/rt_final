@@ -74,9 +74,7 @@ t_color	get_pxl_color(t_rt *e, t_ray ray)
 		return ref.color;
 	else if (e->scene.obj[e->scene.id].mat.refract == 1)
 		return (refract_or_damier(e, &ray, &ref));
-	else
-		ref.color = get_color(e, e->scene.obj[e->scene.id], ref.poi, ray);
-	return (ref.color);
+	return (get_color(e, e->scene.obj[e->scene.id], ref.poi, ray));
 }
 
 t_color			raytrace(int x, int y, t_rt *e)
