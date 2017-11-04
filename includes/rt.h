@@ -79,6 +79,7 @@
 # define KEY_ESC 53
 # define KEY_HOME 115
 # define KEY_DEL 117
+# define COBJ e->scene.obj
 # define CCAM e->scene.cam
 # define CLIGHT scene.lights[i]
 # define AMBIENT_LIGHT e->scene.ambient
