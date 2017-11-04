@@ -100,20 +100,9 @@
 		</xsd:complexType>
 	</xsd:element>
 
-	<xsd:element name="limit_sphere">
-		<xsd:complexType>
-			<xsd:choice maxOccurs="unbounded">
-				<xsd:element ref="pos" minOccurs="1" maxOccurs="1"/>
-				<xsd:element ref="normal" minOccurs="1" maxOccurs="1"/>
-			</xsd:choice>
-			<xsd:attribute type="xsd:float" name="radius" use="required"/>
-		</xsd:complexType>
-	</xsd:element>
-
 	<xsd:element name="limits">
 		<xsd:complexType>
 			<xsd:choice maxOccurs="4" minOccurs="1">
-				<xsd:element ref="limit_sphere" minOccurs="0"/>
 				<xsd:element ref="limit_plane" minOccurs="0"/>
 			</xsd:choice>
 		</xsd:complexType>
