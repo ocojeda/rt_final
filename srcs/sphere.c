@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sphere.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/04 19:56:42 by bbeldame          #+#    #+#             */
+/*   Updated: 2017/11/04 19:57:06 by bbeldame         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/rt.h"
 
 float			get_res_of_quadratic(t_calc *op, t_obj *obj)
@@ -6,14 +18,11 @@ float			get_res_of_quadratic(t_calc *op, t_obj *obj)
 	op->disc = op->b * op->b - 4 * op->a * op->c;
 	if (op->disc < 0)
 		return (DIST_MAX);
-	//obj->nbr_t = (op->disc == 0) ? 1 : 2;
 	if (op->disc == 0)
 		return (-op->b / (2 * op->a));
 	op->disc = sqrt(op->disc);
 	op->t0 = (-op->b + op->disc) / (2 * op->a);
 	op->t1 = (-op->b - op->disc) / (2 * op->a);
-	//if (op->t0 <= 0 || op->t1 <= 0)
-	//	obj->nbr_t = 1;
 	if ((op->t0 < op->t1 || op->t1 < EPSILON) && op->t0 > EPSILON)
 	{
 		obj->max_dist = op->t1;
@@ -46,7 +55,5 @@ float			intersect_sphere(t_ray ray, t_obj *sphere)
 	op.b = 2 * vec_dot3(ray.dir, x);
 	op.c = vec_dot3(x, x) - (sphere->r * sphere->r);
 	op.eq = get_res_of_quadratic(&op, sphere);
-	return (op.eq);	
+	return (op.eq);
 }
-
-
