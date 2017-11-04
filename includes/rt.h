@@ -513,4 +513,7 @@ double				get_perlin(double x, double y, double z);
 
 t_vec3				norm_limit_plane(t_limit *plane, t_ray ray);
 float				intersect_limit_sphere(t_ray ray, t_limit *sphere);
+t_rt				*copy_rt(t_rt *e);
+t_light				copy_light(t_light light);
+void				finish_it(t_rt **th_e, t_rt *e);
 #endif

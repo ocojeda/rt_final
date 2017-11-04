@@ -33,6 +33,9 @@ SRC			=	main.c \
 				negative_intersect.c \
 				damier.c \
 				get_color.c \
+				copy_scene.c \
+				copy_scene2.c \
+				finish_it.c \
 				parsing/parse.c \
 				parsing/checks.c \
 				parsing/parser_utils.c \
@@ -41,7 +44,7 @@ SRC			=	main.c \
 				parsing/parse_attributes.c \
 				parsing/parse_limits.c \
 				parsing/parse_skybox.c \
-				parsing/parse_lights.c
+				parsing/parse_lights.c \
 
 MINILIBX	=	libs/minilibx/libmlx.a
 LIBFT		=	libs/libft/libft.a
