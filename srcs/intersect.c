@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersect.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfaure <tfaure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 20:20:54 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/11/04 20:22:18 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/11/04 21:28:23 by tfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ float			limit_obj(t_ray ray, t_obj *obj, float dist, t_rt *e)
 	t_vec3		norm;
 	t_ray		poi;
 
-	dist2 = DIST_MAX;
 	u = 0;
 	poi = c_ray(vec_add3(ray.pos, vec_scale3(ray.dir, dist)),
 		vec_new3(0, 0, 0));
@@ -28,21 +27,13 @@ float			limit_obj(t_ray ray, t_obj *obj, float dist, t_rt *e)
 		poi.dir = vec_norme3(vec_sub3(obj->limit[u].pos, poi.pos));
 		dist2 = intersect_obj_limit(ray, &obj->limit[u], e);
 		norm = norm_limit_plane(&obj->limit[u], poi);
-		if ((norm.x == (obj->limit[u].vector.x * -1) &&
-			norm.y == (obj->limit[u].vector.y * -1) &&
-				norm.z == (obj->limit[u].vector.z * -1)) || dist == DIST_MAX)
-			u++;
-		else
-		{
-			if (norm.x == (obj->limit[u].vector.x) &&
-				norm.y == (obj->limit[u].vector.y) &&
-				norm.z == (obj->limit[u].vector.z) &&
-				dist2 < obj->max_dist && dist2 < DIST_MAX && dist <= dist2)
-				dist = dist2;
-			else
-				dist = DIST_MAX;
-			u++;
-		}
+		if (!((norm.x == (obj->limit[u].vector.x * -1) && norm.y ==
+		(obj->limit[u].vector.y * -1) && norm.z ==
+		(obj->limit[u].vector.z * -1)) || dist == DIST_MAX))
+			dist = (norm.x == (obj->limit[u].vector.x) && norm.y ==
+(obj->limit[u].vector.y) && norm.z == (obj->limit[u].vector.z) && dist2 <
+obj->max_dist && dist2 < DIST_MAX && dist <= dist2) ? dist2 : DIST_MAX;
+		u++;
 	}
 	return (dist);
 }
