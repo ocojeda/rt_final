@@ -3,7 +3,7 @@
 <scene width="800" height="800" ambient="0.2">
 	<lights>
 		<light intensity="0.1">
-		    <pos x="0" y="2000" z="-15000"/>
+		    <pos x="0" y="2000" z="3500"/>
 			<color r="255" g="0" b="0"/>
 		</light>
 	</lights>

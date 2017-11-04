@@ -30,6 +30,7 @@ SRC			=	main.c \
 				intersect.c \
 				negative_intersect.c \
 				damier.c \
+				get_color.c \
 				parsing/parse.c \
 				parsing/checks.c \
 				parsing/parser_utils.c \

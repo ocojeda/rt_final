@@ -47,17 +47,17 @@
 			<color r="255" g="255" b="255"/>
 		</plane>
 
-		<sphere radius="600" diff="0.1" spec="1" damier='1'>
+		<sphere radius="600" diff="0.1" spec="1" sin='2'>
 			<pos x="-1500" y="1000" z="0"/>
 			<color r="255" g="0" b="0"/>
 		</sphere>
 
-		<sphere radius="600" diff="0.1" spec="1" damier='1'>
+		<sphere radius="600" diff="0.1" spec="1" sin='2'>
 			<pos x="0" y="1000" z="0"/>
 			<color r="0" g="200" b="0"/>
 		</sphere>
 
-		<sphere radius="600" diff="0.1" spec="1" damier='1'>
+		<sphere radius="600" diff="0.1" spec="1" sin='2'>
 			<pos x="1500" y="1000" z="0"/>
 			<color r="0" g="0" b="200"/>
 		</sphere>
