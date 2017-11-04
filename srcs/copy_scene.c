@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   copy_scene.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ocojeda- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/04 20:30:33 by ocojeda-          #+#    #+#             */
+/*   Updated: 2017/11/04 20:34:06 by ocojeda-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/rt.h"
 
 void				copy_limits2(t_obj *copy)
@@ -19,14 +31,14 @@ void				copy_limits(t_obj *obj, t_obj *copy)
 
 	i = 0;
 	if (obj->limit_active == 1)
-	while (i < obj->limit_nbr)
-	{
-		copy->limit[i].type = obj->limit[i].type;
-		copy->limit[i].pos = obj->limit[i].pos;
-		copy->limit[i].vector = obj->limit[i].vector;
-		copy->limit[i].r = obj->limit[i].r;
-		i++;
-	}
+		while (i < obj->limit_nbr)
+		{
+			copy->limit[i].type = obj->limit[i].type;
+			copy->limit[i].pos = obj->limit[i].pos;
+			copy->limit[i].vector = obj->limit[i].vector;
+			copy->limit[i].r = obj->limit[i].r;
+			i++;
+		}
 	copy->k = obj->k;
 	copy->vector = obj->vector;
 	copy->r = obj->r;
@@ -40,6 +52,7 @@ void				copy_limits(t_obj *obj, t_obj *copy)
 t_obj				copy_objs(t_obj obj)
 {
 	t_obj			copy;
+
 	copy.max_dist = obj.max_dist;
 	copy.type = obj.type;
 	copy.color = obj.color;
