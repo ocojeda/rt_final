@@ -21,13 +21,6 @@ float			obj_isnt_in_shadow(t_rt *e, t_vec3 poi, t_light *light)
 	{
 		dist = intersect_obj(ray, &e->scene.obj[i], e);
 		if (dist > 0 && dist < dist_to_light && e->scene.obj[i].neg != 1)
-<<<<<<< HEAD
-		{	
-			t_vec3 pos_tmp = vec_add3(poi, e->scene.obj[i].pos);
-			opac = e->scene.obj[i].mat.refract;
-				if (e->scene.obj[i].mat.refract == 1 && (damier(&pos_tmp, e)))
-					opac = e->scene.obj[i].mat.refract_rate;
-=======
 		{
 			if (e->scene.obj[i].mat.refract && e->scene.obj[i].mat.damier)
 			{
@@ -56,7 +49,6 @@ float			obj_isnt_in_shadow(t_rt *e, t_vec3 poi, t_light *light)
 			}
 			else if(e->scene.obj[i].mat.refract && e->scene.obj[i].mat.damier == 0)
 				opac = e->scene.obj[i].mat.refract;
->>>>>>> master
 		}
 	}
 	return (opac);
