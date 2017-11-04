@@ -7,7 +7,7 @@
             "request": "launch",
             "program": "${workspaceRoot}/rt",
             "args": [
-                "scenes/limits_and_skybox.xml"
+                "scenes/limits.xml"
             ],
             "cwd": "${workspaceRoot}",
             "stopOnEntry": false,

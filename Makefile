@@ -23,6 +23,10 @@ SRC			=	main.c \
 				paraboloid.c \
 				skybox.c \
 				limit_intersect.c \
+				bruit.c \
+				intersect.c \
+				negative_intersect.c \
+				damier.c \
 				parsing/parse.c \
 				parsing/checks.c \
 				parsing/parser_utils.c \

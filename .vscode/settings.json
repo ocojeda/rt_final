@@ -1,7 +1,8 @@
 {
     "files.associations": {
         "rt.h": "c",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "iosfwd": "c"
     },
     "editor.tabSize": 4,
     "editor.insertSpaces": false

@@ -103,8 +103,8 @@
 			<color r="150" g="150" b="0"/>
 			<limits>
 				<limit_plane>
-					<pos x="250" y="-200" z="500" />
-					<normal x="0" y="-1" z="0"/>
+					<pos x="625" y="-200" z="500" />
+					<normal x="0" y="-0.9" z="0"/>
 				</limit_plane>
 				<limit_plane>
 					<pos x="850" y="0" z="500" />
