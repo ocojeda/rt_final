@@ -7,12 +7,29 @@ float rand_noise(int t)
     return 1.0 - (t & 0x7fffffff) / 1073741824.0;
 }
 
+t_color matiere_converter(t_ray *ray, t_obj *obj, t_reflect *ref, t_rt *e)
+{
+	float	dot;
+	t_ray	ray_tmp;
+	
+	ray_tmp = get_reflected_ray(e, *ray, ref->poi);
+	dot = sin(vec_dot3(ray->dir, ref->poi)) * PI;
+	if(obj->mat.sinus == 1)
+		return (bruit(dot, ref->color, e->scene.obj[e->scene.id].color, rand_noise((e->scene.x + e->scene.y) * e->scene.id)));
+	if(obj->mat.sinus == 2)
+		return (ft_map_color(bruit3(dot*0.9, e->scene.x, e->scene.y, e), c_color(163,60,80), 0.5));
+	dot = vec_dot3(ray->dir, ray_tmp.pos) * obj->mat.sinus;
+	return (bruit2(dot * obj->mat.sinus, c_color(150, 50, 200), e->scene.obj[e->scene.id].color, rand_noise(e->scene.x)));
+}
+
 t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi, t_ray ray)
 {
 	float		intensity;
 	int			i;
 	t_color		color1;
-	t_ray		ray_tmp;
+	t_reflect	ref;
+
+	ref.poi = poi;
 
 	i = -1;
 	intensity = (!e->scene.nbr_light) ? AMBIENT_LIGHT : 0;
@@ -22,26 +39,15 @@ t_color			get_color(t_rt *e, t_obj obj, t_vec3 poi, t_ray ray)
 	if (intensity != 0)
 	{
 		float	dot = vec_dot3(ray.dir, poi);
-		
-		ray_tmp = get_reflected_ray(e, ray, poi);
-		dot = vec_dot3(ray.dir, poi);
-	
 		color1 = color_mult(obj.color, intensity, 1);
-		dot = sin(vec_dot3(ray.dir, poi))*PI;
-		if(obj.mat.sinus == 1)
-			return (color_mult(bruit(dot, color1, e->scene.obj[e->scene.id].color, rand_noise(e->scene.x)), intensity, 1)); 
-		if(obj.mat.sinus == 2)
-			return (ft_map_color(color_mult(bruit3(dot*0.9, e->scene.x, e->scene.y, e), intensity, 1), c_color(163,60,80), 0.5));
-		if(obj.mat.sinus >= 3)
-		{
-			dot = vec_dot3(ray.dir, ray_tmp.pos) * obj.mat.sinus;
-			return (color_mult(bruit2(dot * obj.mat.sinus, c_color(150, 50, 200), e->scene.obj[e->scene.id].color, rand_noise(e->scene.x)), intensity, 1));
-		}
-		return	color1;
+		ref.color = color1;
+		//if(obj.mat.sinus)
+		//	return (color_mult(matiere_converter(&ray, &obj, &ref, e), intensity, 1));
+		return	ref.color;
 	}
 	return ((t_color){0, 0, 0, 0});
 }
-int		begin_raytracer(t_rt *e, t_ray *ray, t_reflect *ref)
+int		begin_raytracer(t_rt *e, t_ray *ray, t_reflect *ref, t_norme *a)
 {
 	float		tmp;
 
@@ -102,12 +108,9 @@ t_color		refract_or_damier(t_rt *e, t_ray *ray, t_reflect *ref)
 t_color	get_pxl_color(t_rt *e, t_ray ray)
 {
 	t_reflect	ref;
-	float		tmp;
-	t_ray		ray2;
-	t_vec3		poi2;
-	float		min_dist2;
+	t_norme 	a;
 
-	if (begin_raytracer(e, &ray, &ref))
+	if (begin_raytracer(e, &ray, &ref, &a))
 		return ref.color;
 	else if (e->scene.obj[e->scene.id].mat.refract == 1)
 		return (refract_or_damier(e, &ray, &ref));

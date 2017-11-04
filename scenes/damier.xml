@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<scene width="800" height="800" ambient="0.2">
+	<lights>
+		<light intensity="0.1">
+		    <pos x="0" y="2000" z="-15000"/>
+			<color r="255" g="0" b="0"/>
+		</light>
+	</lights>
+	<camera fov="60">
+		<pos x="0" y="2000" z="-4000"/>
+	</camera>
+
+	<objects>
+	<plane diff="0.4" spec="0.5" reflex='1'>
+			<pos x="0" y="0" z="-20000" />
+			<normal x="0" y="0" z="0.99"/>
+			<color r="255" g="255" b="255"/>
+		</plane>
+		<plane diff="0.4" spec="0.5" reflex='1'>
+			<pos x="0" y="0" z="9000" />
+			<normal x="0" y="0" z="-0.99"/>
+			<color r="255" g="255" b="255"/>
+		</plane>
+		
+		<plane diff="0.4" spec="0.5" reflex='1'>
+			<pos x="9000" y="0" z="0" />
+			<normal x="-0.99" y="0" z="0"/>
+			<color r="255" g="255" b="255"/>
+		</plane>
+		<plane diff="0.4" spec="0.5" reflex='1'>
+			<pos x="-9000" y="0" z="0" />
+			<normal x="0.99" y="0" z="0"/>
+			<color r="255" g="255" b="255"/>
+		</plane>
+
+		<plane diff="0.4" spec="0.5" reflex='1'>
+			<pos x="0" y="-6000" z="0" />
+			<normal x="0" y="0.99" z="0"/>
+			<color r="255" g="255" b="255"/>
+		</plane>
+		
+		<plane diff="0.4" spec="0.5" reflex='1'>
+			<pos x="0" y="6000" z="0" />
+			<normal x="0" y="-0.99" z="0"/>
+			<color r="255" g="255" b="255"/>
+		</plane>
+
+		<sphere radius="600" diff="0.5" spec="0.5">
+			<pos x="-1000" y="1500" z="-2000"/>
+			<color r="255" g="0" b="0"/>
+		</sphere>
+
+		<sphere radius="600" diff="0.5" spec="0.5">
+			<pos x="0" y="0" z="-1500"/>
+			<color r="0" g="200" b="0"/>
+		</sphere>
+
+		<sphere radius="600" diff="0.5" spec="0.5">
+			<pos x="1000" y="0" z="-2000"/>
+			<color r="0" g="0" b="200"/>
+		</sphere>
+
+	</objects>
+</scene>
