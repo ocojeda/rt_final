@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
-<scene width="800" height="800" ambient="0.2">
+<scene width="800" height="800" ambient="0">
 	<lights>
 		<light intensity="0.1">
 		    <pos x="-600" y="400" z="-3000"/>
 			<color r="255" g="0" b="0"/>
 		</light>
+
+		<light intensity="0.1">
+		    <pos x="6000" y="400" z="-3000"/>
+			<color r="255" g="0" b="0"/>
+		</light>
 	</lights>
 
 	<camera fov="60">
-		<pos x="0" y="0" z="-4000"/>
+		<pos x="-1500" y="600" z="-6000"/>
+		<rot x="0" y="0" z="0"/>
 	</camera>
 
 	<objects>
@@ -25,9 +31,9 @@
 			<color r="255" g="255" b="255"/>
 		</plane>
 
-		<cylinder radius="100" diff="0.4" spec="0.5">
+		<cylinder radius="300" diff="0.4" spec="0.5" negative="true">
 			<pos x="-200" y="0" z="-1500" />
-			<normal x="0.2" y="1" z="0"/>
+			<normal x="0.8" y="0.2" z="0"/>
 			<color r="255" g="87" b="51"/>
 		</cylinder>
 
@@ -42,19 +48,9 @@
 			<color r="255" g="155" b="0"/>
 		</sphere>
 
-		<sphere radius="200" diff="0.5" spec="0.5" negative="true">
-			<pos x="-1000" y="0" z="-1700"/>
-			<color r="255" g="155" b="0"/>
-		</sphere>
-
 		<sphere radius="200" diff="0.5" spec="0.5">
 			<pos x="-1000" y="500" z="-1500"/>
 			<color r="255" g="195" b="0"/>
-		</sphere>
-
-		<sphere radius="150" diff="0.5" spec="0.5" negative="true">
-			<pos x="-1000" y="500" z="-1600"/>
-			<color r="255" g="155" b="0"/>
 		</sphere>
 
 		<sphere radius="100" diff="0.5" spec="0.5">
