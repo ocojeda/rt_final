@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfaure <tfaure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 19:42:58 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/11/05 00:03:06 by ocojeda-         ###   ########.fr       */
+/*   Updated: 2017/11/05 16:34:35 by tfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ void		keypress3(int keycode, t_rt *e)
 		e->scene.filters = (e->scene.filters == 3) ? 0 : 3;
 		frame(e);
 	}
+	if (keycode == KEY_FOUR)
+	{
+		e->scene.filters = (e->scene.filters == 4) ? 0 : 4;
+		frame(e);
+	}
 	if (keycode == KEY_HOME)
 		e->scene.selected_obj = -1;
 	keypress4(keycode, e, 0);
@@ -38,16 +43,14 @@ void		keypress3(int keycode, t_rt *e)
 
 void		keypress2(int keycode, t_rt *e)
 {
-	if (keycode == KEY_Q)
-	{
-		CCAM.rot.z += 1;
-		CCAM.rot.z = (CCAM.rot.z > 360) ? 0 : CCAM.rot.z;
-		frame(e);
-	}
-	if (keycode == KEY_E)
+	if (keycode == KEY_R)
 	{
 		CCAM.rot.z -= 1;
-		CCAM.rot.z = (CCAM.rot.z < 0) ? 360 : CCAM.rot.z;
+		frame(e);
+	}
+	if (keycode == KEY_F)
+	{
+		CCAM.rot.z += 1;
 		frame(e);
 	}
 	if (keycode == PAGE_UP)
@@ -67,22 +70,22 @@ void		keypress2(int keycode, t_rt *e)
 
 void		keypress1(int keycode, t_rt *e)
 {
-	if (keycode == KEY_W)
+	if (keycode == KEY_Q)
 	{
 		CCAM.pos.z += 20;
 		frame(e);
 	}
-	if (keycode == KEY_S)
+	if (keycode == KEY_A)
 	{
 		CCAM.pos.z -= 20;
 		frame(e);
 	}
-	if (keycode == KEY_A)
+	if (keycode == KEY_S)
 	{
 		CCAM.pos.x -= 15;
 		frame(e);
 	}
-	if (keycode == KEY_D)
+	if (keycode == KEY_W)
 	{
 		CCAM.pos.x += 15;
 		frame(e);
@@ -98,17 +101,15 @@ int			keypress(int keycode, void *param)
 
 	e = (t_rt *)param;
 	if (keycode == KEY_MINUS)
-	{
 		if (e->scene.selected_obj >= 0)
 		{
 			e->scene.obj[e->scene.selected_obj].pos.z -= 10;
 			frame(e);
 		}
-		else
-		{
-			CCAM.pos.y += -20;
-			frame(e);
-		}
+	if (keycode == KEY_D)
+	{
+		CCAM.pos.y -= 20;
+		frame(e);
 	}
 	keypress1(keycode, e);
 	return (keycode);

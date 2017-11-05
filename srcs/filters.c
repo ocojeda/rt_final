@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filters.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfaure <tfaure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 19:31:14 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/11/04 19:32:21 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/11/05 16:34:02 by tfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,27 @@ void		filter_reverse(t_rt *e)
 	}
 }
 
+void		filter_stereo(t_rt *e)
+{
+	int		i;
+	int		tmp;
+
+	i = 0;
+	while (i < (LARGEUR * HAUTEUR * 4))
+	{
+		tmp = i + 1 - 40 - (LARGEUR * 4) * 10;
+		if (tmp > 0)
+		{
+			DATA[tmp] = DATA[i + 1];
+			DATA[i + 1] = 0;
+			tmp = i - 40 - (LARGEUR * 4) * 10;
+			DATA[tmp] = DATA[i];
+			DATA[i] = 0;
+		}
+		i += 4;
+	}
+}
+
 void		filters(t_rt *e)
 {
 	if (e->scene.filters == 1)
@@ -71,4 +92,6 @@ void		filters(t_rt *e)
 		filter_sepia(e);
 	if (e->scene.filters == 3)
 		filter_reverse(e);
+	if (e->scene.filters == 4)
+		filter_stereo(e);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocojeda- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tfaure <tfaure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/05 00:03:28 by ocojeda-          #+#    #+#             */
-/*   Updated: 2017/11/05 00:03:48 by ocojeda-         ###   ########.fr       */
+/*   Updated: 2017/11/05 16:20:54 by tfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,13 @@ void		keypress8(int keycode, t_rt *e)
 	if (keycode == KEY_PLUS)
 	{
 		if (e->scene.selected_obj >= 0)
-		{
 			e->scene.obj[e->scene.selected_obj].pos.z += 10;
-			frame(e);
-		}
-		else
-		{
-			CCAM.pos.y += 20;
-			frame(e);
-		}
+		frame(e);
+	}
+	if (keycode == KEY_E)
+	{
+		CCAM.pos.y += 20;
+		frame(e);
 	}
 }
 
@@ -49,7 +47,6 @@ void		keypress7(int keycode, t_rt *e, int i)
 		else
 		{
 			CCAM.rot.y -= 1;
-			CCAM.rot.y = (CCAM.rot.y < 0) ? 360 : CCAM.rot.y;
 			frame(e);
 		}
 	}
@@ -76,7 +73,6 @@ void		keypress6(int keycode, t_rt *e, int i)
 		else
 		{
 			CCAM.rot.y += 1;
-			CCAM.rot.y = (CCAM.rot.y > 360) ? 0 : CCAM.rot.y;
 			frame(e);
 		}
 	}
@@ -103,7 +99,6 @@ void		keypress5(int keycode, t_rt *e, int i)
 		else
 		{
 			CCAM.rot.x -= 1;
-			CCAM.rot.x = (CCAM.rot.x < 0) ? 360 : CCAM.rot.x;
 			frame(e);
 		}
 	}
@@ -130,7 +125,6 @@ void		keypress4(int keycode, t_rt *e, int i)
 		else
 		{
 			CCAM.rot.x += 1;
-			CCAM.rot.x = (CCAM.rot.x > 360) ? 0 : CCAM.rot.x;
 			frame(e);
 		}
 	}

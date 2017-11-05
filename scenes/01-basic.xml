@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
-<scene width="800" height="800" ambient="0.2">
+<scene width="800" height="800" ambient="0">
 	<lights>
 		<light intensity="0.1">
 		    <pos x="-600" y="400" z="-3000"/>
@@ -15,6 +15,7 @@
 
 	<camera fov="60">
 		<pos x="0" y="0" z="-4000"/>
+		<rot x="0" y="0" z="0"/>
 	</camera>
 
 	<objects>
