@@ -19,25 +19,6 @@
 	</camera>
 
 	<objects>
-		<plane diff="0.4" spec="0.5">
-			<pos x="400" y="400" z="900" />
-			<normal x="0" y="0" z="-1"/>
-			<color r="255" g="255" b="255"/>
-			<limits>
-				<limit_plane>
-					<pos x="400" y="0" z="900"/>
-					<normal x="0" y="-0.9" z="0"/>
-				</limit_plane>
-				<limit_plane>
-					<pos x="800" y="400" z="900"/>
-					<normal x="0.5" y="0.5" z="0"/>
-				</limit_plane>
-				<limit_plane>
-					<pos x="0" y="400" z="900"/>
-					<normal x="-0.5" y="0.5" z="0"/>
-				</limit_plane>
-			</limits>
-		</plane>
 
 		<plane diff="0.4" spec="0.5">
 			<pos x="900" y="-300" z="0" />

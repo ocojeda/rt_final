@@ -6,7 +6,7 @@
 /*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 19:07:43 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/11/04 19:07:44 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/11/05 19:32:39 by bbeldame         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void				parse2(t_rt *e, xmlDocPtr doc)
 	get_nodes_by_name(root, "light", &lst);
 	parse_lights(e, lst);
 	ft_lstfree(&lst);
+	e->scene.skybox.is_init = 0;
 	get_nodes_by_name(root, "skybox", &lst);
 	parse_skybox(e, lst);
 	ft_lstfree(&lst);
