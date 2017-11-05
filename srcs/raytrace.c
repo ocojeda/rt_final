@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytrace.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfaure <tfaure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 20:19:40 by tfaure            #+#    #+#             */
-/*   Updated: 2017/11/04 21:43:17 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/11/05 19:23:01 by tfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			begin_raytracer(t_rt *e, t_ray *ray, t_reflect *ref)
 
 	if ((ref->min_dist = get_min_dist(e, *ray)) == -1)
 	{
-		ref->color = c_color(0, 0, 0);
+		ref->color = skybox(e, *ray);
 		return (1);
 	}
 	ref->type = COBJ[e->scene.id].type;

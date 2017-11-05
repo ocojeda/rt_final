@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<scene width="800" height="800" ambient="0.1">
+	<lights>
+		<light intensity="0.1">
+		    <pos x="-600" y="400" z="-3000"/>
+			<color r="255" g="0" b="0"/>
+		</light>
+
+		<light intensity="0.1">
+		    <pos x="6000" y="400" z="-3000"/>
+			<color r="255" g="0" b="0"/>
+		</light>
+	</lights>
+
+	<camera fov="60">
+		<pos x="0" y="0" z="-4000"/>
+		<rot x="0" y="0" z="0"/>
+	</camera>
+
+	<objects>
+		<plane diff="0.4" spec="0.5">
+			<pos x="400" y="400" z="900" />
+			<normal x="0" y="0" z="-1"/>
+			<color r="255" g="255" b="255"/>
+			<limits>
+				<limit_plane>
+					<pos x="400" y="0" z="900"/>
+					<normal x="0" y="-0.9" z="0"/>
+				</limit_plane>
+				<limit_plane>
+					<pos x="800" y="400" z="900"/>
+					<normal x="0.5" y="0.5" z="0"/>
+				</limit_plane>
+				<limit_plane>
+					<pos x="0" y="400" z="900"/>
+					<normal x="-0.5" y="0.5" z="0"/>
+				</limit_plane>
+			</limits>
+		</plane>
+
+		<plane diff="0.4" spec="0.5">
+			<pos x="900" y="-300" z="0" />
+			<normal x="0" y="1" z="0"/>
+			<color r="255" g="255" b="255"/>
+		</plane>
+
+		<cylinder radius="100" diff="0.4" spec="0.5">
+			<pos x="-200" y="0" z="-1500" />
+			<normal x="0.2" y="1" z="0.4"/>
+			<color r="255" g="87" b="51"/>
+			<limits>
+				<limit_plane>
+					<pos x="-200" y="100" z="-1500" />
+					<normal x="0.5" y="-0.5" z="0"/>
+				</limit_plane>
+				<limit_plane>
+					<pos x="-200" y="800" z="-1500" />
+					<normal x="0.5" y="0.5" z="0"/>
+				</limit_plane>
+			</limits>
+		</cylinder>
+
+		<cone angle="0.2" diff="0.4" spec="1">
+			<pos x="600" y="400" z="-1500" />
+			<normal x="0.1" y="0.5" z="0"/>
+			<color r="199" g="0" b="57"/>
+			<limits>
+				<limit_plane>
+					<pos x="600" y="0" z="-1500" />
+					<normal x="-0.4" y="-0.2" z="0"/>
+				</limit_plane>
+				<limit_plane>
+					<pos  x="600" y="1000" z="-1500" />
+					<normal x="0.7" y="0.1" z="0.1"/>
+				</limit_plane>
+			</limits>
+		</cone>
+
+		<sphere radius="300" diff="0.5" spec="0.5">
+			<pos x="-1000" y="0" z="-1500"/>
+			<color r="255" g="155" b="0"/>
+			<limits>
+				<limit_plane>
+					<pos x="-1000" y="0" z="-1500"/>
+					<normal x="1" y="0" z="0.2"/>
+				</limit_plane>
+				<limit_plane>
+					<pos x="-1150" y="0" z="-1500"/>
+					<normal x="-1" y="0" z="-0.2"/>
+				</limit_plane>
+			</limits>
+		</sphere>
+
+		<sphere radius="200" diff="0.5" spec="0.5">
+			<pos x="-1000" y="500" z="-1500"/>
+			<color r="255" g="195" b="0"/>
+		</sphere>
+	</objects>
+</scene>
