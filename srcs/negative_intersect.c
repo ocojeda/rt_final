@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   negative_intersect.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfaure <tfaure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 20:14:01 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/11/04 20:16:26 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/11/05 00:03:48 by tfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,24 +86,28 @@ float		intersect_cylinder_neg(t_ray ray, t_obj *cyl,
 float		check_negative_objects(float dist_obj,
 	t_rt *e, t_ray ray, float max_dist)
 {
-	int i;
+	int		i;
+	float	dist;
 
 	i = 0;
-	while (i++ <= e->scene.nbr_obj - 1)
+	dist = dist_obj;
+	while (i++ <= e->scene.nbr_obj)
+	{
 		if (e->scene.obj[i].neg == 1)
 		{
 			if (e->scene.obj[i].type == CYLINDER)
-				return (intersect_cylinder_neg(ray,
-					&e->scene.obj[i], dist_obj, max_dist));
+				dist = intersect_cylinder_neg(ray,
+					&e->scene.obj[i], dist_obj, max_dist);
 			else if (e->scene.obj[i].type == SPHERE)
-				return (intersect_sphere_neg(ray,
-					&e->scene.obj[i], dist_obj, max_dist));
+				dist = intersect_sphere_neg(ray,
+					&e->scene.obj[i], dist_obj, max_dist);
 			else if (e->scene.obj[i].type == CONE)
-				return (intersect_cone_neg(ray,
-					&e->scene.obj[i], dist_obj, max_dist));
+				dist = intersect_cone_neg(ray,
+					&e->scene.obj[i], dist_obj, max_dist);
 			else if (e->scene.obj[i].type == PARABOLOID)
-				return (intersect_paraboloid_neg(ray,
-					&e->scene.obj[i], dist_obj, max_dist));
+				dist = intersect_paraboloid_neg(ray,
+					&e->scene.obj[i], dist_obj, max_dist);
 		}
-	return (dist_obj);
+	}
+	return (dist);
 }

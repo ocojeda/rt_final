@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfaure <tfaure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 20:42:52 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/11/05 00:06:50 by ocojeda-         ###   ########.fr       */
+/*   Updated: 2017/11/05 15:04:27 by tfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -312,7 +312,7 @@ typedef struct		s_norme
 	t_color			base_color;
 	t_color			final_color;
 	t_vec3			newpoi;
-	t_vec3			point_of_impact;
+	t_vec3			poi;
 	t_color			color;
 }					t_norme;
 

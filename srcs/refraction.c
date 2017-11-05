@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   refraction.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbeldame <bbeldame@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tfaure <tfaure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 20:03:32 by bbeldame          #+#    #+#             */
-/*   Updated: 2017/11/04 21:41:23 by bbeldame         ###   ########.fr       */
+/*   Updated: 2017/11/05 15:05:22 by tfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ static void		g_norme(t_rt *e, t_reflect *ref, t_norme *n, t_vec3 poi)
 }
 
 void			prepare_refraction(t_rt *e, t_color *base_color,
-	t_norme *n, t_reflect *ref, t_vec3 poi)
+	t_norme *n, t_reflect *ref)
 {
 	n->newpoi = vec_add3(ref->new_ray.pos, vec_scale3(ref->new_ray.dir,
 				ref->min_dist));
-	n->final_color = get_color(e, e->scene.obj[n->a], poi, ref->new_ray);
+	n->final_color = get_color(e, e->scene.obj[n->a], n->poi, ref->new_ray);
 	*base_color = ft_map_color(*base_color, n->final_color, n->taux_temp);
 	e->scene.id = n->a;
 }
@@ -64,10 +64,10 @@ t_color			get_refracted_color(t_rt *e, t_vec3 poi, t_color bc,
 
 	if (ref.counter == 0)
 		return (bc);
-	g_norme(e, &ref, &n, poi);
+	g_norme(e, &ref, &n, n.poi = poi);
 	if (ref.min_dist < DIST_MAX && ref.total_distance < DIST_MAX)
 	{
-		prepare_refraction(e, &bc, &n, &ref, poi);
+		prepare_refraction(e, &bc, &n, &ref);
 		ref.ray = c_ray(poi, ref.new_ray.dir);
 		if (e->scene.obj[n.a].mat.reflex)
 		{
